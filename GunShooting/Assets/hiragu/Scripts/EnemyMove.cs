@@ -5,12 +5,13 @@ using static UnityEngine.GraphicsBuffer;
 
 public class EnemyMove : MonoBehaviour
 {
-    [SerializeField] Transform player;
+    Transform player;
     NavMeshAgent agent;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        player = GameObject.FindWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
     }
 
