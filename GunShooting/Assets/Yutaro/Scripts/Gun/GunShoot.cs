@@ -7,14 +7,20 @@ public class GunShoot : MonoBehaviour
     [SerializeField] Transform firePoint;
     //弾の速度
     [SerializeField] float bulletSpeed = 20f;
-    　
+    // 連射間隔（秒）
+    [SerializeField] float fireRate = 0.5f; 
+    private float nextFireTime = 0f;
+    // 弾のダメージ
+    [SerializeField] float bulletDamage = 10f;
+
 
     void Update()
     {
         // 左クリックで発射
-        if (Input.GetButtonDown("Fire1")) 
+        if (Input.GetButton("Fire1") && Time.time >= nextFireTime) 
         {
             Shoot();
+            nextFireTime = Time.time + fireRate;
         }
     }
 

@@ -5,9 +5,11 @@ public class AutoGunshoot : MonoBehaviour
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform firePoint;
     [SerializeField] float bulletSpeed = 20f;
-    [SerializeField] float fireRate = 0.2f; // 連射間隔（秒）
-
+    // 連射間隔（秒）
+    [SerializeField] float fireRate = 0.2f; 
     private float nextFireTime = 0f;
+    // 弾のダメージ
+    [SerializeField] float bulletDamage = 10f;
 
     void Update()
     {

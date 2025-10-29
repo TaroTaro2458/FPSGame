@@ -16,6 +16,7 @@ public class BulletCnt : MonoBehaviour
         // “G‚È‚Ç‚É“–‚½‚Á‚½‚Æ‚«‚¾‚¯ˆ—
         if ( other.gameObject.CompareTag("ground"))
         {
+            
             //Õ“Ë‚µ‚½‚ç‘¦À‚ÉÁ–Å
             Destroy(gameObject);
         }

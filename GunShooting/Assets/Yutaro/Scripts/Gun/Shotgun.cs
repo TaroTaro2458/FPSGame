@@ -3,17 +3,27 @@ using UnityEngine;
 public class Shotgun : MonoBehaviour
 {
     [SerializeField] GameObject bulletPrefab;
+    // ŽËŒ‚ˆÊ’u
     [SerializeField] Transform firePoint;
-    [SerializeField] int pelletCount = 8;           // ”­ŽË‚·‚é’e‚Ì”
-    [SerializeField] float spreadAngle = 10f;       // ŠgŽUŠp“xi“xj
+    // ”­ŽË‚·‚é’e‚Ì”
+    [SerializeField] int pelletCount = 8;
+    // ŠgŽUŠp“xi“xj
+    [SerializeField] float spreadAngle = 10f;
+    // ’e‚Ì‘¬“x
     [SerializeField] float bulletSpeed = 20f;
+    // ˜AŽËŠÔŠui•bj
+    [SerializeField] float fireRate = 1.0f; 
+    private float nextFireTime = 0f;
+    // ’e‚Ìƒ_ƒ[ƒW
+    [SerializeField] float bulletDamage = 10f;
 
     void Update()
     {
-        // ¶ƒNƒŠƒbƒN‚Å”­ŽË
-        if (Input.GetButtonDown("Fire1"))
+        // ¶ƒNƒŠƒbƒN‰Ÿ‚µ‘±‚¯‚Ä”­ŽË
+        if (Input.GetButton("Fire1") && Time.time >= nextFireTime)
         {
             FireShotgun();
+            nextFireTime = Time.time + fireRate;
         }
     }
 
