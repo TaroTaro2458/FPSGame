@@ -6,8 +6,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
 
     private Rigidbody rb;
-    public Transform groundCheck;
-    public LayerMask groundMask;
+    [SerializeField] Transform groundCheck;
+    [SerializeField] LayerMask groundMask;
 
     //ƒWƒƒƒ“ƒv‚Ì—Í
     [SerializeField] float jumpForce = 5f;
