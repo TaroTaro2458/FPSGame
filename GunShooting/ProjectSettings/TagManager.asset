@@ -6,6 +6,10 @@ TagManager:
   tags:
   - ground
   - Enemy
+  - Item
+  - fullauto
+  - shotgun
+  - single
   layers:
   - Default
   - TransparentFX
