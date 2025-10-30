@@ -15,8 +15,9 @@ public class Shotgun : MonoBehaviour
     [SerializeField] float fireRate = 1.0f; 
     private float nextFireTime = 0f;
     // 弾のダメージ
-    [SerializeField] float bulletDamage = 10f;
-
+    [SerializeField] int bulletDamage = 10;
+    // 弾のダメージをBulletCntに渡す
+    BulletCnt bulletCnt;
     void Update()
     {
         // 左クリック押し続けて発射
@@ -38,6 +39,8 @@ public class Shotgun : MonoBehaviour
                 0) * firePoint.forward;
 
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.LookRotation(spreadDir));
+            bulletCnt = bullet.GetComponent<BulletCnt>();
+            bulletCnt.playerBulletDamage = bulletDamage;
             bullet.GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * bulletSpeed, ForceMode.Impulse);
         }
     }

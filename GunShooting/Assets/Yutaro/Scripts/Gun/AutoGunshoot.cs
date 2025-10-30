@@ -9,7 +9,9 @@ public class AutoGunshoot : MonoBehaviour
     [SerializeField] float fireRate = 0.2f; 
     private float nextFireTime = 0f;
     // 弾のダメージ
-    [SerializeField] float bulletDamage = 10f;
+    [SerializeField] int bulletDamage = 10;
+    // 弾のダメージをBulletCntに渡す
+    BulletCnt bulletCnt;
 
     void Update()
     {
@@ -24,6 +26,8 @@ public class AutoGunshoot : MonoBehaviour
     void Fire()
     {
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        bulletCnt = bullet.GetComponent<BulletCnt>();
+        bulletCnt.playerBulletDamage = bulletDamage;
         bullet.GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * bulletSpeed, ForceMode.Impulse);
     }
 }

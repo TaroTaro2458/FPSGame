@@ -11,8 +11,9 @@ public class GunShoot : MonoBehaviour
     [SerializeField] float fireRate = 0.5f; 
     private float nextFireTime = 0f;
     // 弾のダメージ
-    [SerializeField] float bulletDamage = 10f;
-
+    [SerializeField] int bulletDamage = 10;
+    // 弾のダメージをBulletCntに渡す
+    BulletCnt bulletCnt;
 
     void Update()
     {
@@ -28,6 +29,8 @@ public class GunShoot : MonoBehaviour
     {
         // 弾を生成して前方に発射
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        bulletCnt = bullet.GetComponent<BulletCnt>();
+        bulletCnt.playerBulletDamage = bulletDamage;
         bullet.GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * bulletSpeed, ForceMode.Impulse);
 
     }

@@ -16,12 +16,20 @@ public class EnemyHealth : MonoBehaviour
     {
         if(currentHp <= 0)
         {
-            Destroy(gameObject);
+            EnemyDie();
         }
     }
 
     public void EnemyTakeDamge(int amount)
     {
+        
         currentHp -= amount;
+        Debug.Log(currentHp);
+    }
+
+    private void EnemyDie()
+    {
+        Debug.Log("“GŽ€‚ñ‚¾");
+        Destroy(gameObject);
     }
 }

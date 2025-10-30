@@ -2,23 +2,40 @@ using UnityEngine;
 
 public class EnemyGiveDamage : MonoBehaviour
 {
-    //PlayerHealth playerHealth
-    //PlayerHealth 
+    PlayerHelth playerHealth;
+    [SerializeField] int damage = 100;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // íeÇîÚÇŒÇµÇƒÇ≠ÇÈìGóp
     private void OnTriggerEnter(Collider other)
     {
+        if (!other.gameObject.CompareTag("Enemy"))
+        {
+            if (other.gameObject.CompareTag("Player"))
+            {
+                playerHealth = other.gameObject.GetComponent<PlayerHelth>();
+                if (playerHealth != null)
+                {
+                    playerHealth.TakeDamage(damage);
+                }
+            }
+            Destroy(gameObject);
+        }
+
         
+
+        
+    }
+
+    // í«ê’Ç∑ÇÈìGóp
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerHealth = collision.gameObject.GetComponent<PlayerHelth>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(damage);
+            }
+        }
     }
 }

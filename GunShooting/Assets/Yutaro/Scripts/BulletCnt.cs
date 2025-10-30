@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class BulletCnt : MonoBehaviour
 {
+    EnemyHealth enemyHealth;
+    // ‚»‚ê‚¼‚ê‚Ì•Ší‚©‚çƒ_ƒ[ƒW—Ê‚ğæ“¾‚·‚é
+    [HideInInspector] public int playerBulletDamage;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -12,8 +15,6 @@ public class BulletCnt : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        //CompareTag("Enemy") ||
-        // “G‚È‚Ç‚É“–‚½‚Á‚½‚Æ‚«‚¾‚¯ˆ—
         if ( other.gameObject.CompareTag("ground"))
         {
             
@@ -21,6 +22,16 @@ public class BulletCnt : MonoBehaviour
             Destroy(gameObject);
         }
 
+        // “G‚É“–‚½‚Á‚½‚Ìˆ—
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.EnemyTakeDamge(playerBulletDamage);
+                Destroy(gameObject);
+            }
+        }
     }
 
 }
