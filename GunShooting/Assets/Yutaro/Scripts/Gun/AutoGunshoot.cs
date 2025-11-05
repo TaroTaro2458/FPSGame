@@ -13,13 +13,24 @@ public class AutoGunshoot : MonoBehaviour
     // 弾のダメージをBulletCntに渡す
     BulletCnt bulletCnt;
 
+    // Overheatクラス
+    Overheat overheat;
+    // 1発あたりのゲージ上昇量
+    [SerializeField] float heatPerShot = 5f;
+
+    private void Start()
+    {
+        // Overheatクラスの参照を取得
+        overheat = FindObjectOfType<Overheat>();
+    }
     void Update()
     {
         // 左クリックを押し続けている間、一定間隔で発射
-        if (Input.GetButton("Fire1") && Time.time >= nextFireTime)
+        if (Input.GetButton("Fire1") && Time.time >= nextFireTime && overheat.CanFire)
         {
             Fire();
             nextFireTime = Time.time + fireRate;
+            overheat.RegisterShot(heatPerShot);
         }
     }
 

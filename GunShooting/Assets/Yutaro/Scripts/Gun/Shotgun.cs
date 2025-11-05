@@ -18,13 +18,25 @@ public class Shotgun : MonoBehaviour
     [SerializeField] int bulletDamage = 10;
     // 弾のダメージをBulletCntに渡す
     BulletCnt bulletCnt;
+    // Overheatクラス
+     Overheat overheat;
+    // 1発あたりのゲージ上昇量
+    [SerializeField] float heatPerShot = 10f;
+
+    private void Start()
+    {
+        // Overheatクラスの参照を取得
+        overheat = FindObjectOfType<Overheat>();
+    }
     void Update()
     {
+
         // 左クリック押し続けて発射
-        if (Input.GetButton("Fire1") && Time.time >= nextFireTime)
+        if (Input.GetButton("Fire1") && Time.time >= nextFireTime&& overheat.CanFire)
         {
             FireShotgun();
             nextFireTime = Time.time + fireRate;
+            overheat.RegisterShot(heatPerShot);
         }
     }
 

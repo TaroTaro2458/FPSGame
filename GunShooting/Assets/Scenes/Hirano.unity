@@ -1221,7 +1221,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -471, y: -439}
+  m_AnchoredPosition: {x: -447.1, y: -439}
   m_SizeDelta: {x: 280.076, y: 66.662}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1867677051
@@ -1433,6 +1433,7 @@ MonoBehaviour:
   bulletSpeed: 50
   fireRate: 0.5
   bulletDamage: 10
+  heatPerShot: 5
 --- !u!4 &622352148816720335
 Transform:
   m_ObjectHideFlags: 0
@@ -1496,7 +1497,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7843115628046878327}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c91e2410c0d5084bb3600906a639d81, type: 3}
   m_Name: 
@@ -1506,6 +1507,7 @@ MonoBehaviour:
   bulletSpeed: 50
   fireRate: 0.1
   bulletDamage: 10
+  heatPerShot: 5
 --- !u!4 &2051949364970516672
 Transform:
   m_ObjectHideFlags: 0
@@ -1582,6 +1584,7 @@ GameObject:
   - component: {fileID: 6647603381421057471}
   - component: {fileID: 8951719622611614378}
   - component: {fileID: 8951719622611614379}
+  - component: {fileID: 8951719622611614380}
   m_Layer: 0
   m_Name: Player (1)
   m_TagString: Player
@@ -2133,6 +2136,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+--- !u!114 &8951719622611614380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2588986245584287314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c50110ee33558f04ab19ee43c6d7844c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHeat: 100
+  heatPerShot: 10
+  cooldownRate: 20
+  cooldownDelay: 2
 --- !u!114 &8964322248633544075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2140,7 +2159,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7843115628046878327}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75179864aedb00642bbe9bf0462629ae, type: 3}
   m_Name: 
@@ -2152,6 +2171,7 @@ MonoBehaviour:
   bulletSpeed: 50
   fireRate: 1
   bulletDamage: 10
+  heatPerShot: 10
 --- !u!33 &9075721274281183228
 MeshFilter:
   m_ObjectHideFlags: 0
