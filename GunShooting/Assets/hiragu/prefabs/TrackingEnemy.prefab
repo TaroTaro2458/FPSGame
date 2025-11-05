@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2542301885938398349}
   - component: {fileID: 5803532697401084754}
   - component: {fileID: 6487106104351448319}
+  - component: {fileID: 3963459646301267066}
   m_Layer: 0
   m_Name: TrackingEnemy
   m_TagString: Enemy
@@ -160,3 +161,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 50
+  dropItems:
+  - gunPrefab: {fileID: 8218048025018524560, guid: b7c44503f9c7c724aa121e7c93de4f94, type: 3}
+    dropChance: 1
+  - gunPrefab: {fileID: 8218048025018524560, guid: ca2481939b1c94440a77f1fc131f447a, type: 3}
+    dropChance: 1
+  - gunPrefab: {fileID: 8218048025018524560, guid: 4de05b7364ca8c54199cc603087f7000, type: 3}
+    dropChance: 1
+--- !u!114 &3963459646301267066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5076348676587295246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bfc0968abd03e7429919b758f477aa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 100
