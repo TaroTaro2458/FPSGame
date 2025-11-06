@@ -42,18 +42,19 @@ public class Shotgun : MonoBehaviour
 
     void FireShotgun()
     {
+        Transform camTransform = Camera.main.transform;
         for (int i = 0; i < pelletCount; i++)
         {
             // ŠgŽU•ûŒü‚ðƒ‰ƒ“ƒ_ƒ€‚É¶¬
-            Vector3 spreadDir = Quaternion.Euler(
-                Random.Range(-spreadAngle, spreadAngle),
-                Random.Range(-spreadAngle, spreadAngle),
-                0) * firePoint.forward;
+            Quaternion spreadRotation = camTransform.rotation *
+            Quaternion.Euler(Random.Range(-spreadAngle, spreadAngle), Random.Range(-spreadAngle, spreadAngle), 0);
+
+            Vector3 spreadDir = spreadRotation * Vector3.forward;
 
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.LookRotation(spreadDir));
             bulletCnt = bullet.GetComponent<BulletCnt>();
             bulletCnt.playerBulletDamage = bulletDamage;
-            bullet.GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * bulletSpeed, ForceMode.Impulse);
+            bullet.GetComponent<Rigidbody>().AddForce(spreadDir * bulletSpeed, ForceMode.Impulse);
         }
     }
 }
