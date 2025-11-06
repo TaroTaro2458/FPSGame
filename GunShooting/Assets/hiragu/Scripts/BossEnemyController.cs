@@ -1,23 +1,24 @@
+using NUnit.Framework;
 using UnityEngine;
+using System.Collections.Generic;
 using UnityEngine.AI;
+using Unity.VisualScripting;
 
 public class BossEnemyController : MonoBehaviour
 {
     [SerializeField] float stopDistance = 10f;              // 一定距離まで近づく
-    [SerializeField] Transform shootingPoint;
-    [SerializeField] GameObject bulletPrefab;
-    [SerializeField] float shootingInterval = 3.0f;
-    [SerializeField] float bulletSpeed = 5.0f; 
+    [SerializeField] Transform shootingPoint;               // 発射位置
+    //[SerializeField] GameObject bulletPrefab;               // 発射する弾
+    [SerializeField] float shootingInterval = 3.0f;         // 発射間隔
+    [SerializeField] List<GameObject> bulletList;
 
-    Transform player;
-    NavMeshAgent agent;
-    float distance;
+    Transform player;                                       // プレイヤーを追いかけるための位置
+    NavMeshAgent agent;                                     // 追いかけるためのもの
+    float distance;                                         // 一定距離で追いかけることをやめるためのもの
 
-    GameObject bullet;
-    Rigidbody bulletRb;
-    Vector3 enemyDirectionControl;
-    Vector3 bulletDirection;
-    float countTime = 0;
+    GameObject bullet;                                      // これに弾をセット
+    Vector3 enemyDirectionControl;                          // 常にプレイヤーのほうを向くため
+    float countTime = 0;                                    // 発射間隔制御用
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -48,12 +49,15 @@ public class BossEnemyController : MonoBehaviour
         countTime += Time.deltaTime;
         if (countTime > shootingInterval)
         {
-            bullet = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
-            bullet.transform.rotation = Quaternion.LookRotation(
-                (player.position - shootingPoint.position).normalized) * Quaternion.Euler(90, 0, 0);
-            bulletRb = bullet.GetComponent<Rigidbody>();
-            bulletDirection = (player.position - shootingPoint.position).normalized;
-            bulletRb.linearVelocity = bulletDirection * bulletSpeed;
+            //bullet = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
+            int rand = Random.Range(0, bulletList.Count);
+            bullet = Instantiate(bulletList[rand],shootingPoint.position, shootingPoint.rotation);
+            LocketLauncherBulletController llbc = bullet.GetComponent<LocketLauncherBulletController>();
+            if(llbc != null)
+            {
+                llbc.setShootingPoint(shootingPoint);
+            }
+            
             Destroy(bullet, 5);
 
             countTime = 0;
