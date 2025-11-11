@@ -6,8 +6,7 @@ public class LocketLauncherBulletController : MonoBehaviour
     [SerializeField] int damage = 50;                           // ダメージ量
     [SerializeField] float lifeTime = 5f;                       // 自壊までの時間
     [SerializeField] ParticleSystem explosionParticle;          // 爆発のエフェクト
-    [SerializeField] float bulletSpeed = 5.0f;                  // 弾速
-
+    [HideInInspector] public float bulletSpeed;
     Transform player;
     Transform shootingPoint;
     Rigidbody rb;

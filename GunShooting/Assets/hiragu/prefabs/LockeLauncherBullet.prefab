@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -3924566753860947547}
   m_Layer: 0
   m_Name: LockeLauncherBullet
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,3 +155,4 @@ MonoBehaviour:
   damage: 50
   lifeTime: 5
   explosionParticle: {fileID: 2651405155204049635, guid: 246db02fa20c5564a943d6641ad4dae8, type: 3}
+  bulletSpeed: 5

@@ -4,7 +4,7 @@ using static UnityEngine.GraphicsBuffer;
 public class HomingBullet : MonoBehaviour
 {
     Transform targetPosition;
-    [SerializeField] float speed = 3f;              // 弾速
+    [HideInInspector] public float bulletSpeed;              // 弾速
     [SerializeField] float rotateSpeed = 5f;        // 方向転換の速度
     [SerializeField] float lifeTime = 5f;           // 自然消滅の時間
     [SerializeField] int damage = 50;
@@ -35,7 +35,7 @@ public class HomingBullet : MonoBehaviour
         Vector3 rotateAmount = Vector3.Cross(transform.forward, direction);
         rb.angularVelocity = rotateAmount * rotateSpeed;
 
-        rb.linearVelocity = transform.forward * speed;
+        rb.linearVelocity = transform.forward * bulletSpeed;
     }
 
     void OnTriggerEnter(Collider other)

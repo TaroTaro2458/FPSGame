@@ -10,6 +10,8 @@ public class BossEnemyController : MonoBehaviour
     [SerializeField] Transform shootingPoint;               // 発射位置
     //[SerializeField] GameObject bulletPrefab;               // 発射する弾
     [SerializeField] float shootingInterval = 3.0f;         // 発射間隔
+    [SerializeField] float homingBulletSpeed = 5;
+    [SerializeField] float locLanSpeed = 5;
     [SerializeField] List<GameObject> bulletList;
 
     Transform player;                                       // プレイヤーを追いかけるための位置
@@ -53,9 +55,15 @@ public class BossEnemyController : MonoBehaviour
             int rand = Random.Range(0, bulletList.Count);
             bullet = Instantiate(bulletList[rand],shootingPoint.position, shootingPoint.rotation);
             LocketLauncherBulletController llbc = bullet.GetComponent<LocketLauncherBulletController>();
+            HomingBullet hb = bullet.GetComponent<HomingBullet>();
             if(llbc != null)
             {
                 llbc.setShootingPoint(shootingPoint);
+                llbc.bulletSpeed = locLanSpeed;
+            }
+            if (hb != null)
+            {
+                hb.bulletSpeed = homingBulletSpeed;
             }
             
             Destroy(bullet, 5);
