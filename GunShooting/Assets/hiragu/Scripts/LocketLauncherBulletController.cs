@@ -5,7 +5,7 @@ public class LocketLauncherBulletController : MonoBehaviour
     [SerializeField] float explosionRadius = 5f;                // 爆発範囲
     [SerializeField] int damage = 50;                           // ダメージ量
     [SerializeField] float lifeTime = 5f;                       // 自壊までの時間
-    [SerializeField] ParticleSystem explosionParticle;          // 爆発のエフェクト
+    [SerializeField] GameObject explosionParticle;          // 爆発のエフェクト
     [HideInInspector] public float bulletSpeed;
     Transform player;
     Transform shootingPoint;
@@ -33,7 +33,8 @@ public class LocketLauncherBulletController : MonoBehaviour
         if (!other.CompareTag("Enemy"))
         {
             Explode();
-            Instantiate(explosionParticle, transform.position, Quaternion.identity);
+            GameObject effect = Instantiate(explosionParticle, transform.position, Quaternion.identity);
+            Destroy(effect, 5.0f);
         }
     }
 
