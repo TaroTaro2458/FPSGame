@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5272124222709257699}
   - component: {fileID: -8496291610150068922}
+  - component: {fileID: 6907052702909209588}
   m_Layer: 0
   m_Name: FullAuto
   m_TagString: Untagged
@@ -81,3 +82,17 @@ MonoBehaviour:
   bulletSpeed: 20
   fireRate: 0.2
   bulletDamage: 10
+  heatPerShot: 5
+--- !u!114 &6907052702909209588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8218048025018524560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eac3556485299c4db869795fff8e6de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: FullAuto

@@ -25,7 +25,7 @@ public class GetItem : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        GameObject item = other.GetComponent<GameObject>();
+        GameObject item = other.gameObject;
         // アイテム取得判定 tagで識別
         if (other.CompareTag("fullauto")&& AddItem(item))
         {
@@ -57,21 +57,44 @@ public class GetItem : MonoBehaviour
     // アイテムをインベントリに追加と判定
     public bool AddItem(GameObject item)
     {
-        if (currentItems.Count >= maxItems)
+        if (item == null) return false;
+        if (currentItemList.Count >= maxItems) return false;
+
+        ItemData data = item.GetComponent<ItemData>();
+        if (data != null)
         {
-            Debug.Log("インベントリがいっぱいです！");
-            return false;
+            currentItemList.Add(data.itemName);
+            onItemChanged.Invoke();// UIに通知
+            Destroy(item); // 情報を保存したあとに削除
+            return true;
         }
-        currentItems.Add(item);
+        /*currentItems.Add(item);
         currentItemList.Add(item.tag);
         onItemChanged.Invoke(); // UIに通知
-        return true;
-
+        return true;*/
+        Debug.LogWarning("ItemData が見つかりませんでした");
+        return false;
     }
 
-    // 現在の所持アイテムを取得
+    // アイテムをインベントリから削除
+    public void RemoveItem(string item)
+    {
+        // アイテムが存在するか確認
+        if (currentItemList.Contains(item))
+        {
+            currentItemList.Remove(item);
+            onItemChanged.Invoke();
+        }
+    }
+
+    // 現在の所持アイテムを取得(string)
     public List<string> GetCurrentItems()
     {
         return currentItemList;
+    }
+    // 現在の所持アイテムを取得(GameObject)
+    public List<GameObject> GetCurrentItemObjects()
+    {
+        return currentItems;
     }
 }

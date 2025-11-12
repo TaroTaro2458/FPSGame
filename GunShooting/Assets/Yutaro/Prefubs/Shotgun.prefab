@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5272124222709257699}
   - component: {fileID: 346359766005688088}
+  - component: {fileID: -4667544453759907454}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -84,3 +85,16 @@ MonoBehaviour:
   fireRate: 1
   bulletDamage: 10
   heatPerShot: 10
+--- !u!114 &-4667544453759907454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8218048025018524560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eac3556485299c4db869795fff8e6de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: shotgun

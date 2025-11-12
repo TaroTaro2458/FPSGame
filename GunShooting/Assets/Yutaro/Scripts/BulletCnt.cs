@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BulletCnt : MonoBehaviour
 {
+    // 敵の体力スクリプトの参照
     EnemyHealth enemyHealth;
     // それぞれの武器からダメージ量を取得する
     [HideInInspector] public int playerBulletDamage;
