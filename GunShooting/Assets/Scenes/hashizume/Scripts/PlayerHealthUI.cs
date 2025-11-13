@@ -5,13 +5,14 @@ using System.Collections;
 
 public class PlayerHealthUI : MonoBehaviour
 {
-    [SerializeField] private PlayerHelth playerHealth; // プレイヤーの参照
-    [SerializeField] private Image hpFillImage;        // HPバー本体（Filled）
-    [SerializeField] private TextMeshProUGUI hpText;   // HPテキスト
-    [SerializeField] private RectTransform hpBarTransform; // HPバー全体のRectTransform
+    [SerializeField] private PlayerHelth playerHealth;
+    [SerializeField] private Image hpFillImage;
+    [SerializeField] private TextMeshProUGUI hpText;
+    [SerializeField] private RectTransform hpBarTransform;
+    [SerializeField] private Image damageOverlay; // 🔴画面赤フェード
 
     private float previousFillAmount;
-    private bool isAnimating = false;
+    private bool isLowHealthEffect = false;
 
     private void Start()
     {
@@ -21,6 +22,9 @@ public class PlayerHealthUI : MonoBehaviour
         if (hpBarTransform == null && hpFillImage != null)
             hpBarTransform = hpFillImage.GetComponent<RectTransform>();
 
+        if (damageOverlay != null)
+            damageOverlay.color = new Color(1, 0, 0, 0); // 最初は透明
+
         previousFillAmount = 1f;
     }
 
@@ -28,46 +32,64 @@ public class PlayerHealthUI : MonoBehaviour
     {
         if (playerHealth == null || hpFillImage == null) return;
 
-        float fillAmount = Mathf.Clamp01((float)playerHealth.CurrentHealth / playerHealth.MaxHealth);
+        float fill = Mathf.Clamp01((float)playerHealth.CurrentHealth / playerHealth.MaxHealth);
 
         // HPバー更新
-        hpFillImage.fillAmount = fillAmount;
-        hpFillImage.color = Color.Lerp(Color.red, Color.green, fillAmount);
+        hpFillImage.fillAmount = fill;
+
+        // 綺麗な赤→黄→緑補間
+        Color targetColor;
+        if (fill < 0.5f)
+            targetColor = Color.Lerp(Color.red, Color.yellow, fill * 2f);
+        else
+            targetColor = Color.Lerp(Color.yellow, Color.green, (fill - 0.5f) * 2f);
+        hpFillImage.color = targetColor;
+
+        // HP低下時に演出発動
+        if (fill <= 0.3f && !isLowHealthEffect)
+        {
+            isLowHealthEffect = true;
+            StartCoroutine(LowHealthEffects());
+        }
+        else if (fill > 0.3f && isLowHealthEffect)
+        {
+            isLowHealthEffect = false;
+            StopAllCoroutines();
+            if (damageOverlay != null)
+                damageOverlay.color = new Color(1, 0, 0, 0); // フェードアウト
+            hpBarTransform.localScale = Vector3.one;
+        }
 
         // テキスト更新
         if (hpText != null)
             hpText.text = $"HP: {playerHealth.CurrentHealth}/{playerHealth.MaxHealth}";
 
-        // HPが減ったときに演出を開始
-        if (fillAmount < previousFillAmount && !isAnimating)
-            StartCoroutine(ShakeBar());
-
-        previousFillAmount = fillAmount;
+        if (Input.GetKeyDown(KeyCode.Space))
+            playerHealth.TakeDamage(10);
     }
 
-    /// <summary>
-    /// HPバーを一瞬揺らす
-    /// </summary>
-    private IEnumerator ShakeBar()
+    private IEnumerator LowHealthEffects()
     {
-        isAnimating = true;
+        float pulse = 0f;
+        float overlayAlpha = 0f;
 
-        Vector3 originalPos = hpBarTransform.localPosition;
-        float duration = 0.25f; // 揺れる時間
-        float strength = 10f;   // 揺れの強さ
-
-        float elapsed = 0f;
-        while (elapsed < duration)
+        while (isLowHealthEffect && playerHealth.CurrentHealth > 0)
         {
-            float offsetX = Random.Range(-strength, strength);
-            float offsetY = Random.Range(-strength, strength);
-            hpBarTransform.localPosition = originalPos + new Vector3(offsetX, offsetY, 0);
+            // HPバーのズーム（ドクンドクン）
+            float scale = 1f + Mathf.PingPong(pulse * 4f, 0.2f);
+            hpBarTransform.localScale = new Vector3(scale, scale, 1f);
 
-            elapsed += Time.deltaTime;
+            // 画面赤フェード（明滅）
+            overlayAlpha = Mathf.PingPong(Time.time * 2f, 0.4f);
+            if (damageOverlay != null)
+                damageOverlay.color = new Color(1, 0, 0, overlayAlpha);
+
+            pulse += Time.deltaTime;
             yield return null;
         }
 
-        hpBarTransform.localPosition = originalPos;
-        isAnimating = false;
+        if (damageOverlay != null)
+            damageOverlay.color = new Color(1, 0, 0, 0);
+        hpBarTransform.localScale = Vector3.one;
     }
 }
