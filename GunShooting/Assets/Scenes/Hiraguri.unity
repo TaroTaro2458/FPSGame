@@ -481,7 +481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4556305810685525093, guid: 205792cc63f6775469edd5b8a485a22b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.61
       objectReference: {fileID: 0}
     - target: {fileID: 4556305810685525093, guid: 205792cc63f6775469edd5b8a485a22b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -952,6 +952,10 @@ PrefabInstance:
     - target: {fileID: 2791431649368283016, guid: 31dbb0fc972c34f4788b2ed609572efe, type: 3}
       propertyPath: m_Name
       value: BossEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565168803041973679, guid: 31dbb0fc972c34f4788b2ed609572efe, type: 3}
+      propertyPath: pinchBulletSpeed
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6300216962914583864, guid: 31dbb0fc972c34f4788b2ed609572efe, type: 3}
       propertyPath: m_LocalPosition.x

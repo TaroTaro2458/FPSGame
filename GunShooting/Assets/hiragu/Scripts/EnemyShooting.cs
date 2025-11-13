@@ -8,27 +8,33 @@ public class EnemyShooting : MonoBehaviour
     [SerializeField] float bulletSpeed = 10.0f;
 
     Transform player;
-    Rigidbody playerRb;
     float countTime = 0;
-    bool bossCheck = false;
     GameObject bullet;
 
     Rigidbody bulletRb;
 
     Vector3 enemyDirectionControl;
     Vector3 bulletDirection;
-    
-    
+
+    bool isBoss = false;
+    bool isPinch = false;
+    EnemyHealth enmeyHealth;
+
+    [Header("ƒ{ƒX‚ÌHP‚ªŒ¸‚Á‚½Žž‚É‹­‰»‚·‚é")]
+    [SerializeField] float pinchShootingInterval = 0.7f;
+    [SerializeField] float pinchBulletSpeed = 13f;
+    [SerializeField] int pinchHp = 100;
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
-        playerRb = player.GetComponent<Rigidbody>();
-        if (gameObject.name == "BossEnemy")
+
+        if(gameObject.name == "BossEnemy")
         {
-            bossCheck = true;
+            isBoss = true;
+            enmeyHealth = GetComponent<EnemyHealth>();
         }
     }
 
@@ -41,73 +47,21 @@ public class EnemyShooting : MonoBehaviour
 
         
         countTime += Time.deltaTime;
-        if (countTime > shootingInterval && !bossCheck)
+        if (countTime > shootingInterval)
         {
             Shooting();
 
             countTime = 0;
         }
 
-        if (countTime > shootingInterval && bossCheck)
+        if(isBoss && enmeyHealth.EnmeyCurrentHp <= pinchHp && !isPinch)
         {
-            ShootWithPrediction();
-
-            countTime = 0;
+            shootingInterval = pinchShootingInterval;
+            bulletSpeed = pinchBulletSpeed;
+            isPinch = true;
+            Debug.Log("‹­‚­‚È‚Á‚½");
         }
     }
-
-    void ShootWithPrediction()
-    {
-        if (player == null || playerRb == null) return;
-
-        Vector3 playerPos = player.position;
-        Vector3 playerVel = playerRb.linearVelocity;
-        Vector3 enemyPos = shootingPoint.position;
-
-        Vector3 toPlayer = playerPos - enemyPos;
-        float distance = toPlayer.magnitude;
-
-        float a = Vector3.Dot(playerVel, playerVel) - bulletSpeed * bulletSpeed;
-        float b = 2 * Vector3.Dot(toPlayer, playerVel);
-        float c = Vector3.Dot(toPlayer, toPlayer);
-
-        float det = b * b - 4 * a * c;
-
-        if (det < 0)
-        {
-            BossShooting(toPlayer.normalized);
-            return;
-        }
-
-        float t1 = (-b + Mathf.Sqrt(det)) / (2 * a);
-        float t2 = (-b - Mathf.Sqrt(det)) / (2 * a);
-        float t = Mathf.Min(t1, t2);
-
-        if (t < 0) t = Mathf.Max(t1, t2);
-        if (t <= 0)
-        {
-            BossShooting(toPlayer.normalized);
-            return;
-        }
-
-        
-        Vector3 predictedPos = playerPos + playerVel * t;
-        Vector3 aimDir = (predictedPos - enemyPos).normalized;
-
-        BossShooting(aimDir);
-    }
-
-    void BossShooting(Vector3 dir)
-    {
-        GameObject bullet = Instantiate(bulletPrefab, shootingPoint.position, Quaternion.LookRotation(dir));
-        bullet.transform.rotation *= Quaternion.Euler(90, 0, 0);
-        bullet.transform.rotation = Quaternion.LookRotation(
-            (player.position - shootingPoint.position).normalized) * Quaternion.Euler(90, 0, 0);
-        bulletRb = bullet.GetComponent<Rigidbody>();
-        bulletRb.linearVelocity = dir * bulletSpeed;
-        Destroy(bullet, 5);
-    }
-
 
     void Shooting()
     {
