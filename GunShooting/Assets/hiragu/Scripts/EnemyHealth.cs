@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] int maxHp = 50;
-    int currentHp;
+    [HideInInspector] public int EnmeyCurrentHp;
 
     // 銃をドロップする
     [System.Serializable]
@@ -20,13 +20,13 @@ public class EnemyHealth : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        currentHp = maxHp;
+        EnmeyCurrentHp = maxHp;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(currentHp <= 0)
+        if(EnmeyCurrentHp <= 0)
         {
             EnemyDie();
         }
@@ -34,9 +34,9 @@ public class EnemyHealth : MonoBehaviour
 
     public void EnemyTakeDamge(int amount)
     {
-        
-        currentHp -= amount;
-        Debug.Log(currentHp);
+
+        EnmeyCurrentHp -= amount;
+        Debug.Log(EnmeyCurrentHp);
     }
 
     private void EnemyDie()

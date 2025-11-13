@@ -161,13 +161,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 50
+  overallDropChance: 1
   dropItems:
-  - gunPrefab: {fileID: 8218048025018524560, guid: b7c44503f9c7c724aa121e7c93de4f94, type: 3}
-    dropChance: 1
-  - gunPrefab: {fileID: 8218048025018524560, guid: ca2481939b1c94440a77f1fc131f447a, type: 3}
-    dropChance: 1
-  - gunPrefab: {fileID: 8218048025018524560, guid: 4de05b7364ca8c54199cc603087f7000, type: 3}
-    dropChance: 1
+  - gunPrefab: {fileID: 5582469306570441448, guid: 65b9566d07c6af44885686e86ca153c0, type: 3}
+  - gunPrefab: {fileID: 259343658904190189, guid: fc983c616a6edee4c9a7ed05422c9682, type: 3}
+  - gunPrefab: {fileID: 7000038458876174501, guid: 840503d1bd8889949a7022cab19a3e7c, type: 3}
 --- !u!114 &3963459646301267066
 MonoBehaviour:
   m_ObjectHideFlags: 0

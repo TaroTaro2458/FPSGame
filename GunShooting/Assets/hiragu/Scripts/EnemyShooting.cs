@@ -7,40 +7,71 @@ public class EnemyShooting : MonoBehaviour
     [SerializeField] float shootingInterval = 5.0f;
     [SerializeField] float bulletSpeed = 10.0f;
 
-    GameObject bullet;
-    Rigidbody bulletRb;
     Transform player;
+    float countTime = 0;
+    GameObject bullet;
+
+    Rigidbody bulletRb;
+
     Vector3 enemyDirectionControl;
     Vector3 bulletDirection;
-    float countTime = 0;
+
+    bool isBoss = false;
+    bool isPinch = false;
+    EnemyHealth enmeyHealth;
+
+    [Header("ボスのHPが減った時に強化する")]
+    [SerializeField] float pinchShootingInterval = 0.7f;
+    [SerializeField] float pinchBulletSpeed = 13f;
+    [SerializeField] int pinchHp = 100;
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
+
+        if(gameObject.name == "BossEnemy")
+        {
+            isBoss = true;
+            enmeyHealth = GetComponent<EnemyHealth>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        // 常にプレイヤーの方を向く処理
+        
         enemyDirectionControl = new Vector3(player.position.x, transform.position.y, player.position.z);
         transform.LookAt(enemyDirectionControl);
 
-        //  一定時間経過で射撃
+        
         countTime += Time.deltaTime;
         if (countTime > shootingInterval)
         {
-            bullet =  Instantiate(bulletPrefab,shootingPoint.position, shootingPoint.rotation);
-            bullet.transform.rotation = Quaternion.LookRotation(
-                (player.position - shootingPoint.position).normalized) * Quaternion.Euler(90, 0, 0);
-            bulletRb = bullet.GetComponent<Rigidbody>();
-            bulletDirection = (player.position - shootingPoint.position).normalized;
-            bulletRb.linearVelocity = bulletDirection * bulletSpeed;
-            Destroy(bullet, 5);
+            Shooting();
 
             countTime = 0;
         }
+
+        if(isBoss && enmeyHealth.EnmeyCurrentHp <= pinchHp && !isPinch)
+        {
+            shootingInterval = pinchShootingInterval;
+            bulletSpeed = pinchBulletSpeed;
+            isPinch = true;
+            Debug.Log("強くなった");
+        }
     }
+
+    void Shooting()
+    {
+        bullet = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
+        bullet.transform.rotation = Quaternion.LookRotation(
+            (player.position - shootingPoint.position).normalized) * Quaternion.Euler(90, 0, 0);
+        bulletRb = bullet.GetComponent<Rigidbody>();
+        bulletDirection = (player.position - shootingPoint.position).normalized;
+        bulletRb.linearVelocity = bulletDirection * bulletSpeed;
+        Destroy(bullet, 5);
+    }
+
 }
