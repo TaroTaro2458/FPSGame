@@ -63,6 +63,7 @@ public class InventoryUI : MonoBehaviour
             RectTransform rect = slot.GetComponent<RectTransform>();
             rect.anchoredPosition += new Vector2(10f, -20f);
         }*/
+        // string型でアイテム名を取得して表示
         foreach (string itemName in getItem.GetCurrentItems())
         {
             GameObject slot = Instantiate(weaponSlotPrefab, slotParent);

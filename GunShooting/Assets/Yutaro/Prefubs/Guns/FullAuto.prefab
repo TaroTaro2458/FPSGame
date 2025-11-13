@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 5272124222709257699}
   - component: {fileID: -8496291610150068922}
   - component: {fileID: 6907052702909209588}
+  - component: {fileID: -2828667833398134550}
   m_Layer: 0
   m_Name: FullAuto
   m_TagString: Untagged
@@ -96,3 +97,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: FullAuto
+--- !u!114 &-2828667833398134550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8218048025018524560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3eac64fc08353f409de7f77ea425096, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  getItem: {fileID: 1835179730000843523, guid: e4beb50f8aa59fc489236ff70f40cf96, type: 3}
+  playerName: Player(1)

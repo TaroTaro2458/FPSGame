@@ -40,10 +40,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5272124222709257699}
-  - component: {fileID: -4872022808277924842}
-  - component: {fileID: 192234130809269708}
+  - component: {fileID: 346359766005688088}
+  - component: {fileID: -4667544453759907454}
+  - component: {fileID: -7009950676935817709}
   m_Layer: 0
-  m_Name: Gun
+  m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,15 +58,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8218048025018524560}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7238547, z: -0, w: 0.68995243}
+  m_LocalRotation: {x: -0, y: -0.72255373, z: -0, w: 0.6913149}
   m_LocalPosition: {x: 0.587, y: -0.70000005, z: 0.596}
   m_LocalScale: {x: 3.2787838, y: 2.5090241, z: 0.5240193}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2637000729274754316}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -92.747, z: 0}
---- !u!114 &-4872022808277924842
+  m_LocalEulerAnglesHint: {x: 0, y: -92.531, z: 0}
+--- !u!114 &346359766005688088
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,16 +75,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 8218048025018524560}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 110c17897cb82c14faf979c80c79e0ed, type: 3}
+  m_Script: {fileID: 11500000, guid: 75179864aedb00642bbe9bf0462629ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 5331095314279468045, guid: 64b36108a7a091d4cb6b21cacd77a697, type: 3}
   firePoint: {fileID: 2637000729274754316}
+  pelletCount: 8
+  spreadAngle: 10
   bulletSpeed: 20
-  fireRate: 0.5
+  fireRate: 1
   bulletDamage: 10
-  heatPerShot: 5
---- !u!114 &192234130809269708
+  heatPerShot: 10
+--- !u!114 &-4667544453759907454
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,4 +98,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eac3556485299c4db869795fff8e6de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: single
+  itemName: shotgun
+--- !u!114 &-7009950676935817709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8218048025018524560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3eac64fc08353f409de7f77ea425096, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  getItem: {fileID: 1835179730000843523, guid: e4beb50f8aa59fc489236ff70f40cf96, type: 3}
+  playerName: Player(1)
