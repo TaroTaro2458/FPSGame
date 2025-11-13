@@ -64,8 +64,6 @@ public class PlayerHealthUI : MonoBehaviour
         if (hpText != null)
             hpText.text = $"HP: {playerHealth.CurrentHealth}/{playerHealth.MaxHealth}";
 
-        if (Input.GetKeyDown(KeyCode.Space))
-            playerHealth.TakeDamage(10);
     }
 
     private IEnumerator LowHealthEffects()

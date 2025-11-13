@@ -1,34 +1,34 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class GunShoot : MonoBehaviour
 {
     [SerializeField] GameObject bulletPrefab;
-    //ËŒ‚ˆÊ’u
+    //å°„æ’ƒä½ç½®
     [SerializeField] Transform firePoint;
-    //’e‚Ì‘¬“x
+    //å¼¾ã®é€Ÿåº¦
     [SerializeField] float bulletSpeed = 20f;
-    // ˜AËŠÔŠui•bj
+    // é€£å°„é–“éš”ï¼ˆç§’ï¼‰
     [SerializeField] float fireRate = 0.5f; 
     private float nextFireTime = 0f;
-    // ’e‚Ìƒ_ƒ[ƒW
+    // å¼¾ã®ãƒ€ãƒ¡ãƒ¼ã‚¸
     [SerializeField] int bulletDamage = 10;
-    // ’e‚Ìƒ_ƒ[ƒW‚ğBulletCnt‚É“n‚·
+    // å¼¾ã®ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’BulletCntã«æ¸¡ã™
     BulletCnt bulletCnt;
 
-    // OverheatƒNƒ‰ƒX
+    // Overheatã‚¯ãƒ©ã‚¹
     Overheat overheat;
-    // 1”­‚ ‚½‚è‚ÌƒQ[ƒWã¸—Ê
+    // 1ç™ºã‚ãŸã‚Šã®ã‚²ãƒ¼ã‚¸ä¸Šæ˜‡é‡
     [SerializeField] float heatPerShot = 5f;
 
     private void Start()
     {
-        // OverheatƒNƒ‰ƒX‚ÌQÆ‚ğæ“¾
+        // Overheatã‚¯ãƒ©ã‚¹ã®å‚ç…§ã‚’å–å¾—
         overheat = FindObjectOfType<Overheat>();
     }
 
     void Update()
     {
-        // ¶ƒNƒŠƒbƒN‚Å”­Ë
+        // å·¦ã‚¯ãƒªãƒƒã‚¯ã§ç™ºå°„
         if (Input.GetButton("Fire1") && Time.time >= nextFireTime && overheat.CanFire) 
         {
             Shoot();
@@ -39,12 +39,29 @@ public class GunShoot : MonoBehaviour
 
     void Shoot()
     {
-        // ’e‚ğ¶¬‚µ‚Ä‘O•û‚É”­Ë
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        // 
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        Vector3 targetPoint;
+
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            targetPoint = hit.point;
+        }
+        else
+        {
+            targetPoint = ray.GetPoint(100f); 
+        }
+
+        Vector3 shootDirection = (targetPoint - firePoint.position).normalized;
+
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.LookRotation(shootDirection));
         bulletCnt = bullet.GetComponent<BulletCnt>();
         bulletCnt.playerBulletDamage = bulletDamage;
-        bullet.GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * bulletSpeed, ForceMode.Impulse);
 
+        Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        rb.linearVelocity = shootDirection * bulletSpeed;
     }
+
 }
+
 
