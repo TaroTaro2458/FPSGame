@@ -23,9 +23,9 @@ public class InventoryUI : MonoBehaviour
         inventoryCanvas.SetActive(false);
     }
 
-    //Tabキーでインベントリの表示/非表示を切り替え
     void Update()
     {
+        // Tabキーが押されたらインベントリを表示/非表示切り替え
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             ToggleInventory();
@@ -52,17 +52,6 @@ public class InventoryUI : MonoBehaviour
             Destroy(slot);
         slotInstances.Clear();
 
-        // 取得したアイテムをインベントリに表示
-        /*foreach (GameObject item in getItem.GetCurrentItemObjects())
-        {
-            GameObject slot = Instantiate(weaponSlotPrefab, slotParent);
-            slot.GetComponent<WeaponSlot>().Initialize(item, getItem);
-            slot.GetComponentInChildren<TextMeshProUGUI>().text = item.tag;
-            slotInstances.Add(slot);
-
-            RectTransform rect = slot.GetComponent<RectTransform>();
-            rect.anchoredPosition += new Vector2(10f, -20f);
-        }*/
         // string型でアイテム名を取得して表示
         foreach (string itemName in getItem.GetCurrentItems())
         {

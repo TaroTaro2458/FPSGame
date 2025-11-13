@@ -6,10 +6,19 @@ public class BulletCnt : MonoBehaviour
     EnemyHealth enemyHealth;
     // ‚»‚ê‚¼‚ê‚Ì•Ší‚©‚çƒ_ƒ[ƒW—Ê‚ğæ“¾‚·‚é
     [HideInInspector] public int playerBulletDamage;
+    // ’e‚Ì‘¬“x
+    [SerializeField] float speed = 20f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //’e‚ğ‘O•û‚É”­Ë
+        /*Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = false; // ”O‚Ì‚½‚ß
+            rb.velocity = transform.forward * speed;
+        }*/
         //‚T•bŒã‚É©“®“I‚ÉÁ–Å
         Destroy(gameObject, 5f);
     }

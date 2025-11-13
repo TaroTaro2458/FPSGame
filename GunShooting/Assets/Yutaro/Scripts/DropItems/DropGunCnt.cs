@@ -33,9 +33,10 @@ public class DropGunCnt : MonoBehaviour
             Debug.LogWarning("getItem が null です。プレイヤーオブジェクトが見つからなかった可能性があります。");
             return;
         }
+        // 取得したアイテムリストを更新
         ItemData data = gameObject.GetComponent<ItemData>();
         droppedItems = getItem.GetCurrentItems();
-
+        // 所持しているアイテムにドロップアイテムが含まれていなければ消去
         if (data != null && !droppedItems.Contains(data.itemName))
         {
             Destroy(gameObject);
