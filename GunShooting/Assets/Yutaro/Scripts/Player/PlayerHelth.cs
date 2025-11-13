@@ -21,9 +21,15 @@ public class PlayerHelth : MonoBehaviour
     {
         // ダメージを受ける
         currentHealth -= damage;
+        // カメラシェイクを呼び出す
+        CameraShake shake = Camera.main.GetComponent<CameraShake>();
+        if (shake != null)
+        {
+            shake.TriggerShake();
+        }
 
         //HPが0以下になったら死亡処理
-        
+
         if (currentHealth <= 0)
         {
             Die();
