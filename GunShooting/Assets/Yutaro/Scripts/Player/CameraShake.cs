@@ -17,6 +17,7 @@ public class CameraShake : MonoBehaviour
 
     void Update()
     {
+        // シェイク処理
         if (shakeTime > 0)
         {
             transform.localPosition = initialPosition + Random.insideUnitSphere * shakeMagnitude;
@@ -28,6 +29,7 @@ public class CameraShake : MonoBehaviour
         }
     }
 
+    // 外部からシェイクを呼ぶメソッド
     public void TriggerShake()
     {
         shakeTime = shakeDuration;

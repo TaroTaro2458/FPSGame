@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHelth : MonoBehaviour
 {
@@ -40,8 +41,8 @@ public class PlayerHelth : MonoBehaviour
 
     void Die()
     {
-        // 死亡処理（アニメーション、ゲームオーバーなど）
+        // 死亡処理 シーンをGameOverに切り替える
         Debug.Log("プレイヤー死亡");
-        Destroy(gameObject); 
+        SceneManager.LoadScene("GameOver");
     }
 }
