@@ -30,12 +30,16 @@ public class LocketLauncherBulletController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Enemy"))
+        if (/*!other.CompareTag("Enemy") &&*/ other.CompareTag("Enemy") || other.CompareTag("EnemyBullet"))
         {
-            Explode();
+            /*Explode();
             GameObject effect = Instantiate(explosionParticle, transform.position, Quaternion.identity);
-            Destroy(effect, 5.0f);
+            Destroy(effect, 5.0f);*/
+            return;
         }
+        Explode();
+        GameObject effect = Instantiate(explosionParticle, transform.position, Quaternion.identity);
+        Destroy(effect, 5.0f);
     }
 
     private void Explode()

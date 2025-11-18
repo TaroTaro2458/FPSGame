@@ -10,6 +10,7 @@ TagManager:
   - fullauto
   - shotgun
   - single
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX

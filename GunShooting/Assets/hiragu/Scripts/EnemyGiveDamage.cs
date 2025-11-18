@@ -8,6 +8,11 @@ public class EnemyGiveDamage : MonoBehaviour
     // ’e‚ğ”ò‚Î‚µ‚Ä‚­‚é“G—p
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("Enemy") || other.CompareTag("EnemyBullet"))
+        {
+            return;
+        }
+
         if (!other.gameObject.CompareTag("Enemy"))
         {
             if (other.gameObject.CompareTag("Player"))
@@ -23,7 +28,7 @@ public class EnemyGiveDamage : MonoBehaviour
 
         
 
-        
+
     }
 
     // ’ÇÕ‚·‚é“G—p
