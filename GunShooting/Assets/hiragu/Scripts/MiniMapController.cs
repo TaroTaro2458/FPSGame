@@ -3,81 +3,66 @@ using UnityEngine;
 
 public class MiniMapController : MonoBehaviour
 {
-    [SerializeField] RectTransform mapRect;          // マップパネル
-    [SerializeField] RectTransform enemyDotPrefab;   // 敵アイコンプレハブ
     [SerializeField] Transform player;               // プレイヤー
-    [SerializeField] float mapRange = 50f;           // ワールド単位での表示範囲
-    [SerializeField] string enemyTag = "Enemy";      // 敵タグ
-    [SerializeField] int poolSize = 32;
+    [SerializeField] GameObject enemyDotPrefab;      // 敵アイコンのプレハブ
+    [SerializeField] RectTransform minimapArea;      // ミニマップの表示範囲（RectTransform）
 
-    private List<RectTransform> pool = new List<RectTransform>();
-    private int usedCount = 0;
+    [Header("表示範囲や最大表示数の設定")]
+    [SerializeField] float viewRadius = 20f;         // ミニマップに表示する範囲
+    [SerializeField] int poolSize = 20;              // 敵ドットの最大数（ObjectPool）
 
-    void Awake()
+    private List<RectTransform> dotPool = new List<RectTransform>();
+
+    void Start()
     {
-        InitPool(poolSize);
-    }
-
-    void LateUpdate()
-    {
-        if (player == null) return;
-
-        usedCount = 0;
-        Vector2 halfSize = mapRect.sizeDelta / 2f;
-
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
-
-        foreach (GameObject enemyObj in enemies)
+        // プレハブを poolSize 個だけ作る（これ以上増えない）
+        for (int i = 0; i < poolSize; i++)
         {
-            Transform enemy = enemyObj.transform;
-
-            // --- 1. プレイヤー中心に差分を取る ---
-            Vector3 diff = enemy.position - player.position;
-
-            // --- 2. プレイヤーの回転に合わせる ---
-            float angleRad = player.eulerAngles.y * Mathf.Deg2Rad; // -で逆回転
-            float x = diff.x * Mathf.Cos(angleRad) - diff.z * Mathf.Sin(angleRad);
-            float y = diff.x * Mathf.Sin(angleRad) + diff.z * Mathf.Cos(angleRad);
-
-            // --- 3. マップサイズに合わせてスケーリング ---
-            Vector2 anchored = new Vector2(x, y) / mapRange * halfSize;
-
-            // --- 4. マップ範囲内にクランプ ---
-            float clampedX = Mathf.Clamp(anchored.x, -halfSize.x, halfSize.x);
-            float clampedY = Mathf.Clamp(anchored.y, -halfSize.y, halfSize.y);
-            Vector2 finalPos = new Vector2(clampedX, clampedY);
-
-            // --- 5. アイコン配置 ---
-            RectTransform dot = GetFromPool();
-            dot.SetParent(mapRect, false);
-            dot.anchoredPosition = finalPos;
+            GameObject dot = Instantiate(enemyDotPrefab, minimapArea);
+            dot.SetActive(false);
+            dotPool.Add(dot.GetComponent<RectTransform>());
         }
-
-        // 使わなかったドットを非表示
-        for (int i = usedCount; i < pool.Count; i++)
-            pool[i].gameObject.SetActive(false);
     }
 
-    void InitPool(int size)
+    void Update()
     {
-        for (int i = 0; i < size; i++)
-        {
-            RectTransform dot = Instantiate(enemyDotPrefab, mapRect.parent);
+        UpdateEnemyDots();
+    }
+
+    void UpdateEnemyDots()
+    {
+        var enemies = EnemyManager.enemyInstance.GetEnemies();
+
+        // プールを全て非表示にして準備
+        foreach (var dot in dotPool)
             dot.gameObject.SetActive(false);
-            pool.Add(dot);
-        }
-    }
 
-    RectTransform GetFromPool()
-    {
-        if (usedCount >= pool.Count)
+        int index = 0;
+
+        foreach (Transform enemy in enemies)
         {
-            RectTransform dot = Instantiate(enemyDotPrefab, mapRect.parent);
-            pool.Add(dot);
+            if (index >= poolSize)
+                break;
+
+            Vector3 dir = enemy.position - player.position;
+            float dist = dir.magnitude;
+
+            if (dist > viewRadius)
+                continue;
+
+            // プレイヤーの向きに合わせる（Y軸のみ回転）
+            Vector3 rotated = Quaternion.Euler(0, -player.eulerAngles.y, 0) * dir;
+
+            // ミニマップ内の座標に変換
+            Vector2 mapPos = new Vector2(rotated.x, rotated.z)
+                             / viewRadius
+                             * (minimapArea.sizeDelta / 2f);
+
+            var dot = dotPool[index];
+            dot.anchoredPosition = mapPos;
+            dot.gameObject.SetActive(true);
+
+            index++;
         }
-        RectTransform item = pool[usedCount];
-        item.gameObject.SetActive(true);
-        usedCount++;
-        return item;
     }
 }

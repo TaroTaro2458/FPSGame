@@ -36,6 +36,18 @@ public class EnemyHealth : MonoBehaviour
         
     }
 
+    void OnEnable()
+    {
+        if (EnemyManager.enemyInstance != null)
+            EnemyManager.enemyInstance.RegisterEnemy(transform);
+    }
+
+    void OnDisable()
+    {
+        if (EnemyManager.enemyInstance != null)
+            EnemyManager.enemyInstance.UnregisterEnemy(transform);
+    }
+
     // Update is called once per frame
     void Update()
     {

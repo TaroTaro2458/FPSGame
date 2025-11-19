@@ -3,12 +3,12 @@ using UnityEngine.UI;
 
 public class BossUI : MonoBehaviour
 {
-    Slider slider;
+    [SerializeField] Slider slider;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        slider = GetComponent<Slider>();
+
     }
 
     // Update is called once per frame
