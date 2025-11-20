@@ -31,6 +31,8 @@ public class MiniMapController : MonoBehaviour
 
     void UpdateEnemyDots()
     {
+        //Debug.Log("敵数 = " + EnemyManager.enemyInstance.GetEnemies().Count);
+
         var enemies = EnemyManager.enemyInstance.GetEnemies();
 
         // プールを全て非表示にして準備
