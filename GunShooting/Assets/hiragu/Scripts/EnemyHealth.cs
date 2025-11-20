@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -17,10 +19,38 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField, Range(0f, 1f)] float overallDropChance = 1f;
     [SerializeField] List<dropItem> dropItems;
 
+    bool isBoss = false;
+
+    [Header("ボスの場合にHPが減ったことをUIに通知する")]
+    [SerializeField] UnityEvent<int,int> onHealthChanged;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         EnmeyCurrentHp = maxHp;
+
+        // シーン開始時でも必ず登録されるようにする
+        if (EnemyManager.enemyInstance != null)
+            EnemyManager.enemyInstance.RegisterEnemy(transform);
+
+        if (name == "BossEnemy")
+        {
+            isBoss = true;
+            onHealthChanged.Invoke(EnmeyCurrentHp,maxHp);
+        }
+        
+    }
+
+    void OnEnable()
+    {
+        if (EnemyManager.enemyInstance != null)
+            EnemyManager.enemyInstance.RegisterEnemy(transform);
+    }
+
+    void OnDisable()
+    {
+        if (EnemyManager.enemyInstance != null)
+            EnemyManager.enemyInstance.UnregisterEnemy(transform);
     }
 
     // Update is called once per frame
@@ -36,6 +66,10 @@ public class EnemyHealth : MonoBehaviour
     {
 
         EnmeyCurrentHp -= amount;
+        if (isBoss)
+        {
+            onHealthChanged.Invoke(EnmeyCurrentHp, maxHp);
+        }
         Debug.Log(EnmeyCurrentHp);
     }
 

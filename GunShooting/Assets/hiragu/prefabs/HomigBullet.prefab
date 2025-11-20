@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 188402842813881262}
   m_Layer: 0
   m_Name: HomigBullet
-  m_TagString: Enemy
+  m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39b29b8482baec14d932c9452b5db597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  bulletSpeed: 0
   rotateSpeed: 5
   lifeTime: 5
   damage: 50

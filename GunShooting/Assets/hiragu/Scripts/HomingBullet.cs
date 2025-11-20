@@ -40,7 +40,8 @@ public class HomingBullet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("ground"))
+        if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("ground") ||
+            other.gameObject.CompareTag("EnemyBullet"))
         {
             // 否定にするとうまくいかない
         }
