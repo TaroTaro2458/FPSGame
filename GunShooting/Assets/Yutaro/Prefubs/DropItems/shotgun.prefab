@@ -122,3 +122,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: shotgun
+  itemImage: {fileID: 21300000, guid: cb92d955676b2e9469cb7939ed7c712a, type: 3}

@@ -21,7 +21,22 @@ public class GetItem : MonoBehaviour
     private List<string> currentItemList = new List<string>();
     // アイテム変更イベント
     public UnityEvent onItemChanged = new UnityEvent();
+    // すべてのアイテムデータリスト
+    [SerializeField] private List<ItemData> allItemDataList;
+    // アイテムデータ辞書
+    private Dictionary<string, ItemData> itemDataDict = new Dictionary<string, ItemData>();
 
+    void Awake()
+    {
+        // アイテムデータ辞書の初期化
+        foreach (ItemData data in allItemDataList)
+        {
+            if (!itemDataDict.ContainsKey(data.itemName))
+            {
+                itemDataDict[data.itemName] = data;
+            }
+        }
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -96,5 +111,17 @@ public class GetItem : MonoBehaviour
     public List<GameObject> GetCurrentItemObjects()
     {
         return currentItems;
+    }
+
+    // アイテム名からItemDataを取得
+    public ItemData GetItemData(string itemName)
+    {
+        // アイテムデータ辞書から取得
+        if (itemDataDict.TryGetValue(itemName, out ItemData data))
+        {
+            return data;
+        }
+        Debug.LogWarning($"ItemData not found for itemName: {itemName}");
+        return null;
     }
 }

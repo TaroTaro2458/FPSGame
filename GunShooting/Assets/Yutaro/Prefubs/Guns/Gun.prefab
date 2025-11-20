@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: single
+  itemImage: {fileID: 21300000, guid: 795e1bdf4497f8142aa9808f2f9f2634, type: 3}
 --- !u!114 &347382939164740837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,5 +110,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3eac64fc08353f409de7f77ea425096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  getItem: {fileID: 1835179730000843523, guid: e4beb50f8aa59fc489236ff70f40cf96, type: 3}
   playerName: Player(1)
