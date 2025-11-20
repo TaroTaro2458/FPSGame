@@ -985,8 +985,13 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
+  maxStamina: 100
+  staminaDrainRate: 20
+  staminaRecoveryRate: 10
   jumpForce: 5
   isGrounded: 1
+  dashSpeed: 10
+  dashDuration: 5
 --- !u!136 &953918080
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2081,6 +2086,7 @@ GameObject:
   - component: {fileID: 2007674077}
   - component: {fileID: 2007674076}
   - component: {fileID: 2007674075}
+  - component: {fileID: 2007674079}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2221,6 +2227,20 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &2007674079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2007674073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d0e7f7bdba5fa24ab583ede13df908e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeDuration: 0.3
+  shakeMagnitude: 0.2
 --- !u!1 &2036331075
 GameObject:
   m_ObjectHideFlags: 0
@@ -2852,6 +2872,7 @@ SceneRoots:
   - {fileID: 1662909721}
   - {fileID: 690624129}
   - {fileID: 1498543502}
+  - {fileID: 953918083}
   - {fileID: 2103165888}
   - {fileID: 8930158671982112064}
   - {fileID: 8655810145117262381}
@@ -2862,4 +2883,3 @@ SceneRoots:
   - {fileID: 981325235}
   - {fileID: 265411353}
   - {fileID: 986096081}
-  - {fileID: 953918083}
