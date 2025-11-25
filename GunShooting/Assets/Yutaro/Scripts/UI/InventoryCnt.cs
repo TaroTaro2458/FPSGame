@@ -52,7 +52,7 @@ public class InventoryUI : MonoBehaviour
         foreach (GameObject slot in slotInstances)
             Destroy(slot);
         slotInstances.Clear();
-
+        // 新しいスロットを作成
         foreach (string itemName in getItem.GetCurrentItems())
         {
             ItemData data = getItem.GetItemData(itemName);

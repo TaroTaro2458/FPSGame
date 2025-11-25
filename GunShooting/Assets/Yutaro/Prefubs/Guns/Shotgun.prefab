@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: shotgun
-  itemImage: {fileID: 21300000, guid: cb92d955676b2e9469cb7939ed7c712a, type: 3}
+  itemImage: {fileID: 21300000, guid: 79f56b5ec9b579a49af027af391ae0b6, type: 3}
 --- !u!114 &-7009950676935817709
 MonoBehaviour:
   m_ObjectHideFlags: 0

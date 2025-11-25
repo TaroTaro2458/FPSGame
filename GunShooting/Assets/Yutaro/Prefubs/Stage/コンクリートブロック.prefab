@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7000038458876174501
+--- !u!1 &2252258934963947260
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8318420253836855750}
-  - component: {fileID: 3079976538003353005}
-  - component: {fileID: 4325463695113408111}
-  - component: {fileID: 7224120444768433444}
-  - component: {fileID: -3772658185574537392}
-  m_Layer: 0
-  m_Name: shotgun
-  m_TagString: shotgun
+  - component: {fileID: 6824701797818579928}
+  - component: {fileID: 5092821303177377265}
+  - component: {fileID: 7459585967199620665}
+  - component: {fileID: 1027574084145714027}
+  m_Layer: 3
+  m_Name: "\u30B3\u30F3\u30AF\u30EA\u30FC\u30C8\u30D6\u30ED\u30C3\u30AF"
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8318420253836855750
+--- !u!4 &6824701797818579928
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7000038458876174501}
+  m_GameObject: {fileID: 2252258934963947260}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7238547, z: -0, w: 0.68995243}
-  m_LocalPosition: {x: -2.77, y: 0.9, z: 3.51}
-  m_LocalScale: {x: 1.91203, y: 0.39856, z: 0.30129}
+  m_LocalRotation: {x: -0, y: -0.0074562454, z: -0, w: 0.9999722}
+  m_LocalPosition: {x: 0.0350183, y: 2.5273, z: 0.0037757}
+  m_LocalScale: {x: 0.0022618114, y: 4.007837, z: 0.001749487}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -92.747, z: 0}
---- !u!33 &3079976538003353005
+  m_LocalEulerAnglesHint: {x: 0, y: -0.854, z: 0}
+--- !u!33 &5092821303177377265
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7000038458876174501}
+  m_GameObject: {fileID: 2252258934963947260}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &4325463695113408111
+--- !u!23 &7459585967199620665
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7000038458876174501}
+  m_GameObject: {fileID: 2252258934963947260}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -66,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 2570065314f5b0346972d0a5fc987234, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -88,13 +87,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7224120444768433444
+--- !u!65 &1027574084145714027
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7000038458876174501}
+  m_GameObject: {fileID: 2252258934963947260}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -103,23 +102,9 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-3772658185574537392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7000038458876174501}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8eac3556485299c4db869795fff8e6de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: shotgun
-  itemImage: {fileID: 21300000, guid: 79f56b5ec9b579a49af027af391ae0b6, type: 3}

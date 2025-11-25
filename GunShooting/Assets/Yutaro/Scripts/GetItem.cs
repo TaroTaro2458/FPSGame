@@ -68,6 +68,20 @@ public class GetItem : MonoBehaviour
         Transform equipSlot = handTransform; // 装備位置
         GameObject equippedItem = Instantiate(itemPrefab, equipSlot.position, equipSlot.rotation, equipSlot);
     }
+    // アイテム削除処理
+    public void UnequipItem(string itemName)
+    {
+        // 装備中のアイテムを探して削除
+        foreach (Transform child in handTransform)
+        {
+            ItemData data = child.GetComponent<ItemData>();
+            if (data != null && data.itemName == itemName)
+            {
+                Destroy(child.gameObject);
+                break;
+            }
+        }
+    }
 
     // アイテムをインベントリに追加と判定
     public bool AddItem(GameObject item)
@@ -83,10 +97,6 @@ public class GetItem : MonoBehaviour
             Destroy(item); // 情報を保存したあとに削除
             return true;
         }
-        /*currentItems.Add(item);
-        currentItemList.Add(item.tag);
-        onItemChanged.Invoke(); // UIに通知
-        return true;*/
         Debug.LogWarning("ItemData が見つかりませんでした");
         return false;
     }
