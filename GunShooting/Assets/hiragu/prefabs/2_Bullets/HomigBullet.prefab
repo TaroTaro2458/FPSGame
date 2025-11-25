@@ -152,4 +152,4 @@ MonoBehaviour:
   bulletSpeed: 0
   rotateSpeed: 5
   lifeTime: 5
-  damage: 50
+  damage: 25

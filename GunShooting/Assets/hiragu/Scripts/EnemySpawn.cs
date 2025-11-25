@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class WaveSpawn : MonoBehaviour
+public class EnemySpawn : MonoBehaviour
 {
     [Header("スポーンエリア（このオブジェクト中心）")]
     [SerializeField] Vector2 spawnAreaSize = new Vector2(50f, 50f);
@@ -18,6 +18,9 @@ public class WaveSpawn : MonoBehaviour
     [Tooltip("各プレハブの重み（確率）。0以上。未設定や長さ不一致なら均等配分になる）")]
     [SerializeField] float[] prefabWeights;
 
+    [Header("ボスのプレハブ")]
+    [SerializeField] GameObject bossPrefab;
+
     [Header("検索設定")]
     [Tooltip("有効な候補点を探す最大試行回数")]
     [SerializeField] int maxAttempts = 30;
@@ -29,8 +32,6 @@ public class WaveSpawn : MonoBehaviour
     // 1体だけスポーン
     public bool SpawnOne()
     {
-        
-
         Vector3 spawnPos;
         if (!TryGetValidSpawnPoint(out spawnPos))
             return false;
@@ -43,7 +44,7 @@ public class WaveSpawn : MonoBehaviour
     }
 
     // n体スポーン（成功した生成数を返す）
-    public int SpawnMultiple(int count)
+    public void SpawnMultiple(int count)
     {
         int spawned = 0;
         for (int i = 0; i < count; i++)
@@ -51,7 +52,20 @@ public class WaveSpawn : MonoBehaviour
             if (SpawnOne()) spawned++;
             else break; // 有効地点が見つからなければ中断
         }
-        return spawned;
+        //return spawned;
+    }
+
+    public bool BossSpawn()
+    {
+        Vector3 spawnPos;
+        if (!TryGetValidSpawnPoint(out spawnPos))
+            return false;
+
+        
+        if (bossPrefab == null) return false;
+
+        Instantiate(bossPrefab, spawnPos, Quaternion.identity);
+        return true;
     }
 
     // ---------- 内部ロジック ----------
