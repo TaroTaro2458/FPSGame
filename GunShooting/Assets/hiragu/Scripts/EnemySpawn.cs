@@ -28,6 +28,8 @@ public class EnemySpawn : MonoBehaviour
     [Header("参照")]
     [SerializeField] Transform player;
 
+    GameObject currBoss;
+
     // ---------- public API ----------
     // 1体だけスポーン
     public bool SpawnOne()
@@ -64,7 +66,14 @@ public class EnemySpawn : MonoBehaviour
         
         if (bossPrefab == null) return false;
 
+        //currBoss = Instantiate(bossPrefab, spawnPos, Quaternion.identity);
         Instantiate(bossPrefab, spawnPos, Quaternion.identity);
+        //EnemyHealth health = currBoss.GetComponent<EnemyHealth>();
+        //BossUI ui = currBoss.GetComponent<BossUI>();
+        //health.onHealthChanged.AddListener(ui.UpdateBossUI);
+
+        // 初期化
+        //ui.UpdateBossUI(health.CurrentHP, health.MaxHP);
         return true;
     }
 

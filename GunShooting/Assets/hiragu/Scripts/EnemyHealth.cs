@@ -28,13 +28,14 @@ public class EnemyHealth : MonoBehaviour
     void Start()
     {
         EnmeyCurrentHp = maxHp;
-
+        
         // シーン開始時でも必ず登録されるようにする
         if (EnemyManager.enemyInstance != null)
             EnemyManager.enemyInstance.RegisterEnemy(transform);
 
         if (name == "BossEnemy")
         {
+            Debug.Log("aaaa");
             isBoss = true;
             onHealthChanged.Invoke(EnmeyCurrentHp,maxHp);
         }
