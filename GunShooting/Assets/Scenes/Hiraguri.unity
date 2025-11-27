@@ -397,8 +397,13 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
+  maxStamina: 100
+  staminaDrainRate: 20
+  staminaRecoveryRate: 10
   jumpForce: 5
   isGrounded: 1
+  dashSpeed: 10
+  dashDuration: 5
 --- !u!136 &289125109
 CapsuleCollider:
   m_ObjectHideFlags: 0
