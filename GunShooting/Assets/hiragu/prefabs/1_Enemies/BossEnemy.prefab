@@ -132,6 +132,7 @@ MonoBehaviour:
   EnmeyCurrentHp: 0
   overallDropChance: 1
   dropItems: []
+  isBoss: 1
   onHealthChanged:
     m_PersistentCalls:
       m_Calls:
@@ -205,6 +206,7 @@ MonoBehaviour:
   shootingPoint: {fileID: 2733122294184789825}
   shootingInterval: 1
   bulletSpeed: 20
+  isBoss: 1
   pinchShootingInterval: 0.7
   pinchBulletSpeed: 15
   pinchHp: 100

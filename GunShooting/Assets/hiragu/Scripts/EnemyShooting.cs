@@ -16,7 +16,7 @@ public class EnemyShooting : MonoBehaviour
     Vector3 enemyDirectionControl;
     Vector3 bulletDirection;
 
-    bool isBoss = false;
+    [SerializeField] bool isBoss = false;
     bool isPinch = false;
     EnemyHealth enmeyHealth;
 
@@ -31,9 +31,8 @@ public class EnemyShooting : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").transform;
 
-        if(gameObject.name == "BossEnemy")
+        if(isBoss)
         {
-            isBoss = true;
             enmeyHealth = GetComponent<EnemyHealth>();
         }
     }
@@ -41,7 +40,8 @@ public class EnemyShooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (player == null) return;
+
         enemyDirectionControl = new Vector3(player.position.x, transform.position.y, player.position.z);
         transform.LookAt(enemyDirectionControl);
 
@@ -65,6 +65,8 @@ public class EnemyShooting : MonoBehaviour
 
     void Shooting()
     {
+        if (player == null) return;
+
         bullet = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
         bullet.transform.rotation = Quaternion.LookRotation(
             (player.position - shootingPoint.position).normalized) * Quaternion.Euler(90, 0, 0);

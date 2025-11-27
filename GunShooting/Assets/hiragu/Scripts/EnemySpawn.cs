@@ -54,7 +54,6 @@ public class EnemySpawn : MonoBehaviour
             if (SpawnOne()) spawned++;
             else break; // —LŒø’n“_‚ªŒ©‚Â‚©‚ç‚È‚¯‚ê‚Î’†’f
         }
-        //return spawned;
     }
 
     public bool BossSpawn()
@@ -66,14 +65,9 @@ public class EnemySpawn : MonoBehaviour
         
         if (bossPrefab == null) return false;
 
-        //currBoss = Instantiate(bossPrefab, spawnPos, Quaternion.identity);
         Instantiate(bossPrefab, spawnPos, Quaternion.identity);
-        //EnemyHealth health = currBoss.GetComponent<EnemyHealth>();
-        //BossUI ui = currBoss.GetComponent<BossUI>();
-        //health.onHealthChanged.AddListener(ui.UpdateBossUI);
+        
 
-        // ‰Šú‰»
-        //ui.UpdateBossUI(health.CurrentHP, health.MaxHP);
         return true;
     }
 

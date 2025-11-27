@@ -1696,9 +1696,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 1165207190}
-  spawnInterval: 10000
+  spawnInterval: 7
   spawnNum: 3
-  bossSpawnInterval: 10
+  bossSpawnInterval: 60
   waveCount: []
 --- !u!4 &1229172023
 Transform:

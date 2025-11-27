@@ -23,8 +23,22 @@ public class LocketLauncherBulletController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = Quaternion.LookRotation(
-                (player.position - shootingPoint.position).normalized) * Quaternion.Euler(90, 0, 0);
+        // ★ Transform が Destroy されていないかチェック
+        if (player == null || shootingPoint == null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        // ★ 安全に座標を取得
+        Vector3 direction = player.position - shootingPoint.position;
+
+        // 方向がゼロベクトルにならないように保険
+        if (direction.sqrMagnitude < 0.0001f)
+            return;
+
+        transform.rotation = Quaternion.LookRotation(direction.normalized) * Quaternion.Euler(90, 0, 0);
+
         rb.linearVelocity = (player.position - shootingPoint.position).normalized * bulletSpeed;
     }
 

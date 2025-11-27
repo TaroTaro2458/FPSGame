@@ -40,21 +40,19 @@ public class HomingBullet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("ground") ||
-            other.gameObject.CompareTag("EnemyBullet"))
+        if (!other.CompareTag("Enemy") &&
+    !       other.CompareTag("ground") &&
+            !other.CompareTag("EnemyBullet"))
         {
-            // 否定にするとうまくいかない
-        }
-        else
-        {
-            if (other.gameObject.CompareTag("Player"))
+            if (other.CompareTag("Player"))
             {
-                playerHealth = other.gameObject.GetComponent<PlayerHelth>();
+                playerHealth = other.GetComponent<PlayerHelth>();
                 if (playerHealth != null)
                 {
                     playerHealth.TakeDamage(damage);
                 }
             }
+
             Destroy(gameObject);
         }
     }

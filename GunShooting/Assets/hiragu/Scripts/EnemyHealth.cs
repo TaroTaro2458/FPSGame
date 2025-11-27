@@ -19,7 +19,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField, Range(0f, 1f)] float overallDropChance = 1f;
     [SerializeField] List<dropItem> dropItems;
 
-    bool isBoss = false;
+    [SerializeField] bool isBoss = false;
 
     [Header("ボスの場合にHPが減ったことをUIに通知する")]
     [SerializeField] UnityEvent<int,int> onHealthChanged;
@@ -33,10 +33,8 @@ public class EnemyHealth : MonoBehaviour
         if (EnemyManager.enemyInstance != null)
             EnemyManager.enemyInstance.RegisterEnemy(transform);
 
-        if (name == "BossEnemy")
+        if (isBoss)
         {
-            Debug.Log("aaaa");
-            isBoss = true;
             onHealthChanged.Invoke(EnmeyCurrentHp,maxHp);
         }
         
@@ -104,4 +102,5 @@ public class EnemyHealth : MonoBehaviour
             Instantiate(dropItems[randomIndex].gunPrefab, transform.position, Quaternion.identity);
         }
     }
+
 }
