@@ -82,7 +82,7 @@ MonoBehaviour:
   firePoint: {fileID: 2637000729274754316}
   pelletCount: 8
   spreadAngle: 10
-  bulletSpeed: 20
+  bulletSpeed: 50
   fireRate: 1
   bulletDamage: 10
   heatPerShot: 10
