@@ -21,10 +21,14 @@ public class PlayerMove : MonoBehaviour
     // ダッシュの速度と持続時間
     [SerializeField] float dashSpeed = 10f;
     [SerializeField] float dashDuration = 5f;
-
+    // ダッシュのクールダウン時間
     private float dashTimer ;
+    // ダッシュ中かどうかのフラグ
     private bool isDashing = false;
+    // ダッシュ終了時間
     private float dashEndTime = 0f;
+    // アニメーター参照(保留中）
+    //Animator animator;
 
 
 
@@ -32,10 +36,13 @@ public class PlayerMove : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true; // 倒れ防止
+
+        //animator = GetComponent<Animator>();
     }
 
     void Update()
     {
+
         // 地面チェック
         isGrounded = Physics.CheckSphere(groundCheck.position, 0.3f, groundMask);
 
@@ -65,6 +72,9 @@ public class PlayerMove : MonoBehaviour
         // 移動入力
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
+        // アニメーションの速度パラメーターを設定
+        float moveAmount = new Vector2(moveX, moveZ).magnitude;
+        //animator.SetFloat("Speed", moveAmount);
 
         Vector3 move = transform.right * moveX + transform.forward * moveZ;
 
