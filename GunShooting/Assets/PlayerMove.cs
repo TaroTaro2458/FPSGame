@@ -4,8 +4,9 @@ public class PlayerMove : MonoBehaviour
 {
     //移動速度
     [SerializeField] float moveSpeed = 5f;
-
+    // Rigidbodyコンポーネントの参照
     private Rigidbody rb;
+    // 地面チェック用のTransformとLayerMask
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask groundMask;
 

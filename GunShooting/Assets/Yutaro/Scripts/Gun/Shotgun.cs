@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Shotgun : MonoBehaviour
 {
+    // 弾のプレハブ
     [SerializeField] GameObject bulletPrefab;
     // 射撃位置
     [SerializeField] Transform firePoint;
