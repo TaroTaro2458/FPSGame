@@ -385,6 +385,7 @@ MonoBehaviour:
   bulletSpeed: 20
   fireRate: 1
   bulletDamage: 10
+  heatPerShot: 10
 --- !u!114 &223385410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,6 +403,7 @@ MonoBehaviour:
   bulletSpeed: 20
   fireRate: 0.5
   bulletDamage: 10
+  heatPerShot: 10
 --- !u!114 &223385411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,6 +421,7 @@ MonoBehaviour:
   bulletSpeed: 20
   fireRate: 0.2
   bulletDamage: 10
+  heatPerShot: 10
 --- !u!1 &224526073
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,7 +483,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9788ac5042b327f49a8e02bb4dace20d, type: 2}
   m_sharedMaterial: {fileID: 4670337722271395054, guid: 9788ac5042b327f49a8e02bb4dace20d, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 4670337722271395054, guid: 9788ac5042b327f49a8e02bb4dace20d, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -649,7 +653,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 01219acc239963a40aa907c2a99c293d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -859,7 +863,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: c7c65b143bcec81478a96e7af9f81cf5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1197,7 +1201,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHeat: 100
-  heatPerShot: 10
   cooldownRate: 20
   cooldownDelay: 2
   heatFillImage: {fileID: 1417109428}
@@ -1644,7 +1647,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 23ad9f01f27e01543a3cb0c1b53d4da3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2018,8 +2021,13 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
+  maxStamina: 100
+  staminaDrainRate: 20
+  staminaRecoveryRate: 10
   jumpForce: 5
   isGrounded: 1
+  dashSpeed: 10
+  dashDuration: 5
 --- !u!136 &1453721571
 CapsuleCollider:
   m_ObjectHideFlags: 0
