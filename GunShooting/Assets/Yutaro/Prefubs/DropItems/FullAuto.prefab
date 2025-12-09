@@ -122,3 +122,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: FullAuto
+  itemImage: {fileID: 21300000, guid: 795e1bdf4497f8142aa9808f2f9f2634, type: 3}

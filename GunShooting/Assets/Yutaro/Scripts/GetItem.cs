@@ -21,7 +21,22 @@ public class GetItem : MonoBehaviour
     private List<string> currentItemList = new List<string>();
     // アイテム変更イベント
     public UnityEvent onItemChanged = new UnityEvent();
+    // すべてのアイテムデータリスト
+    [SerializeField] private List<ItemData> allItemDataList;
+    // アイテムデータ辞書
+    private Dictionary<string, ItemData> itemDataDict = new Dictionary<string, ItemData>();
 
+    void Awake()
+    {
+        // アイテムデータ辞書の初期化
+        foreach (ItemData data in allItemDataList)
+        {
+            if (!itemDataDict.ContainsKey(data.itemName))
+            {
+                itemDataDict[data.itemName] = data;
+            }
+        }
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -53,6 +68,20 @@ public class GetItem : MonoBehaviour
         Transform equipSlot = handTransform; // 装備位置
         GameObject equippedItem = Instantiate(itemPrefab, equipSlot.position, equipSlot.rotation, equipSlot);
     }
+    // アイテム削除処理
+    public void UnequipItem(string itemName)
+    {
+        // 装備中のアイテムを探して削除
+        foreach (Transform child in handTransform)
+        {
+            ItemData data = child.GetComponent<ItemData>();
+            if (data != null && data.itemName == itemName)
+            {
+                Destroy(child.gameObject);
+                break;
+            }
+        }
+    }
 
     // アイテムをインベントリに追加と判定
     public bool AddItem(GameObject item)
@@ -68,10 +97,6 @@ public class GetItem : MonoBehaviour
             Destroy(item); // 情報を保存したあとに削除
             return true;
         }
-        /*currentItems.Add(item);
-        currentItemList.Add(item.tag);
-        onItemChanged.Invoke(); // UIに通知
-        return true;*/
         Debug.LogWarning("ItemData が見つかりませんでした");
         return false;
     }
@@ -96,5 +121,17 @@ public class GetItem : MonoBehaviour
     public List<GameObject> GetCurrentItemObjects()
     {
         return currentItems;
+    }
+
+    // アイテム名からItemDataを取得
+    public ItemData GetItemData(string itemName)
+    {
+        // アイテムデータ辞書から取得
+        if (itemDataDict.TryGetValue(itemName, out ItemData data))
+        {
+            return data;
+        }
+        Debug.LogWarning($"ItemData not found for itemName: {itemName}");
+        return null;
     }
 }

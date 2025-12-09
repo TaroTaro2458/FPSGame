@@ -30,6 +30,7 @@ public class InventoryUI : MonoBehaviour
         {
             ToggleInventory();
         }
+
     }
 
     //インベントリ画面が開かれたときにリスナーを追加
@@ -51,13 +52,14 @@ public class InventoryUI : MonoBehaviour
         foreach (GameObject slot in slotInstances)
             Destroy(slot);
         slotInstances.Clear();
-
-        // string型でアイテム名を取得して表示
+        // 新しいスロットを作成
         foreach (string itemName in getItem.GetCurrentItems())
         {
+            ItemData data = getItem.GetItemData(itemName);
+            if (data == null) continue;
+
             GameObject slot = Instantiate(weaponSlotPrefab, slotParent);
-            slot.GetComponent<WeaponSlot>().Initialize(itemName, getItem);
-            slot.GetComponentInChildren<TextMeshProUGUI>().text = itemName;
+            slot.GetComponent<WeaponSlot>().Initialize(data, getItem);
             slotInstances.Add(slot);
         }
     }

@@ -24,6 +24,8 @@ public class Overheat : MonoBehaviour
 
     //  UIスライダー参照
     [SerializeField] Slider heatSlider;
+    // Slider本体のImage
+    [SerializeField] Image sliderImage; 
     // スライダーの塗りつぶし
     private Image fillImage;
     // 点滅用
@@ -114,8 +116,28 @@ public class Overheat : MonoBehaviour
             //赤と白を交互に切り替え
             fillImage.color = Color.red;
             yield return new WaitForSeconds(0.3f);
-            fillImage.color = Color.white;
+            Color c = sliderImage.color;
+            c.a = 0f;
+            sliderImage.color = c;
             yield return new WaitForSeconds(0.3f);
+            fillImage.color = Color.white;
+             yield return new WaitForSeconds(0.3f);
+
+
+
+            /*// 点滅の色と通常の色
+            Color blinkColor = Color.red;
+            Color normalColor = Color.white;
+
+            if (fillImage != null) fillImage.color = blinkColor;
+            if (sliderImage != null) sliderImage.color = blinkColor;
+
+            yield return new WaitForSeconds(0.3f);
+
+            if (fillImage != null) fillImage.color = normalColor;
+            if (sliderImage != null) sliderImage.color = normalColor;
+
+            yield return new WaitForSeconds(0.3f);*/
         }
     }
     // ゲージの割合を取得

@@ -26,7 +26,7 @@ public class DropGunCnt : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+   /* void Update()
     {
         if (getItem == null)
         {
@@ -41,6 +41,27 @@ public class DropGunCnt : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }*/
+
+    void OnEnable()
+    {
+        if (getItem != null)
+            getItem.onItemChanged.AddListener(CheckDrop);
     }
 
+    void OnDisable()
+    {
+        if (getItem != null)
+            getItem.onItemChanged.RemoveListener(CheckDrop);
+    }
+
+    void CheckDrop()
+    {
+        ItemData data = GetComponent<ItemData>();
+        if (data != null && !getItem.GetCurrentItems().Contains(data.itemName))
+        {
+            Destroy(gameObject);
+        }
+
+    }
 }
