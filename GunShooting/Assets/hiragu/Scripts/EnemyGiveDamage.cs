@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyGiveDamage : MonoBehaviour
 {
-    PlayerHelth playerHealth;
+    PlayerHealth playerHealth;
     [SerializeField] int damage = 100;
 
     // ’e‚ð”ò‚Î‚µ‚Ä‚­‚é“G—p
@@ -17,7 +17,7 @@ public class EnemyGiveDamage : MonoBehaviour
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                playerHealth = other.gameObject.GetComponent<PlayerHelth>();
+                playerHealth = other.gameObject.GetComponent<PlayerHealth>();
                 if (playerHealth != null)
                 {
                     playerHealth.TakeDamage(damage);
@@ -36,7 +36,7 @@ public class EnemyGiveDamage : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            playerHealth = collision.gameObject.GetComponent<PlayerHelth>();
+            playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
             if (playerHealth != null)
             {
                 playerHealth.TakeDamage(damage);

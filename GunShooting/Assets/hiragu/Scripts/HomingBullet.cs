@@ -10,7 +10,7 @@ public class HomingBullet : MonoBehaviour
     [SerializeField] int damage = 50;
 
     Rigidbody rb;
-    PlayerHelth playerHealth;
+    PlayerHealth playerHealth;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -46,7 +46,7 @@ public class HomingBullet : MonoBehaviour
         {
             if (other.CompareTag("Player"))
             {
-                playerHealth = other.GetComponent<PlayerHelth>();
+                playerHealth = other.GetComponent<PlayerHealth>();
                 if (playerHealth != null)
                 {
                     playerHealth.TakeDamage(damage);

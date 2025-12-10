@@ -66,7 +66,7 @@ public class LocketLauncherBulletController : MonoBehaviour
             if (nearbyObject.CompareTag("Player"))
             {
                 // PlayerHealthスクリプトを探す（または任意のダメージスクリプト）
-                PlayerHelth playerHealth = nearbyObject.GetComponent<PlayerHelth>();
+                PlayerHealth playerHealth = nearbyObject.GetComponent<PlayerHealth>();
                 if (playerHealth != null)
                 {
                     playerHealth.TakeDamage(damage);

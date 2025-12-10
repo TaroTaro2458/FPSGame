@@ -5,7 +5,7 @@ using System.Collections;
 
 public class PlayerHealthUI : MonoBehaviour
 {
-    [SerializeField] private PlayerHelth playerHealth;
+    [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private Image hpFillImage;
     [SerializeField] private TextMeshProUGUI hpText;
     [SerializeField] private RectTransform hpBarTransform;
@@ -17,7 +17,7 @@ public class PlayerHealthUI : MonoBehaviour
     private void Start()
     {
         if (playerHealth == null)
-            playerHealth = FindFirstObjectByType<PlayerHelth>();
+            playerHealth = FindFirstObjectByType<PlayerHealth>();
 
         if (hpBarTransform == null && hpFillImage != null)
             hpBarTransform = hpFillImage.GetComponent<RectTransform>();
