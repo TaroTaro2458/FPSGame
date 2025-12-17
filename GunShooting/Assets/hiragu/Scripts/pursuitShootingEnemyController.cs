@@ -11,6 +11,7 @@ public class pursuitShootingEnemyController : MonoBehaviour
     [SerializeField] float bulletSpeed = 10f;           // 弾の速度
     [SerializeField] Transform shootingPoint;
     [SerializeField] float destroyTime = 5;
+    [SerializeField] private LayerMask hitMask; 
 
     NavMeshAgent nav;                                   // プレイヤーを追跡する用のnavMesh
     Transform player;                                   // プレイヤーの位置を取得する
@@ -30,29 +31,63 @@ public class pursuitShootingEnemyController : MonoBehaviour
     void Update()
     {
         // プレイヤーとの距離を取得
-        distance = distance = Vector3.Distance(transform.position, player.position);
+        distance = Vector3.Distance(transform.position, player.position);
 
         if (player != null)
         {
             // プレイヤーが射程外なら追跡、そうでないなら射撃
             if (distance > range)
             {
-                intervalCount = interval - 0.5f;            // 次に止まった場合にすぐに撃てるように調整
-                nav.isStopped = false;                      // 止まらないようにする
-                nav.SetDestination(player.position);        // プレイヤーに追跡
+                Move();
             }
             else
             {
-                transform.LookAt(player);                   // プレイヤーのほうを向く
-                nav.isStopped = true;                       // 止まるようにする
-                intervalCount += Time.deltaTime;            // カウントを進める
-                if(intervalCount >= interval)               // カウントが射撃間隔を越したら撃つ
+                if (CanSeePlayer())
                 {
-                    Shooting();                             // 射撃のメソッド
-                    intervalCount = 0f;                     // カウントをリセット
+                    transform.LookAt(player);                   // プレイヤーのほうを向く
+                    nav.isStopped = true;                       // 止まるようにする
+                    intervalCount += Time.deltaTime;            // カウントを進める
+                    if (intervalCount >= interval)               // カウントが射撃間隔を越したら撃つ
+                    {
+                        Shooting();                             // 射撃のメソッド
+                        intervalCount = 0f;                     // カウントをリセット
+                    }
                 }
+                else
+                {
+                    Move();
+                }
+
+                
             }
 
+        }
+
+        void Move()
+        {
+            intervalCount = interval - 0.5f;            // 次に止まった場合にすぐに撃てるように調整
+            nav.isStopped = false;                      // 止まらないようにする
+            nav.SetDestination(player.position);        // プレイヤーを追跡
+        }
+
+        bool CanSeePlayer()
+        {
+            Vector3 dir = (player.position - transform.position).normalized;
+
+            // RaycastHitで最初に当たったものをチェック
+            if ((Physics.Raycast(
+            shootingPoint.position,
+            dir,
+            out RaycastHit hit,
+            range,
+            hitMask)))
+            {
+                if (hit.transform.CompareTag("Player"))
+                {
+                    return true; // 射線に遮蔽物なし
+                }
+            }
+            return false; // 何か壁などに当たった
         }
 
         // 弾のスピードを渡してプレイヤーの向けて撃つ
