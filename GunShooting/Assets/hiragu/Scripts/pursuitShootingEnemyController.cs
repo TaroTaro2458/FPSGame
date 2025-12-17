@@ -75,12 +75,7 @@ public class pursuitShootingEnemyController : MonoBehaviour
             Vector3 dir = (player.position - transform.position).normalized;
 
             // RaycastHitで最初に当たったものをチェック
-            if ((Physics.Raycast(
-            shootingPoint.position,
-            dir,
-            out RaycastHit hit,
-            range,
-            hitMask)))
+            if ((Physics.Raycast(shootingPoint.position,dir,out RaycastHit hit,range,hitMask)))
             {
                 if (hit.transform.CompareTag("Player"))
                 {
