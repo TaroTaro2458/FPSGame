@@ -14,9 +14,9 @@ public class MouseLookCamera : MonoBehaviour
 
     void Start()
     {
-        // マウスカーソルを非表示にして固定（必要なら）
+        /*// マウスカーソルを非表示にして固定（必要なら）
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        Cursor.visible = false;*/
     }
 
     void Update()

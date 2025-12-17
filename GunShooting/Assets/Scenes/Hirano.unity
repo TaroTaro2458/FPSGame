@@ -8670,7 +8670,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 47c2d740284d61c458bc725d4f321617, type: 2}
+  - {fileID: 2100000, guid: c7c65b143bcec81478a96e7af9f81cf5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15005,7 +15005,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2335324569872035433}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 110c17897cb82c14faf979c80c79e0ed, type: 3}
   m_Name: 
@@ -15032,6 +15032,7 @@ GameObject:
   - component: {fileID: 132837462775787086}
   - component: {fileID: 4523864656170887452}
   - component: {fileID: 6831323188603828081}
+  - component: {fileID: 6831323188603828082}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -15429,8 +15430,8 @@ Transform:
   m_GameObject: {fileID: 6866969699480123759}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7238547, z: -0, w: 0.68995243}
-  m_LocalPosition: {x: 0.2952, y: 1.055, z: 0.412}
-  m_LocalScale: {x: 3.2787838, y: 2.5090241, z: 0.5240193}
+  m_LocalPosition: {x: 0.294, y: 1.055, z: 0.2}
+  m_LocalScale: {x: 1, y: 1, z: 0.5240193}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 662076836170835757}
@@ -15610,6 +15611,26 @@ MonoBehaviour:
   fireRate: 0.5
   bulletDamage: 10
   heatPerShot: 20
+--- !u!114 &6831323188603828082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2335324569872035433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02612a06fd3136a4380d08d7d85d2931, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 5331095314279468045, guid: 64b36108a7a091d4cb6b21cacd77a697, type: 3}
+  firePoint: {fileID: 5117114781407386660}
+  bulletSpeed: 20
+  fireRate: 0.5
+  bulletDamage: 10
+  heatPerShot: 5
+  muzzleFlashPrefab: {fileID: 4565600078591484643, guid: a6e6f080fd570c34fab60b5db24c64f3, type: 3}
+  muzzlePoint: {fileID: 5117114781407386660}
 --- !u!1 &6866969699480123759
 GameObject:
   m_ObjectHideFlags: 0

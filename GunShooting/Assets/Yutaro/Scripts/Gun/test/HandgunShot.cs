@@ -1,40 +1,41 @@
-ï»¿using UnityEngine;
+using UnityEngine;
 
-public class GunShoot : MonoBehaviour
+public class HandgunShot : MonoBehaviour
 {
+
     [SerializeField] GameObject bulletPrefab;
-    //å°„æ’ƒä½ç½®
+    //ËŒ‚ˆÊ’u
     [SerializeField] Transform firePoint;
-    //å¼¾ã®é€Ÿåº¦
+    //’e‚Ì‘¬“x
     [SerializeField] float bulletSpeed = 20f;
-    // é€£å°„é–“éš”ï¼ˆç§’ï¼‰
-    [SerializeField] float fireRate = 0.5f; 
+    // ˜AËŠÔŠui•bj
+    [SerializeField] float fireRate = 0.5f;
     private float nextFireTime = 0f;
-    // å¼¾ã®ãƒ€ãƒ¡ãƒ¼ã‚¸
+    // ’e‚Ìƒ_ƒ[ƒW
     [SerializeField] int bulletDamage = 10;
-    // å¼¾ã®ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’BulletCntã«æ¸¡ã™
+    // ’e‚Ìƒ_ƒ[ƒW‚ğBulletCnt‚É“n‚·
     BulletCnt bulletCnt;
 
-    // Overheatã‚¯ãƒ©ã‚¹
+    // OverheatƒNƒ‰ƒX
     Overheat overheat;
-    // 1ç™ºã‚ãŸã‚Šã®ã‚²ãƒ¼ã‚¸ä¸Šæ˜‡é‡
+    // 1”­‚ ‚½‚è‚ÌƒQ[ƒWã¸—Ê
     [SerializeField] float heatPerShot = 5f;
 
-    /*// ãƒã‚ºãƒ«ãƒ•ãƒ©ãƒƒã‚·ãƒ¥ã®ãƒ—ãƒ¬ãƒãƒ–
+    // ƒ}ƒYƒ‹ƒtƒ‰ƒbƒVƒ…‚ÌƒvƒŒƒnƒu
     [SerializeField] GameObject muzzleFlashPrefab;
-    // ãƒã‚ºãƒ«ãƒ•ãƒ©ãƒƒã‚·ãƒ¥ã®å‡ºç¾ä½ç½®
-    [SerializeField] Transform muzzlePoint;*/ 
+    // ƒ}ƒYƒ‹ƒtƒ‰ƒbƒVƒ…‚ÌoŒ»ˆÊ’u
+    [SerializeField] Transform muzzlePoint;
 
     private void Start()
     {
-        // Overheatã‚¯ãƒ©ã‚¹ã®å‚ç…§ã‚’å–å¾—
+        // OverheatƒNƒ‰ƒX‚ÌQÆ‚ğæ“¾
         overheat = FindObjectOfType<Overheat>();
     }
 
     void Update()
     {
-        // å·¦ã‚¯ãƒªãƒƒã‚¯ã§ç™ºå°„
-        if (Input.GetButton("Fire1") && Time.time >= nextFireTime && overheat.CanFire) 
+        // ¶ƒNƒŠƒbƒN‚Å”­Ë
+        if (Input.GetButton("Fire1") && Time.time >= nextFireTime && overheat.CanFire)
         {
             Shoot();
             nextFireTime = Time.time + fireRate;
@@ -54,7 +55,7 @@ public class GunShoot : MonoBehaviour
         }
         else
         {
-            targetPoint = ray.GetPoint(100f); 
+            targetPoint = ray.GetPoint(100f);
         }
 
         Vector3 shootDirection = (targetPoint - firePoint.position).normalized;
@@ -66,11 +67,10 @@ public class GunShoot : MonoBehaviour
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.linearVelocity = shootDirection * bulletSpeed;
 
-       /* // ãƒã‚ºãƒ«ãƒ•ãƒ©ãƒƒã‚·ãƒ¥ã‚’ç”Ÿæˆ
+        // ƒ}ƒYƒ‹ƒtƒ‰ƒbƒVƒ…‚ğ¶¬
         GameObject flash = Instantiate(muzzleFlashPrefab, muzzlePoint.position, muzzlePoint.rotation);
-        Destroy(flash, 0.1f); // 0.1ç§’å¾Œã«è‡ªå‹•ã§æ¶ˆã™*/
+        Destroy(flash, 0.1f); // 0.1•bŒã‚É©“®‚ÅÁ‚·
     }
 
+
 }
-
-
