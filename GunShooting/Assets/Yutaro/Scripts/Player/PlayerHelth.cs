@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerHelth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
     // Å‘å‘Ì—Í
     [SerializeField] int maxHealth = 100;
@@ -38,6 +38,14 @@ public class PlayerHelth : MonoBehaviour
         
 
     }
+
+    public void Heal(int amount)
+    {
+        currentHealth += amount;
+        if (currentHealth > maxHealth)
+            currentHealth = maxHealth;
+    }
+
 
     void Die()
     {
