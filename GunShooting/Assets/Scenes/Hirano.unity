@@ -14189,9 +14189,11 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 5076348676587295246, guid: 5fbc058e79a64384faa6027f20cacb3f, type: 3}
   - {fileID: 4549659127224029235, guid: 909bddd2f84a20848b3b1652f443456e, type: 3}
+  - {fileID: 8385722931339567798, guid: d36e524663e0e9847b11d3b010f25da8, type: 3}
   prefabWeights:
-  - 0.7
+  - 0.5
   - 0.3
+  - 0.2
   bossPrefab: {fileID: 2791431649368283016, guid: 31dbb0fc972c34f4788b2ed609572efe, type: 3}
   maxAttempts: 30
   player: {fileID: 1787733574373408374}

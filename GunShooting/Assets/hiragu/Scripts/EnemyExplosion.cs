@@ -35,7 +35,7 @@ public class EnemyExplosion : MonoBehaviour
         foreach (Collider nearbyObject in colliders)
         {
             // PlayerHealthスクリプトを探す（または任意のダメージスクリプト）
-            PlayerHelth playerHealth = nearbyObject.GetComponent<PlayerHelth>();
+            PlayerHealth playerHealth = nearbyObject.GetComponent<PlayerHealth>();
             if (playerHealth != null)
             {
                 playerHealth.TakeDamage(damage);
