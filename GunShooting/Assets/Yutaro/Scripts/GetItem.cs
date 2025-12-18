@@ -10,8 +10,10 @@ public class GetItem : MonoBehaviour
     [SerializeField] GameObject fullAutogunPrefab;
     [SerializeField] GameObject shotgunPrefab;
     [SerializeField] GameObject handgunPrefab;
-    // 装備位置
-    [SerializeField] Transform handTransform;
+    // 装備位置　武器ごとで別の位置 頑張れ！
+    [SerializeField] Transform fullautoHandTransform;
+    //[SerializeField] Transform shotgunHandTransform;
+    //[SerializeField] Transform handgunHandTransform;
     // 最大装備数
     [SerializeField] int maxItems = 2;
     // 所持アイテムリスト
@@ -35,7 +37,7 @@ public class GetItem : MonoBehaviour
             }
         }
     }
-
+    // アイテム取得判定
     void OnTriggerEnter(Collider other)
     {
         GameObject item = other.gameObject;
@@ -43,34 +45,34 @@ public class GetItem : MonoBehaviour
         if (other.CompareTag("fullauto")&& AddItem(item))
         {
             Debug.Log("fullauto");   
-            EquipItem(fullAutogunPrefab); // 入手と同時に装備
+            GetFullauto(fullAutogunPrefab); // 入手と同時に装備
             Destroy(other.gameObject); // アイテムを消す
         }
         else if (other.CompareTag("shotgun") && AddItem(item))
         {
             Debug.Log("shotgun");
-            EquipItem(shotgunPrefab); // 入手と同時に装備
+            GetFullauto(shotgunPrefab); // 入手と同時に装備
             Destroy(other.gameObject); // アイテムを消す
         }
         else if (other.CompareTag("single") && AddItem(item))
         {
             Debug.Log("handgun");
-            EquipItem(handgunPrefab); // 入手と同時に装備
+            GetFullauto(handgunPrefab); // 入手と同時に装備
             Destroy(other.gameObject); // アイテムを消す
         }
     }
 
     // アイテム装備処理
-    void EquipItem(GameObject itemPrefab)
+    void GetFullauto(GameObject itemPrefab)
     {
-        Transform equipSlot = handTransform; // 装備位置
+        Transform equipSlot = fullautoHandTransform; // 装備位置
         GameObject equippedItem = Instantiate(itemPrefab, equipSlot.position, equipSlot.rotation, equipSlot);
     }
     // アイテム削除処理
     public void UnequipItem(string itemName)
     {
         // 装備中のアイテムを探して削除
-        foreach (Transform child in handTransform)
+        foreach (Transform child in fullautoHandTransform)
         {
             ItemData data = child.GetComponent<ItemData>();
             if (data != null && data.itemName == itemName)
@@ -80,6 +82,8 @@ public class GetItem : MonoBehaviour
             }
         }
     }
+
+
 
     // アイテムをインベントリに追加と判定
     public bool AddItem(GameObject item)
