@@ -3,10 +3,18 @@ using UnityEngine.SceneManagement;
 
 public class TitleButtonManager : MonoBehaviour
 {
+    void Start()
+    {
+        // マウスカーソルを表示
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     // ボタンから呼び出す関数
     public void OnStartButton()
     {
-        SceneManager.LoadScene("MainScene"); // ← 遷移先のシーン名
+        Debug.Log("ゲームスタートボタンが押されました！");
+        SceneManager.LoadScene("Hirano"); // ← 遷移先のシーン名
     }
 
     public void OnQuitButton()

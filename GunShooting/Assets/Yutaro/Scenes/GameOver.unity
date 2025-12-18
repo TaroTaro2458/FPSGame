@@ -997,7 +997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f80c8b2822d28948ac83d0eb20867aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playScene: MainScene
+  playScene: Hirano
 --- !u!1 &1917288584
 GameObject:
   m_ObjectHideFlags: 0
