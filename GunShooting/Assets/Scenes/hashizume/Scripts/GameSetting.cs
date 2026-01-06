@@ -6,9 +6,11 @@ public class GameSetting : MonoBehaviour
 
     public float mouseSensitivityX = 1f;
     public float mouseSensitivityY = 1f;
-    public float bgmVolume = 1f;
-    public float seVolume = 1f;
+
     public bool isSettingsOpen = false;
+
+    const string SensXKey = "SensX";
+    const string SensYKey = "SensY";
 
     void Awake()
     {
@@ -16,6 +18,8 @@ public class GameSetting : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            LoadSettings();
         }
         else
         {
@@ -26,21 +30,18 @@ public class GameSetting : MonoBehaviour
     public void SetSensitivityX(float value)
     {
         mouseSensitivityX = value;
+        PlayerPrefs.SetFloat(SensXKey, value);
     }
 
     public void SetSensitivityY(float value)
     {
         mouseSensitivityY = value;
+        PlayerPrefs.SetFloat(SensYKey, value);
     }
 
-    public void SetBGM(float value)
+    void LoadSettings()
     {
-        bgmVolume = value;
-        AudioListener.volume = value;
-    }
-
-    public void SetSE(float value)
-    {
-        seVolume = value;
+        mouseSensitivityX = PlayerPrefs.GetFloat(SensXKey, 1f);
+        mouseSensitivityY = PlayerPrefs.GetFloat(SensYKey, 1f);
     }
 }
