@@ -12,8 +12,8 @@ public class GetItem : MonoBehaviour
     [SerializeField] GameObject handgunPrefab;
     // 装備位置　武器ごとで別の位置 頑張れ！
     [SerializeField] Transform fullautoHandTransform;
-    //[SerializeField] Transform shotgunHandTransform;
-    //[SerializeField] Transform handgunHandTransform;
+    [SerializeField] Transform shotgunHandTransform;
+    [SerializeField] Transform handgunHandTransform;
     // 最大装備数
     [SerializeField] int maxItems = 2;
     // 所持アイテムリスト
@@ -51,13 +51,13 @@ public class GetItem : MonoBehaviour
         else if (other.CompareTag("shotgun") && AddItem(item))
         {
             Debug.Log("shotgun");
-            GetFullauto(shotgunPrefab); // 入手と同時に装備
+            GetShotgun(shotgunPrefab); // 入手と同時に装備
             Destroy(other.gameObject); // アイテムを消す
         }
         else if (other.CompareTag("single") && AddItem(item))
         {
             Debug.Log("handgun");
-            GetFullauto(handgunPrefab); // 入手と同時に装備
+            GetHandgun(handgunPrefab); // 入手と同時に装備
             Destroy(other.gameObject); // アイテムを消す
         }
     }
@@ -68,10 +68,20 @@ public class GetItem : MonoBehaviour
         Transform equipSlot = fullautoHandTransform; // 装備位置
         GameObject equippedItem = Instantiate(itemPrefab, equipSlot.position, equipSlot.rotation, equipSlot);
     }
+    void GetShotgun(GameObject itemPrefab)
+    {
+        Transform equipSlot = shotgunHandTransform; // 装備位置
+        GameObject equippedItem = Instantiate(itemPrefab, equipSlot.position, equipSlot.rotation, equipSlot);
+    }
+    void GetHandgun(GameObject itemPrefab)
+    {
+        Transform equipSlot = handgunHandTransform; // 装備位置
+        GameObject equippedItem = Instantiate(itemPrefab, equipSlot.position, equipSlot.rotation, equipSlot);
+    }
     // アイテム削除処理
     public void UnequipItem(string itemName)
     {
-        // 装備中のアイテムを探して削除
+        // 装備中のアイテムを探して削除(武器ごとに探す)
         foreach (Transform child in fullautoHandTransform)
         {
             ItemData data = child.GetComponent<ItemData>();
@@ -81,6 +91,26 @@ public class GetItem : MonoBehaviour
                 break;
             }
         }
+        foreach (Transform child in shotgunHandTransform)
+        {
+            ItemData data = child.GetComponent<ItemData>();
+            if (data != null && data.itemName == itemName)
+            {
+                Destroy(child.gameObject);
+                break;
+            }
+        }
+
+        foreach (Transform child in handgunHandTransform)
+        {
+            ItemData data = child.GetComponent<ItemData>();
+            if (data != null && data.itemName == itemName)
+            {
+                Destroy(child.gameObject);
+                break;
+            }
+        }
+
     }
 
 
