@@ -8,6 +8,7 @@ public class EnemyShooting : MonoBehaviour
     [SerializeField] float bulletSpeed = 10.0f;
 
     Transform player;
+    Transform targetPoint;
     float countTime = 0;
     GameObject bullet;
 
@@ -30,7 +31,7 @@ public class EnemyShooting : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
-
+        targetPoint = player.Find("AimPoint");
         if(isBoss)
         {
             enmeyHealth = GetComponent<EnemyHealth>();
@@ -69,9 +70,9 @@ public class EnemyShooting : MonoBehaviour
 
         bullet = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
         bullet.transform.rotation = Quaternion.LookRotation(
-            (player.position - shootingPoint.position).normalized) * Quaternion.Euler(90, 0, 0);
+            (targetPoint.position - shootingPoint.position).normalized) * Quaternion.Euler(90, 0, 0);
         bulletRb = bullet.GetComponent<Rigidbody>();
-        bulletDirection = (player.position - shootingPoint.position).normalized;
+        bulletDirection = (targetPoint.position - shootingPoint.position).normalized;
         bulletRb.linearVelocity = bulletDirection * bulletSpeed;
         Destroy(bullet, 5);
     }

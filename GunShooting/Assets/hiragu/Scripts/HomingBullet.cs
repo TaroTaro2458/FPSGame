@@ -3,6 +3,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class HomingBullet : MonoBehaviour
 {
+    Transform player;
     Transform targetPosition;
     [HideInInspector] public float bulletSpeed;              // 弾速
     [SerializeField] float rotateSpeed = 5f;        // 方向転換の速度
@@ -15,7 +16,8 @@ public class HomingBullet : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        targetPosition = GameObject.FindWithTag("Player").transform;
+        player = GameObject.FindWithTag("Player").transform;
+        targetPosition = player.Find("AimPoint");
         Destroy(gameObject, lifeTime);
         rb = GetComponent<Rigidbody>();
 

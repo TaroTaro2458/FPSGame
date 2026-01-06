@@ -13,7 +13,8 @@ public class pursuitShootingEnemyController : MonoBehaviour
     [SerializeField] float destroyTime = 5;
 
     NavMeshAgent nav;                                   // プレイヤーを追跡する用のnavMesh
-    Transform player;                                   // プレイヤーの位置を取得する
+    Transform player;                                   // プレイヤーの子オブジェクトにある狙う位置を取得するため
+    Transform targetPoint;                              // 狙う位置
     float distance;                                     // プレイヤーとの距離
     Rigidbody bulletRb;
     Vector3 bulletDirection;
@@ -23,6 +24,7 @@ public class pursuitShootingEnemyController : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
+        targetPoint = player.Find("AimPoint");
         nav = GetComponent<NavMeshAgent>();
     }
 
@@ -30,29 +32,66 @@ public class pursuitShootingEnemyController : MonoBehaviour
     void Update()
     {
         // プレイヤーとの距離を取得
-        distance = distance = Vector3.Distance(transform.position, player.position);
+        distance = distance = Vector3.Distance(transform.position, targetPoint.position);
+        
 
         if (player != null)
         {
             // プレイヤーが射程外なら追跡、そうでないなら射撃
             if (distance > range)
             {
-                intervalCount = interval - 0.5f;            // 次に止まった場合にすぐに撃てるように調整
-                nav.isStopped = false;                      // 止まらないようにする
-                nav.SetDestination(player.position);        // プレイヤーに追跡
+                Move();
             }
             else
             {
-                transform.LookAt(player);                   // プレイヤーのほうを向く
-                nav.isStopped = true;                       // 止まるようにする
-                intervalCount += Time.deltaTime;            // カウントを進める
-                if(intervalCount >= interval)               // カウントが射撃間隔を越したら撃つ
+                if (CanSeePlayer())
                 {
-                    Shooting();                             // 射撃のメソッド
-                    intervalCount = 0f;                     // カウントをリセット
+                    Vector3 targetPos = targetPoint.position;
+                    targetPos.y = transform.position.y;         // y軸方向まで見る必要はない
+                    transform.LookAt(targetPos);                   // プレイヤーのほうを向く
+                    nav.isStopped = true;                       // 止まるようにする
+                    intervalCount += Time.deltaTime;            // カウントを進める
+                    if (intervalCount >= interval)               // カウントが射撃間隔を越したら撃つ
+                    {
+                        Shooting();                             // 射撃のメソッド
+                        intervalCount = 0f;                     // カウントをリセット
+                    }
+                }
+                else
+                {
+                    Move();
                 }
             }
 
+        }
+
+        void Move()
+        {
+            intervalCount = interval - 0.5f;            // 次に止まった場合にすぐに撃てるように調整
+            nav.isStopped = false;                      // 止まらないようにする
+            nav.SetDestination(player.position);        // プレイヤーに追跡
+        }
+
+        // rayを飛ばしてプレイヤーまでの射線上に何もないことを確認する
+        bool CanSeePlayer()
+        {
+            Vector3 dir = (targetPoint.position - shootingPoint.position).normalized;
+
+            // RaycastHitで最初に当たったものをチェック
+            if (Physics.Raycast(shootingPoint.position, dir, out RaycastHit hit, range))
+            {
+                // 以下4行はrayを可視化するためのもの
+                Vector3 origin = shootingPoint.position;
+                Vector3 dira = (targetPoint.position - origin).normalized;
+                float distance = range;
+                Debug.DrawRay(origin, dira * distance, Color.green);
+
+                if (hit.transform.CompareTag("Player"))
+                {
+                    return true; // 射線に遮蔽物なし
+                }
+            }
+            return false; // 何か壁などに当たった
         }
 
         // 弾のスピードを渡してプレイヤーの向けて撃つ
@@ -62,9 +101,9 @@ public class pursuitShootingEnemyController : MonoBehaviour
 
             bullet = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);             // 弾を生成
             bullet.transform.rotation = Quaternion.LookRotation(
-                (player.position - shootingPoint.position).normalized) * Quaternion.Euler(90, 0, 0);        // 弾がカプセルの場合向きを合わせる
+                (targetPoint.position - shootingPoint.position).normalized) * Quaternion.Euler(90, 0, 0);        // 弾がカプセルの場合向きを合わせる
             bulletRb = bullet.GetComponent<Rigidbody>();                                                    // 弾にスピードを渡すためのrigidbody
-            bulletDirection = (player.position - shootingPoint.position).normalized;                        // プレイヤーの現在位置
+            bulletDirection = (targetPoint.position - shootingPoint.position).normalized;                        // プレイヤーの現在位置
             bulletRb.linearVelocity = bulletDirection * bulletSpeed;                                        // プレイヤーに向かって移動させる
             Destroy(bullet, destroyTime);                                                                   // 一定時間経過で壊す
         }
