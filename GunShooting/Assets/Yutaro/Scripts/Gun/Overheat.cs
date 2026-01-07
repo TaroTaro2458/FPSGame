@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Overheat : MonoBehaviour
 {
@@ -31,9 +32,18 @@ public class Overheat : MonoBehaviour
     // 点滅用
     private Coroutine blinkCoroutine;
 
-
+    // アタッチメントによる冷却速度追加分
+    [SerializeField] float baseCooldownRate = 20f;
+    private float currentCooldownRate;
+    // アタッチメント参照
+    [SerializeField] CoolingAttachment coolingAttachment;
+    // アタッチメントのリスト
+    [SerializeField] List<CoolingAttachment> coolingAttachments = new List<CoolingAttachment>();
     void Start()
     {
+        RecalculateCooldownRate();
+
+
         // スライダーの最大値設定
         if (heatSlider != null)
         {
@@ -42,7 +52,13 @@ public class Overheat : MonoBehaviour
             fillImage = heatSlider.fillRect.GetComponent<Image>();
         }
 
-        
+        // アタッチメントがある場合、パラメータを上書き
+        if(coolingAttachment != null)
+        {
+            Debug.Log("アタッチメント適用: " + coolingAttachment.name);
+            currentCooldownRate += coolingAttachment.additionalCooldownRate;
+        }
+
     }
     void Update()
     {
@@ -54,7 +70,7 @@ public class Overheat : MonoBehaviour
         // 冷却処理
         if (Time.time - lastShotTime > cooldownDelay && currentHeat > 0)
         {
-            currentHeat -= cooldownRate * Time.deltaTime;
+            currentHeat -= currentCooldownRate * Time.deltaTime;
             currentHeat = Mathf.Clamp(currentHeat, 0f, maxHeat);
 
             if (isOverheated && currentHeat <= 0f)
@@ -123,27 +139,44 @@ public class Overheat : MonoBehaviour
             fillImage.color = Color.white;
              yield return new WaitForSeconds(0.3f);
 
-
-
-            /*// 点滅の色と通常の色
-            Color blinkColor = Color.red;
-            Color normalColor = Color.white;
-
-            if (fillImage != null) fillImage.color = blinkColor;
-            if (sliderImage != null) sliderImage.color = blinkColor;
-
-            yield return new WaitForSeconds(0.3f);
-
-            if (fillImage != null) fillImage.color = normalColor;
-            if (sliderImage != null) sliderImage.color = normalColor;
-
-            yield return new WaitForSeconds(0.3f);*/
         }
     }
     // ゲージの割合を取得
     public float GetHeatRatio()
     {
         return currentHeat / maxHeat;
+    }
+
+    //ゲッター更新
+    public float GetCooldownRate() {
+        return currentCooldownRate; 
+    }
+    public void SetAttachment(CoolingAttachment attachment) 
+    {
+        coolingAttachment = attachment; 
+        currentCooldownRate = baseCooldownRate + (attachment != null ? attachment.additionalCooldownRate : 0f);
+    }
+
+    public void RecalculateCooldownRate() 
+    { 
+        currentCooldownRate = baseCooldownRate; 
+        foreach (var attachment in coolingAttachments) 
+        { 
+            if (attachment != null) 
+            { 
+                currentCooldownRate += attachment.additionalCooldownRate;
+            } 
+        } 
+    }
+
+    public void AddAttachment(CoolingAttachment newAttachment) 
+    {
+        if (newAttachment != null) 
+        {
+            coolingAttachments.Add(newAttachment); 
+            RecalculateCooldownRate(); 
+            Debug.Log($"アタッチメント追加！冷却速度: {currentCooldownRate}"); 
+        } 
     }
 }
 

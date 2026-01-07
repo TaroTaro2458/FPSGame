@@ -72,5 +72,8 @@ public class InventoryUI : MonoBehaviour
         // マウスカーソルの表示切り替え
         Cursor.visible = isActive;
         Cursor.lockState = isActive ? CursorLockMode.None : CursorLockMode.Locked;
+
+        // ゲームの時間を止める／再開する
+        Time.timeScale = isActive ? 0f : 1f;
     }
 }

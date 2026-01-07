@@ -10,7 +10,7 @@ public class GetItem : MonoBehaviour
     [SerializeField] GameObject fullAutogunPrefab;
     [SerializeField] GameObject shotgunPrefab;
     [SerializeField] GameObject handgunPrefab;
-    // 装備位置　武器ごとで別の位置 頑張れ！
+    // 装備位置　武器ごとで別の位置
     [SerializeField] Transform fullautoHandTransform;
     [SerializeField] Transform shotgunHandTransform;
     [SerializeField] Transform handgunHandTransform;
@@ -25,6 +25,8 @@ public class GetItem : MonoBehaviour
     [SerializeField] private List<ItemData> allItemDataList;
     // アイテムデータ辞書
     private Dictionary<string, ItemData> itemDataDict = new Dictionary<string, ItemData>();
+    // Overheatスクリプトの参照
+    [SerializeField] Overheat overheat; 
 
     void Awake()
     {
@@ -42,9 +44,9 @@ public class GetItem : MonoBehaviour
     {
         GameObject item = other.gameObject;
         // アイテム取得判定 tagで識別
-        if (other.CompareTag("fullauto")&& AddItem(item))
+        if (other.CompareTag("fullauto") && AddItem(item))
         {
-            Debug.Log("fullauto");   
+            Debug.Log("fullauto");
             GetFullauto(fullAutogunPrefab); // 入手と同時に装備
             Destroy(other.gameObject); // アイテムを消す
         }
@@ -59,6 +61,11 @@ public class GetItem : MonoBehaviour
             Debug.Log("handgun");
             GetHandgun(handgunPrefab); // 入手と同時に装備
             Destroy(other.gameObject); // アイテムを消す
+        }
+        else if (other.CompareTag("coolingAttachment") && AddItem(item))
+        {
+            Debug.Log("冷却アタッチメント取得");
+            ApplyAttachment(item); Destroy(other.gameObject);
         }
     }
 
@@ -165,5 +172,18 @@ public class GetItem : MonoBehaviour
         }
         Debug.LogWarning($"ItemData not found for itemName: {itemName}");
         return null;
+
+
+
+    }
+
+    // アタッチメント適用処理
+    void ApplyAttachment(GameObject item)
+    {
+        ItemData data = item.GetComponent<ItemData>();
+        if (data != null && data.itemType == ItemType.Attachment && data.coolingAttachment != null)
+        {
+            overheat.AddAttachment(data.coolingAttachment);
+        }
     }
 }
