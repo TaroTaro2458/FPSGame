@@ -7,6 +7,7 @@ public class EnemyMove : MonoBehaviour
 {
     Transform player;
     NavMeshAgent agent;
+    bool isFootstepPlaying;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,11 +19,26 @@ public class EnemyMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player != null)
-        {
-            agent.SetDestination(player.position);
-        }
+        agent.SetDestination(player.position);
 
+        if (agent.velocity.magnitude > 0.1f)
+        {
+            if (!isFootstepPlaying)
+            {
+                AudioManager.Instance.PlaySE3D(SEType.EnemyWalk,transform.position);
+                isFootstepPlaying = true;
+                Invoke(nameof(ResetFootstep), 10.0f); // ‰¹‚Ì’·‚³
+            }
+        }
+        else
+        {
+            isFootstepPlaying = false;
+        }
+    }
+
+    void ResetFootstep()
+    {
+        isFootstepPlaying = false;
     }
 
     private void OnCollisionEnter(Collision collision)
