@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 541e79df0dbd2d642b75320e92168cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreValue: 50
   maxHp: 300
   EnmeyCurrentHp: 0
   overallDropChance: 1

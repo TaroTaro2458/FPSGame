@@ -1,0 +1,12 @@
+using UnityEngine;
+
+public class EnemyBase : MonoBehaviour
+{
+    public int scoreValue = 10; // ìGÇ≤Ç∆ÇÃì_êî
+
+    public virtual void Die()
+    {
+        ScoreManager.Instance.AddScore(scoreValue);
+        Destroy(gameObject);
+    }
+}
