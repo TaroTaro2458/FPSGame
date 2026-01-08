@@ -7,7 +7,7 @@ public enum ItemType
     Attachment
 }
 
-[CreateAssetMenu(menuName = "Item/ItemData")]
+//[CreateAssetMenu(menuName = "Item/ItemData")]
 public class ItemData : MonoBehaviour
 {
    

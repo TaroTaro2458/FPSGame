@@ -157,6 +157,7 @@ public class Overheat : MonoBehaviour
         currentCooldownRate = baseCooldownRate + (attachment != null ? attachment.additionalCooldownRate : 0f);
     }
 
+    // 冷却速度を再計算
     public void RecalculateCooldownRate() 
     { 
         currentCooldownRate = baseCooldownRate; 
@@ -169,6 +170,7 @@ public class Overheat : MonoBehaviour
         } 
     }
 
+    // アタッチメントを追加
     public void AddAttachment(CoolingAttachment newAttachment) 
     {
         if (newAttachment != null) 

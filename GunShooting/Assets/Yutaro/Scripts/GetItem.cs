@@ -10,10 +10,14 @@ public class GetItem : MonoBehaviour
     [SerializeField] GameObject fullAutogunPrefab;
     [SerializeField] GameObject shotgunPrefab;
     [SerializeField] GameObject handgunPrefab;
+    // アタッチメントPrefab
+    [SerializeField] GameObject cooldownAttachmentPrefab;
     // 装備位置　武器ごとで別の位置
     [SerializeField] Transform fullautoHandTransform;
     [SerializeField] Transform shotgunHandTransform;
     [SerializeField] Transform handgunHandTransform;
+    // 装備位置　アタッチメント系
+    [SerializeField] Transform cooldownAttachmentTransform;
     // 最大装備数
     [SerializeField] int maxItems = 2;
     // 所持アイテムリスト
@@ -62,10 +66,11 @@ public class GetItem : MonoBehaviour
             GetHandgun(handgunPrefab); // 入手と同時に装備
             Destroy(other.gameObject); // アイテムを消す
         }
-        else if (other.CompareTag("coolingAttachment") && AddItem(item))
+        else if (other.CompareTag("CoolingAttachment") && AddItem(item))
         {
             Debug.Log("冷却アタッチメント取得");
-            ApplyAttachment(item); Destroy(other.gameObject);
+            ApplyAttachment(cooldownAttachmentPrefab); 
+            Destroy(other.gameObject);
         }
     }
 
@@ -85,6 +90,19 @@ public class GetItem : MonoBehaviour
         Transform equipSlot = handgunHandTransform; // 装備位置
         GameObject equippedItem = Instantiate(itemPrefab, equipSlot.position, equipSlot.rotation, equipSlot);
     }
+
+    // アタッチメント適用処理
+    void ApplyAttachment(GameObject itemPrefab)
+    {
+        ItemData data = itemPrefab.GetComponent<ItemData>();
+        if (data != null && data.itemType == ItemType.Attachment && data.coolingAttachment != null)
+        {
+            Transform equipSlot = cooldownAttachmentTransform; // 装備位置
+            GameObject equippedItem = Instantiate(itemPrefab, equipSlot.position, equipSlot.rotation, equipSlot);
+            overheat.AddAttachment(data.coolingAttachment);
+        }
+    }
+
     // アイテム削除処理
     public void UnequipItem(string itemName)
     {
@@ -107,8 +125,16 @@ public class GetItem : MonoBehaviour
                 break;
             }
         }
-
         foreach (Transform child in handgunHandTransform)
+        {
+            ItemData data = child.GetComponent<ItemData>();
+            if (data != null && data.itemName == itemName)
+            {
+                Destroy(child.gameObject);
+                break;
+            }
+        }
+        foreach (Transform child in cooldownAttachmentTransform)
         {
             ItemData data = child.GetComponent<ItemData>();
             if (data != null && data.itemName == itemName)
@@ -177,13 +203,5 @@ public class GetItem : MonoBehaviour
 
     }
 
-    // アタッチメント適用処理
-    void ApplyAttachment(GameObject item)
-    {
-        ItemData data = item.GetComponent<ItemData>();
-        if (data != null && data.itemType == ItemType.Attachment && data.coolingAttachment != null)
-        {
-            overheat.AddAttachment(data.coolingAttachment);
-        }
-    }
+   
 }
