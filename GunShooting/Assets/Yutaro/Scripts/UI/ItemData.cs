@@ -23,4 +23,6 @@ public class ItemData : MonoBehaviour
 
     // アタッチメント用
     public CoolingAttachment coolingAttachment;
+    public MaxHeatAttachment maxHeatAttachment;
+
 }

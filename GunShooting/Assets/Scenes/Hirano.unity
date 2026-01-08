@@ -3770,7 +3770,7 @@ GameObject:
   m_Component:
   - component: {fileID: 447156058}
   m_Layer: 0
-  m_Name: AttachmentPos
+  m_Name: CoolDownAttachmentPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6695,6 +6695,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHeat: 500
+  baseMaxHeat: 500
   heatPerShot: 10
   cooldownRate: 80
   cooldownDelay: 2
@@ -6703,6 +6704,9 @@ MonoBehaviour:
   baseCooldownRate: 20
   coolingAttachment: {fileID: 0}
   coolingAttachments: []
+  maxHeatgageAttachment: {fileID: 4036763649071897888, guid: 400168367eec63e4b9ce20ca276b90df, type: 3}
+  maxHeatgageAttachments: []
+  additionalMaxHeat: 0
 --- !u!114 &886771691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6732,10 +6736,12 @@ MonoBehaviour:
   shotgunPrefab: {fileID: 8218048025018524560, guid: 4de05b7364ca8c54199cc603087f7000, type: 3}
   handgunPrefab: {fileID: 8218048025018524560, guid: ca2481939b1c94440a77f1fc131f447a, type: 3}
   cooldownAttachmentPrefab: {fileID: 1705751648931382218, guid: 6868807e7e9fe8b4f88b54e681b63f3f, type: 3}
+  maxHeatAttachmentPrefab: {fileID: 546651106691096041, guid: 400168367eec63e4b9ce20ca276b90df, type: 3}
   fullautoHandTransform: {fileID: 1646973212}
   shotgunHandTransform: {fileID: 459455362}
   handgunHandTransform: {fileID: 2114663297}
   cooldownAttachmentTransform: {fileID: 447156058}
+  maxHeatAttachmentTransform: {fileID: 1236852770}
   maxItems: 10
   onItemChanged:
     m_PersistentCalls:
@@ -6745,6 +6751,7 @@ MonoBehaviour:
   - {fileID: -3772658185574537392, guid: 840503d1bd8889949a7022cab19a3e7c, type: 3}
   - {fileID: 4957246204128702511, guid: fc983c616a6edee4c9a7ed05422c9682, type: 3}
   - {fileID: -7566351935642776604, guid: ce12f506ecffc724195acd27578c0b13, type: 3}
+  - {fileID: 1797698030939882461, guid: ab755e5b1b8939e4e90444ee59b13cc9, type: 3}
   overheat: {fileID: 886771690}
 --- !u!54 &886771693
 Rigidbody:
@@ -8835,6 +8842,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1229307813}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1236852769
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1236852770}
+  m_Layer: 0
+  m_Name: MaxHeatAttachmentPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1236852770
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236852769}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1966127816}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1243402669
 GameObject:
   m_ObjectHideFlags: 0
@@ -10749,6 +10787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHeat: 100
+  baseMaxHeat: 100
   heatPerShot: 10
   cooldownRate: 20
   cooldownDelay: 2
@@ -10757,6 +10796,9 @@ MonoBehaviour:
   baseCooldownRate: 20
   coolingAttachment: {fileID: 2913783199397906018, guid: 6868807e7e9fe8b4f88b54e681b63f3f, type: 3}
   coolingAttachments: []
+  maxHeatgageAttachment: {fileID: 0}
+  maxHeatgageAttachments: []
+  additionalMaxHeat: 0
 --- !u!1 &1477026327
 GameObject:
   m_ObjectHideFlags: 0
@@ -14125,6 +14167,7 @@ Transform:
   - {fileID: 459455362}
   - {fileID: 2114663297}
   - {fileID: 447156058}
+  - {fileID: 1236852770}
   m_Father: {fileID: 1559311206}
   m_LocalEulerAnglesHint: {x: 0, y: -92.747, z: 0}
 --- !u!114 &1966127817
@@ -15566,6 +15609,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2212256795695673219
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 605339371805934323, guid: ab755e5b1b8939e4e90444ee59b13cc9, type: 3}
+      propertyPath: m_Name
+      value: "\u62E1\u5F35\u30DE\u30AC\u30B8\u30F3\uFF08dropItem)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414858349392227756, guid: ab755e5b1b8939e4e90444ee59b13cc9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -268
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414858349392227756, guid: ab755e5b1b8939e4e90444ee59b13cc9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414858349392227756, guid: ab755e5b1b8939e4e90444ee59b13cc9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 611
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414858349392227756, guid: ab755e5b1b8939e4e90444ee59b13cc9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414858349392227756, guid: ab755e5b1b8939e4e90444ee59b13cc9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414858349392227756, guid: ab755e5b1b8939e4e90444ee59b13cc9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414858349392227756, guid: ab755e5b1b8939e4e90444ee59b13cc9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414858349392227756, guid: ab755e5b1b8939e4e90444ee59b13cc9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414858349392227756, guid: ab755e5b1b8939e4e90444ee59b13cc9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414858349392227756, guid: ab755e5b1b8939e4e90444ee59b13cc9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ab755e5b1b8939e4e90444ee59b13cc9, type: 3}
 --- !u!1001 &3017097265879545958
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15819,3 +15919,4 @@ SceneRoots:
   - {fileID: 1357132375}
   - {fileID: 244647365}
   - {fileID: 161043300}
+  - {fileID: 2212256795695673219}

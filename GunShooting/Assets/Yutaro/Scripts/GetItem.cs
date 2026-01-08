@@ -12,12 +12,14 @@ public class GetItem : MonoBehaviour
     [SerializeField] GameObject handgunPrefab;
     // アタッチメントPrefab
     [SerializeField] GameObject cooldownAttachmentPrefab;
+    [SerializeField] GameObject maxHeatAttachmentPrefab;
     // 装備位置　武器ごとで別の位置
     [SerializeField] Transform fullautoHandTransform;
     [SerializeField] Transform shotgunHandTransform;
     [SerializeField] Transform handgunHandTransform;
     // 装備位置　アタッチメント系
     [SerializeField] Transform cooldownAttachmentTransform;
+    [SerializeField] Transform maxHeatAttachmentTransform;
     // 最大装備数
     [SerializeField] int maxItems = 2;
     // 所持アイテムリスト
@@ -69,7 +71,13 @@ public class GetItem : MonoBehaviour
         else if (other.CompareTag("CoolingAttachment") && AddItem(item))
         {
             Debug.Log("冷却アタッチメント取得");
-            ApplyAttachment(cooldownAttachmentPrefab); 
+            ApplyCooldownAttachment(cooldownAttachmentPrefab); 
+            Destroy(other.gameObject);
+        }
+        else if (other.CompareTag("MaxHeatAttachment") && AddItem(item))
+        {
+            Debug.Log("拡張アタッチメント取得");
+            ApplyMaxHeatAttachment(maxHeatAttachmentPrefab);
             Destroy(other.gameObject);
         }
     }
@@ -91,15 +99,26 @@ public class GetItem : MonoBehaviour
         GameObject equippedItem = Instantiate(itemPrefab, equipSlot.position, equipSlot.rotation, equipSlot);
     }
 
-    // アタッチメント適用処理
-    void ApplyAttachment(GameObject itemPrefab)
+    // アタッチメント適用処理(冷却氷)
+    void ApplyCooldownAttachment(GameObject itemPrefab)
     {
         ItemData data = itemPrefab.GetComponent<ItemData>();
         if (data != null && data.itemType == ItemType.Attachment && data.coolingAttachment != null)
         {
             Transform equipSlot = cooldownAttachmentTransform; // 装備位置
             GameObject equippedItem = Instantiate(itemPrefab, equipSlot.position, equipSlot.rotation, equipSlot);
-            overheat.AddAttachment(data.coolingAttachment);
+            overheat.AddCooldownAttachment(data.coolingAttachment);
+        }
+    }
+    // アタッチメント適用処理(拡張マガジン)
+    void ApplyMaxHeatAttachment(GameObject itemPrefab)
+    {
+        ItemData data = itemPrefab.GetComponent<ItemData>();
+        if (data != null && data.itemType == ItemType.Attachment && data.maxHeatAttachment != null)
+        {
+            Transform equipSlot = maxHeatAttachmentTransform; // 装備位置
+            GameObject equippedItem = Instantiate(itemPrefab, equipSlot.position, equipSlot.rotation, equipSlot);
+            overheat.AddMaxHeatAttachment(data.maxHeatAttachment);
         }
     }
 

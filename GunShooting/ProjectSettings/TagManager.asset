@@ -12,6 +12,7 @@ TagManager:
   - single
   - EnemyBullet
   - CoolingAttachment
+  - MaxHeatAttachment
   layers:
   - Default
   - TransparentFX

@@ -7,6 +7,8 @@ public class Overheat : MonoBehaviour
 {
     // 最大射撃可能ゲージ
     [SerializeField] float maxHeat = 100f;
+    //ゲージ拡張用
+    [SerializeField] float baseMaxHeat = 100f;
     // 1発あたりのゲージ上昇量
     [SerializeField] float heatPerShot = 10f;
     // 冷却速度（ゲージ/秒）
@@ -32,17 +34,24 @@ public class Overheat : MonoBehaviour
     // 点滅用
     private Coroutine blinkCoroutine;
 
-    // アタッチメントによる冷却速度追加分
+    // 冷却アタッチメントによる冷却速度追加分
     [SerializeField] float baseCooldownRate = 20f;
     private float currentCooldownRate;
-    // アタッチメント参照
+    // 冷却アタッチメント参照
     [SerializeField] CoolingAttachment coolingAttachment;
-    // アタッチメントのリスト
+    // 冷却アタッチメントのリスト
     [SerializeField] List<CoolingAttachment> coolingAttachments = new List<CoolingAttachment>();
+    // ゲージ拡張用アタッチメント
+    [SerializeField] MaxHeatAttachment  maxHeatgageAttachment;
+    [SerializeField] List<MaxHeatAttachment> maxHeatgageAttachments = new List<MaxHeatAttachment>();
+    public float additionalMaxHeat;
+    
     void Start()
     {
+        RecalculateMaxHeat();
         RecalculateCooldownRate();
 
+        currentHeat = 0f;
 
         // スライダーの最大値設定
         if (heatSlider != null)
@@ -53,13 +62,19 @@ public class Overheat : MonoBehaviour
         }
 
         // アタッチメントがある場合、パラメータを上書き
-        if(coolingAttachment != null)
+        if (coolingAttachment != null)
         {
             Debug.Log("アタッチメント適用: " + coolingAttachment.name);
             currentCooldownRate += coolingAttachment.additionalCooldownRate;
         }
+        else if (maxHeatgageAttachment != null)
+        {
+            Debug.Log("アタッチメント適用: " + maxHeatgageAttachment.name);
+            maxHeat += maxHeatgageAttachment.additionalMaxHeat;
+            heatSlider.maxValue = maxHeat;
+        }
 
-    }
+        }
     void Update()
     {
         if (heatSlider != null)
@@ -170,15 +185,44 @@ public class Overheat : MonoBehaviour
         } 
     }
 
+    // 最大熱量を再計算
+    public void RecalculateMaxHeat()
+    {
+        maxHeat = baseMaxHeat;
+        foreach (var attachment in maxHeatgageAttachments)
+        {
+            if (attachment != null)
+            {
+                maxHeat += attachment.additionalMaxHeat;
+            }
+        }
+
+        if (heatSlider != null)
+        {
+            heatSlider.maxValue = maxHeat;
+        }
+    }
+
+
     // アタッチメントを追加
-    public void AddAttachment(CoolingAttachment newAttachment) 
+    public void AddCooldownAttachment(CoolingAttachment newAttachment) 
     {
         if (newAttachment != null) 
         {
             coolingAttachments.Add(newAttachment); 
-            RecalculateCooldownRate(); 
-            Debug.Log($"アタッチメント追加！冷却速度: {currentCooldownRate}"); 
+            RecalculateCooldownRate();
+            Debug.Log($"アタッチメント追加！冷却速度: {currentCooldownRate}");
         } 
+    }
+
+    public void AddMaxHeatAttachment(MaxHeatAttachment newAttachment)
+    {
+        if (newAttachment != null)
+        {
+            maxHeatgageAttachments.Add(newAttachment);
+            RecalculateMaxHeat();
+            Debug.Log($"アタッチメント追加！, 最大ヒート: {maxHeat}");
+        }
     }
 }
 
