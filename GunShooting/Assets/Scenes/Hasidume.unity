@@ -2478,6 +2478,7 @@ MonoBehaviour:
   comboTimeLimit: 3
   baseComboSize: 40
   sizeGrowPerCombo: 6
+  currentRank: 0
 --- !u!1 &880855490
 GameObject:
   m_ObjectHideFlags: 0
@@ -3417,8 +3418,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 717.27, y: 376.964}
-  m_SizeDelta: {x: 498.09, y: 156.071}
+  m_AnchoredPosition: {x: 710.93, y: 350.77}
+  m_SizeDelta: {x: 506.02, y: 195.991}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1154496504
 MonoBehaviour:
@@ -3449,7 +3450,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278190335
   m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -3505,7 +3506,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -0.0019378643, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

@@ -16,6 +16,10 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] float baseComboSize = 40f;
     [SerializeField] float sizeGrowPerCombo = 6f;
 
+    // ƒ‰ƒ“ƒN
+    public enum Rank { C, B, A, S }
+    public Rank currentRank;
+
     int combo = 0;
     float comboTimer;
 
@@ -89,6 +93,15 @@ public class ScoreManager : MonoBehaviour
     {
         return score;
     }
+
+    public Rank GetRank()
+    {
+        if (score >= 3000) return Rank.S;
+        if (score >= 1000) return Rank.A;
+        if (score >= 500) return Rank.B;
+        return Rank.C;
+    }
+
 
     public void ResetScore()
     {

@@ -6498,10 +6498,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 121236586}
-  comboTimeLimit: 6
   comboText: {fileID: 445062877}
+  comboTimeLimit: 3
   baseComboSize: 40
   sizeGrowPerCombo: 6
+  currentRank: 0
 --- !u!1 &582453302
 GameObject:
   m_ObjectHideFlags: 0
