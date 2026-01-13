@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: -4872022808277924842}
   - component: {fileID: 192234130809269708}
   - component: {fileID: 347382939164740837}
+  - component: {fileID: 60527823745962966}
   m_Layer: 0
   m_Name: Handgun
   m_TagString: Untagged
@@ -106,7 +107,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8218048025018524560}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 110c17897cb82c14faf979c80c79e0ed, type: 3}
   m_Name: 
@@ -131,6 +132,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: single
   itemImage: {fileID: 21300000, guid: c24038a576f44524a8f214ee2c4490a3, type: 3}
+  itemType: 0
+  coolingAttachment: {fileID: 0}
+  maxHeatAttachment: {fileID: 0}
 --- !u!114 &347382939164740837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,6 +148,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: Player(1)
+--- !u!114 &60527823745962966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8218048025018524560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02612a06fd3136a4380d08d7d85d2931, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 5331095314279468045, guid: 64b36108a7a091d4cb6b21cacd77a697, type: 3}
+  firePoint: {fileID: 2637000729274754316}
+  bulletSpeed: 100
+  fireRate: 0.5
+  bulletDamage: 20
+  heatPerShot: 5
+  muzzleFlashPrefab: {fileID: 4565600078591484643, guid: a6e6f080fd570c34fab60b5db24c64f3, type: 3}
+  muzzlePoint: {fileID: 2637000729274754316}
 --- !u!1001 &3374045917391049380
 PrefabInstance:
   m_ObjectHideFlags: 0

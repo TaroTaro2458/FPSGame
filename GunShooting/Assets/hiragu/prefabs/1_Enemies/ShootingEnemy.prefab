@@ -151,6 +151,7 @@ MonoBehaviour:
   - gunPrefab: {fileID: 5582469306570441448, guid: 65b9566d07c6af44885686e86ca153c0, type: 3}
   - gunPrefab: {fileID: 259343658904190189, guid: fc983c616a6edee4c9a7ed05422c9682, type: 3}
   - gunPrefab: {fileID: 7000038458876174501, guid: 840503d1bd8889949a7022cab19a3e7c, type: 3}
+  - gunPrefab: {fileID: 605339371805934323, guid: ab755e5b1b8939e4e90444ee59b13cc9, type: 3}
   isBoss: 0
   onHealthChanged:
     m_PersistentCalls:

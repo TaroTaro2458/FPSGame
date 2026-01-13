@@ -117,6 +117,8 @@ MonoBehaviour:
   fireRate: 0.2
   bulletDamage: 10
   heatPerShot: 5
+  muzzleFlashPrefab: {fileID: 4565600078591484643, guid: a6e6f080fd570c34fab60b5db24c64f3, type: 3}
+  muzzlePoint: {fileID: 2637000729274754316}
 --- !u!114 &6907052702909209588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,6 +133,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: FullAuto
   itemImage: {fileID: 21300000, guid: 795e1bdf4497f8142aa9808f2f9f2634, type: 3}
+  itemType: 0
+  coolingAttachment: {fileID: 0}
+  maxHeatAttachment: {fileID: 0}
 --- !u!114 &-2828667833398134550
 MonoBehaviour:
   m_ObjectHideFlags: 0

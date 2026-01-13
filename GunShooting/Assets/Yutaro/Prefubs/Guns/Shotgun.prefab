@@ -119,6 +119,8 @@ MonoBehaviour:
   fireRate: 1
   bulletDamage: 10
   heatPerShot: 10
+  muzzleFlashPrefab: {fileID: 4565600078591484643, guid: a6e6f080fd570c34fab60b5db24c64f3, type: 3}
+  muzzlePoint: {fileID: 2637000729274754316}
 --- !u!114 &-4667544453759907454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,6 +135,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: shotgun
   itemImage: {fileID: 21300000, guid: 79f56b5ec9b579a49af027af391ae0b6, type: 3}
+  itemType: 0
+  coolingAttachment: {fileID: 0}
+  maxHeatAttachment: {fileID: 0}
 --- !u!114 &-7009950676935817709
 MonoBehaviour:
   m_ObjectHideFlags: 0

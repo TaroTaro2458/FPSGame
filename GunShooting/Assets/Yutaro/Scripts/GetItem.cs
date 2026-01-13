@@ -32,7 +32,9 @@ public class GetItem : MonoBehaviour
     // アイテムデータ辞書
     private Dictionary<string, ItemData> itemDataDict = new Dictionary<string, ItemData>();
     // Overheatスクリプトの参照
-    [SerializeField] Overheat overheat; 
+    [SerializeField] Overheat overheat;
+    
+    private int fireGageCount = 0;
 
     void Awake()
     {
@@ -105,8 +107,16 @@ public class GetItem : MonoBehaviour
         ItemData data = itemPrefab.GetComponent<ItemData>();
         if (data != null && data.itemType == ItemType.Attachment && data.coolingAttachment != null)
         {
-            Transform equipSlot = cooldownAttachmentTransform; // 装備位置
-            GameObject equippedItem = Instantiate(itemPrefab, equipSlot.position, equipSlot.rotation, equipSlot);
+            // 現在の装備数を取得
+            int count = cooldownAttachmentTransform.childCount;
+            // オフセット値（上方向にずらす距離）
+            float offsetY = 0.08f; // 必要に応じて調整
+
+            // 新しい位置を計算
+            Vector3 offsetPosition = cooldownAttachmentTransform.position + new Vector3(0f, 0f, offsetY * count);
+
+            // インスタンス生成(装備）
+            GameObject equippedItem = Instantiate(itemPrefab, offsetPosition, cooldownAttachmentTransform.rotation, cooldownAttachmentTransform);
             overheat.AddCooldownAttachment(data.coolingAttachment);
         }
     }
@@ -116,11 +126,23 @@ public class GetItem : MonoBehaviour
         ItemData data = itemPrefab.GetComponent<ItemData>();
         if (data != null && data.itemType == ItemType.Attachment && data.maxHeatAttachment != null)
         {
-            Transform equipSlot = maxHeatAttachmentTransform; // 装備位置
-            GameObject equippedItem = Instantiate(itemPrefab, equipSlot.position, equipSlot.rotation, equipSlot);
+            // 現在の装備数を取得
+            int count = maxHeatAttachmentTransform.childCount;
+
+            // オフセット値（右方向にずらす距離）
+            float offsetZ = -0.05f; // 必要に応じて調整
+
+            // 新しい位置を計算
+            Vector3 offsetPosition = maxHeatAttachmentTransform.position + new Vector3( 0f, 0f,offsetZ * count);
+
+            // インスタンス生成(装備）
+            GameObject equippedItem = Instantiate(itemPrefab, offsetPosition, maxHeatAttachmentTransform.rotation, maxHeatAttachmentTransform);
+
+            // 効果を適用
             overheat.AddMaxHeatAttachment(data.maxHeatAttachment);
         }
     }
+
 
     // アイテム削除処理
     public void UnequipItem(string itemName)

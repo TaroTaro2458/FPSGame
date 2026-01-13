@@ -24,6 +24,11 @@ public class Shotgun : MonoBehaviour
     // 1発あたりのゲージ上昇量
     [SerializeField] float heatPerShot = 10f;
 
+    // マズルフラッシュのプレハブ
+    [SerializeField] GameObject muzzleFlashPrefab;
+    // マズルフラッシュの出現位置
+    [SerializeField] Transform muzzlePoint;
+
     private void Start()
     {
         // Overheatクラスの参照を取得
@@ -56,6 +61,10 @@ public class Shotgun : MonoBehaviour
             bulletCnt = bullet.GetComponent<BulletCnt>();
             bulletCnt.playerBulletDamage = bulletDamage;
             bullet.GetComponent<Rigidbody>().AddForce(spreadDir * bulletSpeed, ForceMode.Impulse);
+
+            // マズルフラッシュを生成
+            GameObject flash = Instantiate(muzzleFlashPrefab, muzzlePoint.position, muzzlePoint.rotation);
+            Destroy(flash, 0.1f); // 0.1秒後に自動で消す
         }
     }
 }

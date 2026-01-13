@@ -5,7 +5,7 @@ public class AutoGunshoot : MonoBehaviour
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform firePoint;
     [SerializeField] float bulletSpeed = 20f;
-    // �A�ˊԊu�i�b�j
+    // 連射間隔（秒）
     [SerializeField] float fireRate = 0.2f; 
     private float nextFireTime = 0f;
     // �e�̃_���[�W
@@ -17,6 +17,11 @@ public class AutoGunshoot : MonoBehaviour
     Overheat overheat;
     // 1��������̃Q�[�W�㏸��
     [SerializeField] float heatPerShot = 5f;
+
+    // マズルフラッシュのプレハブ
+    [SerializeField] GameObject muzzleFlashPrefab;
+    // マズルフラッシュの出現位置
+    [SerializeField] Transform muzzlePoint;
 
     private void Start()
     {
@@ -56,6 +61,10 @@ public class AutoGunshoot : MonoBehaviour
 
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.linearVelocity = shootDirection * bulletSpeed;
+
+        // マズルフラッシュを生成
+        GameObject flash = Instantiate(muzzleFlashPrefab, muzzlePoint.position, muzzlePoint.rotation);
+        Destroy(flash, 0.1f); // 0.1秒後に自動で消す
     }
 }
 
