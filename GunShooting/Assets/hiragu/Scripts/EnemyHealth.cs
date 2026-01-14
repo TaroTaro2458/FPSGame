@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
+    [SerializeField] int scoreValue = 10; //コンボ用に追加しました
     [SerializeField] int maxHp = 50;
     [HideInInspector] public int EnmeyCurrentHp;
 
@@ -75,6 +76,9 @@ public class EnemyHealth : MonoBehaviour
     private void EnemyDie()
     {
         Debug.Log("敵死んだ");
+
+        ScoreManager.Instance.AddScore(scoreValue);
+
         GunDrop();
         Destroy(gameObject);
     }
