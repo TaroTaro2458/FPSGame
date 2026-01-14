@@ -1,0 +1,9 @@
+using UnityEngine;
+
+public class HitLightAutoOff : MonoBehaviour
+{
+    void Start()
+    {
+        Destroy(gameObject, 0.2f); // 0.2ïbÇ≈åıÇ≤Ç∆è¡Ç∑
+    }
+}

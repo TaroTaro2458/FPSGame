@@ -339,6 +339,51 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &20996665
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 20996667}
+  - component: {fileID: 20996666}
+  m_Layer: 0
+  m_Name: HitEffectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &20996666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20996665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68cfb162d62b1a14fa272bd9168a7693, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultHitEffect: {fileID: 2937481063196519274, guid: 2d70135166e37204681c47285e01dbc5, type: 3}
+--- !u!4 &20996667
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20996665}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1460.3405, y: 615.9713, z: 87.513664}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &27185147
 GameObject:
   m_ObjectHideFlags: 0
@@ -5010,6 +5055,8 @@ MonoBehaviour:
   fireRate: 1
   bulletDamage: 10
   heatPerShot: 10
+  muzzleFlashPrefab: {fileID: 0}
+  muzzlePoint: {fileID: 0}
 --- !u!114 &458340317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5028,6 +5075,8 @@ MonoBehaviour:
   fireRate: 0.1
   bulletDamage: 10
   heatPerShot: 5
+  muzzleFlashPrefab: {fileID: 0}
+  muzzlePoint: {fileID: 0}
 --- !u!114 &458340318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5676,6 +5725,85 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 487498761}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &524313684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 524313686}
+  - component: {fileID: 524313685}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &524313685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524313684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d4ff64f8bd13f45b5aa269d22c54be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seList:
+  - type: 0
+    clip: {fileID: 8300000, guid: 194d4057909f784459a3bd968529b836, type: 3}
+  - type: 2
+    clip: {fileID: 8300000, guid: ab3bbbfd14b374940ac53dfdd6e854ac, type: 3}
+  - type: 1
+    clip: {fileID: 8300000, guid: 4fb13da4e56624641b8df896324e230b, type: 3}
+  - type: 5
+    clip: {fileID: 8300000, guid: c02a4725dc0912e488c9fef4ab8a0a1b, type: 3}
+  - type: 3
+    clip: {fileID: 8300000, guid: 37da5e3df4179814ea71ef3a57c85e9b, type: 3}
+  - type: 4
+    clip: {fileID: 8300000, guid: 919aa237cfc9eee4387dd3a671f2d1d0, type: 3}
+  - type: 6
+    clip: {fileID: 8300000, guid: 87124138c9ad12944b339f4d48146cac, type: 3}
+  - type: 7
+    clip: {fileID: 8300000, guid: 4b0170c0aaa283443973c9bc4facc701, type: 3}
+  - type: 8
+    clip: {fileID: 8300000, guid: b4caeaa104f1d0a43b538da51bd8ecbe, type: 3}
+  - type: 10
+    clip: {fileID: 8300000, guid: 27a8c0e09b3210f40b2aced685019f31, type: 3}
+  - type: 11
+    clip: {fileID: 8300000, guid: ea21905ae3d4efa49917b5f609bfe2ee, type: 3}
+  - type: 12
+    clip: {fileID: 8300000, guid: 4674541c6c955e949aef2f9ec3d4f91f, type: 3}
+  - type: 13
+    clip: {fileID: 8300000, guid: 2452c13aad49be8429df0fd48863fe98, type: 3}
+  - type: 9
+    clip: {fileID: 8300000, guid: e5c9760ec64e4a343b1dc2ec042aba96, type: 3}
+  - type: 14
+    clip: {fileID: 8300000, guid: 97748968e217e5440b120a9367fb62d0, type: 3}
+  - type: 15
+    clip: {fileID: 8300000, guid: 39934e8cf3baa984dba5dc0712e77efe, type: 3}
+  - type: 16
+    clip: {fileID: 8300000, guid: b1d8d39892004174eafae187fcc469e0, type: 3}
+--- !u!4 &524313686
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524313684}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.441939, y: 5.880973, z: 8.351417}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &530959121
 GameObject:
   m_ObjectHideFlags: 0
@@ -9553,11 +9681,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHeat: 500
+  baseMaxHeat: 100
   heatPerShot: 10
   cooldownRate: 80
   cooldownDelay: 2
   heatSlider: {fileID: 411246834}
   sliderImage: {fileID: 1245427592}
+  baseCooldownRate: 20
+  coolingAttachment: {fileID: 0}
+  coolingAttachments: []
+  maxHeatgageAttachment: {fileID: 0}
+  maxHeatgageAttachments: []
+  additionalMaxHeat: 0
 --- !u!114 &909993898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9586,9 +9721,13 @@ MonoBehaviour:
   fullAutogunPrefab: {fileID: 8218048025018524560, guid: b7c44503f9c7c724aa121e7c93de4f94, type: 3}
   shotgunPrefab: {fileID: 8218048025018524560, guid: 4de05b7364ca8c54199cc603087f7000, type: 3}
   handgunPrefab: {fileID: 8218048025018524560, guid: ca2481939b1c94440a77f1fc131f447a, type: 3}
+  cooldownAttachmentPrefab: {fileID: 0}
+  maxHeatAttachmentPrefab: {fileID: 0}
   fullautoHandTransform: {fileID: 1490701353}
   shotgunHandTransform: {fileID: 1674315207}
   handgunHandTransform: {fileID: 282729985}
+  cooldownAttachmentTransform: {fileID: 0}
+  maxHeatAttachmentTransform: {fileID: 0}
   maxItems: 5
   onItemChanged:
     m_PersistentCalls:
@@ -9597,6 +9736,7 @@ MonoBehaviour:
   - {fileID: 8123933909767873196, guid: 65b9566d07c6af44885686e86ca153c0, type: 3}
   - {fileID: -3772658185574537392, guid: 840503d1bd8889949a7022cab19a3e7c, type: 3}
   - {fileID: 4957246204128702511, guid: fc983c616a6edee4c9a7ed05422c9682, type: 3}
+  overheat: {fileID: 0}
 --- !u!54 &909993900
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -20191,3 +20331,5 @@ SceneRoots:
   - {fileID: 1067562964}
   - {fileID: 1830705300}
   - {fileID: 673295950}
+  - {fileID: 524313686}
+  - {fileID: 20996667}

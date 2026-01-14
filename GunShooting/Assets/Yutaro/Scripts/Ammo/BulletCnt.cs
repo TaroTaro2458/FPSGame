@@ -25,11 +25,20 @@ public class BulletCnt : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+
+        ContactPoint hit = other.contacts[0];
+
         if ( other.gameObject.CompareTag("ground"))
         {
             
             //衝突したら即座に消滅
             Destroy(gameObject);
+        }
+
+        // 着弾エフェクト出す
+        if (HitEffectManager.Instance != null)
+        {
+            HitEffectManager.Instance.SpawnHitEffect(hit.point, hit.normal);
         }
 
         // 敵に当たった時の処理
