@@ -69,7 +69,6 @@ public class Overheat : MonoBehaviour
         }
         else if (maxHeatgageAttachment != null)
         {
-            Debug.Log("アタッチメント適用: " + maxHeatgageAttachment.name);
             maxHeat += maxHeatgageAttachment.additionalMaxHeat;
             heatSlider.maxValue = maxHeat;
         }

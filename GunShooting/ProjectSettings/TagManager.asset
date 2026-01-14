@@ -13,6 +13,7 @@ TagManager:
   - EnemyBullet
   - CoolingAttachment
   - MaxHeatAttachment
+  - StatusItem
   layers:
   - Default
   - TransparentFX
