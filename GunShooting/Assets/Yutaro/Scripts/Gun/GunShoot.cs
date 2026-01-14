@@ -66,9 +66,11 @@ public class GunShoot : MonoBehaviour
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.linearVelocity = shootDirection * bulletSpeed;
 
-       /* // マズルフラッシュを生成
-        GameObject flash = Instantiate(muzzleFlashPrefab, muzzlePoint.position, muzzlePoint.rotation);
-        Destroy(flash, 0.1f); // 0.1秒後に自動で消す*/
+        /* // マズルフラッシュを生成
+         GameObject flash = Instantiate(muzzleFlashPrefab, muzzlePoint.position, muzzlePoint.rotation);
+         Destroy(flash, 0.1f); // 0.1秒後に自動で消す*/
+
+        AudioManager.Instance.PlaySE3D(SEType.PlayerGun, transform.position);   // 音がなる
     }
 
 }

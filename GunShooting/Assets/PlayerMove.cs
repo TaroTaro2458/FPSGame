@@ -1,3 +1,4 @@
+using Unity.Services.Analytics;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -31,7 +32,7 @@ public class PlayerMove : MonoBehaviour
     // アニメーター参照(保留中）
     //Animator animator;
 
-
+    bool isFootstepPlaying;     // se用の動いているかのフラグ
 
     void Start()
     {
@@ -83,6 +84,27 @@ public class PlayerMove : MonoBehaviour
         
         rb.MovePosition(rb.position + move * currentSpeed * Time.fixedDeltaTime);
 
+        // 動いていたら足音がなるようにする
+        if (rb.linearVelocity.magnitude > 0.1f)
+        {
+            if (!isFootstepPlaying)
+            {
+                AudioManager.Instance.PlaySE3D(SEType.EnemyWalk, transform.position);
+                isFootstepPlaying = true;
+                Invoke(nameof(ResetFootstep), 10.0f); // 音の長さ
+            }
+        }
+        else
+        {
+            isFootstepPlaying = false;
+        }
+
+    }
+
+    // se用
+    void ResetFootstep()
+    {
+        isFootstepPlaying = false;
     }
 }
 

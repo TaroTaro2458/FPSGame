@@ -1,3 +1,4 @@
+using Unity.Services.Analytics;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -12,6 +13,7 @@ public class HomingBullet : MonoBehaviour
 
     Rigidbody rb;
     PlayerHealth playerHealth;
+    bool isFootstepPlaying;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -38,6 +40,17 @@ public class HomingBullet : MonoBehaviour
         rb.angularVelocity = rotateAmount * rotateSpeed;
 
         rb.linearVelocity = transform.forward * bulletSpeed;
+
+
+        if (!isFootstepPlaying)
+        {
+            AudioManager.Instance.PlaySE3D(SEType.Homing, transform.position);
+            isFootstepPlaying = true;
+            Invoke(nameof(ResetFootstep), 5.0f); // 音の長さ
+        }
+        
+            
+        
     }
 
     void OnTriggerEnter(Collider other)
@@ -57,5 +70,10 @@ public class HomingBullet : MonoBehaviour
 
             Destroy(gameObject);
         }
+    }
+
+    void ResetFootstep()
+    {
+        isFootstepPlaying = false;
     }
 }

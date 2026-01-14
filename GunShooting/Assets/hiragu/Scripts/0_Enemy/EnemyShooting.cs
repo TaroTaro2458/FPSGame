@@ -74,6 +74,7 @@ public class EnemyShooting : MonoBehaviour
         bulletRb = bullet.GetComponent<Rigidbody>();
         bulletDirection = (targetPoint.position - shootingPoint.position).normalized;
         bulletRb.linearVelocity = bulletDirection * bulletSpeed;
+        AudioManager.Instance.PlaySE3D(SEType.Gun, transform.position);
         Destroy(bullet, 5);
     }
 

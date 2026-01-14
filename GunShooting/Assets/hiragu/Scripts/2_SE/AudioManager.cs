@@ -9,7 +9,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] List<SEData> seList;
 
     AudioSource seSource;
-    Dictionary<SEType, AudioClip> seDict;
+    Dictionary<SEType, SEData> seDict;
 
     void Awake()
     {
@@ -24,31 +24,48 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
+        // SE用 AudioSource
         seSource = gameObject.AddComponent<AudioSource>();
+        seSource.playOnAwake = false;
+        seSource.spatialBlend = 0f; // 2D用
 
-        // Dictionary化
-        seDict = new Dictionary<SEType, AudioClip>();
+        // Dictionary化（SEDataごと保持）
+        seDict = new Dictionary<SEType, SEData>();
         foreach (var se in seList)
         {
-            seDict[se.type] = se.clip;
+            seDict[se.type] = se;
         }
     }
 
+    // ===== 2D SE（UIなど）=====
     public void PlaySE(SEType type)
     {
-        if (seDict.TryGetValue(type, out var clip))
+        if (seDict.TryGetValue(type, out var se))
         {
-            Debug.Log("呼ばれた");
-            seSource.PlayOneShot(clip);
+            seSource.PlayOneShot(se.clip, se.volume);
+        }
+        else
+        {
+            Debug.LogWarning($"SEType {type} が登録されていません");
         }
     }
 
+    // ===== 3D SE（足音・銃声など）=====
     public void PlaySE3D(SEType type, Vector3 position)
     {
-        if (seDict.TryGetValue(type, out var clip))
-        {
-            Debug.Log("呼ばれた");
-            AudioSource.PlayClipAtPoint(clip, position, 2f);
-        }
+        if (!seDict.TryGetValue(type, out var se)) return;
+
+        GameObject go = new GameObject($"SE_{type}");
+        go.transform.position = position;
+
+        AudioSource src = go.AddComponent<AudioSource>();
+        src.clip = se.clip;
+        src.volume = se.volume;
+        src.spatialBlend = 1f;   // 3D
+        src.minDistance = 2f;
+        src.maxDistance = 25f;
+
+        src.Play();
+        Destroy(go, se.clip.length);
     }
 }

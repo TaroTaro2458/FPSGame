@@ -60,6 +60,8 @@ public class DropGunCnt : MonoBehaviour
     // アイテムドロップの確認
     void CheckDrop()
     {
+        AudioManager.Instance.PlaySE3D(SEType.GunDrop, transform.position);　// 銃を捨てたらseがなる
+
         ItemData data = GetComponent<ItemData>();
         if (data != null && !getItem.GetCurrentItems().Contains(data.itemName))
         {

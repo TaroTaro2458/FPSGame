@@ -19,6 +19,9 @@ public class pursuitShootingEnemyController : MonoBehaviour
     Rigidbody bulletRb;
     Vector3 bulletDirection;
     GameObject bullet;
+    bool isFootstepPlaying;
+    [SerializeField] float footstepInterval = 0.5f;
+    float footstepTimer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -59,6 +62,7 @@ public class pursuitShootingEnemyController : MonoBehaviour
                 }
                 else
                 {
+                    
                     Move();
                 }
             }
@@ -67,10 +71,29 @@ public class pursuitShootingEnemyController : MonoBehaviour
 
         void Move()
         {
-            intervalCount = interval - 0.5f;            // 次に止まった場合にすぐに撃てるように調整
-            nav.isStopped = false;                      // 止まらないようにする
-            nav.SetDestination(player.position);        // プレイヤーに追跡
+            nav.isStopped = false;
+            nav.SetDestination(player.position);
+
+            // 移動中か？
+            if (nav.velocity.magnitude > 0.1f)
+            {
+                footstepTimer += Time.deltaTime;
+
+                if (footstepTimer >= footstepInterval)
+                {
+                    AudioManager.Instance.PlaySE3D(SEType.EnemyWalk, transform.position);
+                    footstepTimer = 0f;
+                }
+            }
+            else
+            {
+                // 止まったらタイマーをリセット
+                footstepTimer = 0f;
+            }
+
+            intervalCount = interval - 0.5f;
         }
+
 
         // rayを飛ばしてプレイヤーまでの射線上に何もないことを確認する
         bool CanSeePlayer()

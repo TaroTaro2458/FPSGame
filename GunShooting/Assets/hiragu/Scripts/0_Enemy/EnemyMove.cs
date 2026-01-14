@@ -61,6 +61,7 @@ public class EnemyMove : MonoBehaviour, IEnemyDeathListener
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            AudioManager.Instance.PlaySE3D(SEType.SelfDestruction, transform.position);
             Destroy(gameObject);
         }
     }

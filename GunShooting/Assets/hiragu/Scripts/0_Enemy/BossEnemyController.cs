@@ -22,6 +22,8 @@ public class BossEnemyController : MonoBehaviour
     Vector3 enemyDirectionControl;                          // 常にプレイヤーのほうを向くため
     float countTime = 0;                                    // 発射間隔制御用
 
+    bool isFootstepPlaying;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -65,10 +67,31 @@ public class BossEnemyController : MonoBehaviour
             {
                 hb.bulletSpeed = homingBulletSpeed;
             }
-            
+            AudioManager.Instance.PlaySE3D(SEType.Gun, transform.position);
             Destroy(bullet, 5);
 
             countTime = 0;
         }
+
+
+        if (agent.velocity.magnitude > 0.1f)
+        {
+            if (!isFootstepPlaying)
+            {
+                AudioManager.Instance.PlaySE3D(SEType.EnemyWalk, transform.position);
+                isFootstepPlaying = true;
+                Invoke(nameof(ResetFootstep), 10.0f); // 音の長さ
+            }
+        }
+        else
+        {
+            isFootstepPlaying = false;
+        }
     }
+
+    void ResetFootstep()
+    {
+        isFootstepPlaying = false;
+    }
+
 }

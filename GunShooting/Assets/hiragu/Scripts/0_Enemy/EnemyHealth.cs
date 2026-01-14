@@ -71,6 +71,7 @@ public class EnemyHealth : MonoBehaviour
             onHealthChanged.Invoke(EnmeyCurrentHp, maxHp);
         }
         Debug.Log(EnmeyCurrentHp);
+        AudioManager.Instance.PlaySE3D(SEType.EnemyHit, transform.position);
     }
 
     private void EnemyDie()
@@ -78,7 +79,7 @@ public class EnemyHealth : MonoBehaviour
         Debug.Log("敵死んだ");
 
         ScoreManager.Instance.AddScore(scoreValue);
-
+        AudioManager.Instance.PlaySE3D(SEType.EnemyDie, transform.position);
         GunDrop();
         Destroy(gameObject);
     }

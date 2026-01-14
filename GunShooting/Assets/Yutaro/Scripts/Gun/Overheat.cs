@@ -100,6 +100,8 @@ public class Overheat : MonoBehaviour
                     blinkCoroutine = null;
                     fillImage.color = Color.white; // 元の色に戻す
                 }
+
+                AudioManager.Instance.PlaySE3D(SEType.Reload, transform.position);　// 冷却完了したらse
             }
 
 
@@ -126,6 +128,8 @@ public class Overheat : MonoBehaviour
         {
             isOverheated = true;
             Debug.Log("オーバーヒート！");
+
+            AudioManager.Instance.PlaySE3D(SEType.OverHeat, transform.position); // オーバーヒートしたらseをならす
 
             // 点滅開始
             if (blinkCoroutine == null && fillImage != null)

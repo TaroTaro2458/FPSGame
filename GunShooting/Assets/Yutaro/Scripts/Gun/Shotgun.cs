@@ -66,6 +66,8 @@ public class Shotgun : MonoBehaviour
             GameObject flash = Instantiate(muzzleFlashPrefab, muzzlePoint.position, muzzlePoint.rotation);
             Destroy(flash, 0.1f); // 0.1ïbå„Ç…é©ìÆÇ≈è¡Ç∑
         }
+
+        AudioManager.Instance.PlaySE3D(SEType.Shotgun, transform.position); // âπÇ™Ç»ÇÈ
     }
 }
 
