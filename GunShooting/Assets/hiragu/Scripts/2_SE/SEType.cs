@@ -1,0 +1,20 @@
+public enum SEType
+{
+        PlayerHit,
+        PlayerWalk,
+        PlayerRun,
+        EnemyHit,
+        EnemyWalk,
+        EnemyDie,
+        Explosion,
+        SelfDestruction,
+        Gun,
+        Shotgun,
+        GunDrop,
+        GunPikUp,
+        OverHeat,
+        Reload,
+        CancelButton,
+        NextButton,
+        SettingButton
+}
