@@ -36,9 +36,9 @@ public class BulletCnt : MonoBehaviour
         }
 
         // 着弾エフェクト出す
-        if (HitEffectManager.Instance != null)
+        if (HitEffectPool.Instance != null)
         {
-            HitEffectManager.Instance.SpawnHitEffect(hit.point, hit.normal);
+            HitEffectPool.Instance.Spawn(hit.point, hit.normal);
         }
 
         // 敵に当たった時の処理

@@ -2,8 +2,13 @@ using UnityEngine;
 
 public class HitLightAutoOff : MonoBehaviour
 {
-    void Start()
+    void OnEnable()
     {
-        Destroy(gameObject, 0.2f); // 0.2ïbÇ≈åıÇ≤Ç∆è¡Ç∑
+        Invoke(nameof(Disable), 0.2f);
     }
+    void Disable()
+    {
+        gameObject.SetActive(false);
+    }
+
 }
