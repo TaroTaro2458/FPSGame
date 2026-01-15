@@ -348,7 +348,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 20996667}
-  - component: {fileID: 20996666}
+  - component: {fileID: 20996668}
   m_Layer: 0
   m_Name: HitEffectManager
   m_TagString: Untagged
@@ -356,19 +356,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &20996666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 20996665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68cfb162d62b1a14fa272bd9168a7693, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultHitEffect: {fileID: 2937481063196519274, guid: 2d70135166e37204681c47285e01dbc5, type: 3}
 --- !u!4 &20996667
 Transform:
   m_ObjectHideFlags: 0
@@ -384,6 +371,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &20996668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20996665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 845203e01863a294680b99fc824ce6c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitPrefab: {fileID: 2937481063196519274, guid: 2d70135166e37204681c47285e01dbc5, type: 3}
+  poolSize: 30
 --- !u!1 &27185147
 GameObject:
   m_ObjectHideFlags: 0
