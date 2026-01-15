@@ -39,11 +39,19 @@ public class PlayerHealth : MonoBehaviour
 
     }
 
+    // ‘Ì—Í‚ğ‰ñ•œ‚·‚é
     public void Heal(int amount)
     {
         currentHealth += amount;
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;
+    }
+
+    // Å‘å‘Ì—Í‚ğã‚°‚é
+    public void HPUp(int amount)
+    {
+        maxHealth += amount;
+        currentHealth += amount;
     }
 
 

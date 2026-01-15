@@ -17,19 +17,22 @@ public class AbilityUser : MonoBehaviour
         }
     }
 
+    // 能力を適用するメソッド
     void ApplyAbility(AbilityData data)
     {
         switch (data.type)
         {
             case AbilityType.IncreaseHealth:
+                Debug.Log("体力が " + data.value + " 増加しました！");
                 // 体力を増やす処理
                 break;
-            case AbilityType.IncreaseSpeed:
-                // 移動速度を上げる処理
+            case AbilityType.InventoryUP:
+                Debug.Log("インベントリのスロット数が " + data.value + " 増加しました！");
+                // inventoryのスロット数を増やす処理
                 break;
-            case AbilityType.FireResistance:
+            /*case AbilityType.FireResistance:
                 // 火耐性を付与する処理
-                break;
+                break;*/
         }
     }
 }

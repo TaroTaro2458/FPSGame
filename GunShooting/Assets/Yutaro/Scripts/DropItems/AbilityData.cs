@@ -14,10 +14,11 @@ public class AbilityData : ScriptableObject
     public float value;
 }
 
+// 能力のタイプを定義する列挙型
 public enum AbilityType
 {
     IncreaseHealth,
-    IncreaseSpeed,
+    InventoryUP,
     FireResistance,
-    // 他にも自由に追加できるよ
+    // 他にも自由に追加できる
 }

@@ -9,7 +9,7 @@ public class DropStatusItem : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Status Item Picked Up");
-            abilityUI.ShowRandomAbilities();
+            abilityUI.ShowFixedAbilities();
             Destroy(gameObject); // ÉAÉCÉeÉÄÇè¡Ç∑
         }
     }

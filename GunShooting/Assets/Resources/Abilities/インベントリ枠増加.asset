@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6fd67c13ca28f864dbcbb7e3ce333513, type: 3}
-  m_Name: "HP\u6700\u5927\u5024\u4E0A\u6607"
+  m_Name: "\u30A4\u30F3\u30D9\u30F3\u30C8\u30EA\u67A0\u5897\u52A0"
   m_EditorClassIdentifier: 
-  abilityName: HP UP
-  description: "HP\u306E\u6700\u5927\u5024\u3092\u4E0A\u6607\u3055\u305B\u308B"
+  abilityName: Inventory UP
+  description: "\u30A4\u30F3\u30D9\u30F3\u30C8\u30EA\u306E\u30B9\u30ED\u30C3\u30C8\u6570\u3092\u5897\u52A0"
   icon: {fileID: 0}
-  type: 0
-  value: 10
+  type: 1
+  value: 1
