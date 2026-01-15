@@ -25,6 +25,9 @@ public class EnemyHealth : MonoBehaviour
     [Header("ボスの場合にHPが減ったことをUIに通知する")]
     [SerializeField] UnityEvent<int,int> onHealthChanged;
 
+    IEnemyDeathListener deathListener;
+    bool isDie = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -38,7 +41,9 @@ public class EnemyHealth : MonoBehaviour
         {
             onHealthChanged.Invoke(EnmeyCurrentHp,maxHp);
         }
-        
+
+        deathListener = GetComponent<IEnemyDeathListener>();
+
     }
 
     void OnEnable()
@@ -56,7 +61,7 @@ public class EnemyHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(EnmeyCurrentHp <= 0)
+        if(EnmeyCurrentHp <= 0 && !isDie)
         {
             EnemyDie();
         }
@@ -77,11 +82,19 @@ public class EnemyHealth : MonoBehaviour
     private void EnemyDie()
     {
         Debug.Log("敵死んだ");
-
+        isDie = true;
         ScoreManager.Instance.AddScore(scoreValue);
         AudioManager.Instance.PlaySE3D(SEType.EnemyDie, transform.position);
         GunDrop();
-        Destroy(gameObject);
+
+        if (deathListener != null)
+        {
+            deathListener.OnDeath();
+        }
+        else
+        {
+            Debug.LogWarning("IEnemyDeath が設定されていません");
+        }
     }
 
     private void GunDrop()
