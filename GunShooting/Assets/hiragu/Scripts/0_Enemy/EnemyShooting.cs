@@ -19,14 +19,8 @@ public class EnemyShooting : MonoBehaviour, IEnemyDeathListener
     Vector3 bulletDirection;
 
     [SerializeField] bool isShootingEne = false;
-    [SerializeField] bool isBoss = false;
-    bool isPinch = false;
+    
     EnemyHealth enmeyHealth;
-
-    [Header("ƒ{ƒX‚ÌHP‚ªŒ¸‚Á‚½Žž‚É‹­‰»‚·‚é")]
-    [SerializeField] float pinchShootingInterval = 0.7f;
-    [SerializeField] float pinchBulletSpeed = 13f;
-    [SerializeField] int pinchHp = 100;
 
     Animator anim;
     bool isDie = false;
@@ -36,10 +30,6 @@ public class EnemyShooting : MonoBehaviour, IEnemyDeathListener
     {
         player = GameObject.FindWithTag("Player").transform;
         targetPoint = player.Find("AimPoint");
-        if(isBoss)
-        {
-            enmeyHealth = GetComponent<EnemyHealth>();
-        }
 
         if (isShootingEne)
         {
@@ -63,14 +53,6 @@ public class EnemyShooting : MonoBehaviour, IEnemyDeathListener
             Shooting();
 
             countTime = 0;
-        }
-
-        if(isBoss && enmeyHealth.EnmeyCurrentHp <= pinchHp && !isPinch)
-        {
-            shootingInterval = pinchShootingInterval;
-            bulletSpeed = pinchBulletSpeed;
-            isPinch = true;
-            Debug.Log("‹­‚­‚È‚Á‚½");
         }
     }
 
