@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "HP\u6700\u5927\u5024\u4E0A\u6607"
   m_EditorClassIdentifier: 
   abilityName: HP UP
-  description: "HP\u306E\u6700\u5927\u5024\u3092\u4E0A\u6607\u3055\u305B\u308B"
+  description: HP+
   icon: {fileID: 0}
   type: 0
   value: 10
