@@ -1,6 +1,7 @@
+using System.ComponentModel;
 using UnityEngine;
 
-public class EnemyShooting : MonoBehaviour
+public class EnemyShooting : MonoBehaviour, IEnemyDeathListener
 {
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform shootingPoint;
@@ -17,6 +18,7 @@ public class EnemyShooting : MonoBehaviour
     Vector3 enemyDirectionControl;
     Vector3 bulletDirection;
 
+    [SerializeField] bool isShootingEne = false;
     [SerializeField] bool isBoss = false;
     bool isPinch = false;
     EnemyHealth enmeyHealth;
@@ -25,7 +27,9 @@ public class EnemyShooting : MonoBehaviour
     [SerializeField] float pinchShootingInterval = 0.7f;
     [SerializeField] float pinchBulletSpeed = 13f;
     [SerializeField] int pinchHp = 100;
-    
+
+    Animator anim;
+    bool isDie = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -36,11 +40,17 @@ public class EnemyShooting : MonoBehaviour
         {
             enmeyHealth = GetComponent<EnemyHealth>();
         }
+
+        if (isShootingEne)
+        {
+            anim = GetComponent<Animator>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (isDie) return;
         if (player == null) return;
 
         enemyDirectionControl = new Vector3(player.position.x, transform.position.y, player.position.z);
@@ -67,6 +77,12 @@ public class EnemyShooting : MonoBehaviour
     void Shooting()
     {
         if (player == null) return;
+        if (isDie) return;
+        // 射撃アニメーション
+        if (isShootingEne && anim != null)
+        {
+            anim.SetBool("Shooting", true);
+        }
 
         bullet = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
         bullet.transform.rotation = Quaternion.LookRotation(
@@ -76,6 +92,26 @@ public class EnemyShooting : MonoBehaviour
         bulletRb.linearVelocity = bulletDirection * bulletSpeed;
         AudioManager.Instance.PlaySE3D(SEType.Gun, transform.position);
         Destroy(bullet, 5);
+
+        Invoke(nameof(EndShooting), 0.2f);
+    }
+
+    public void OnDeath()
+    {
+        isDie = true;
+
+        anim.SetBool("Die", true);
+        Debug.Log("アニメーション再生");
+        Destroy(gameObject, 0.8f);
+    }
+
+    void EndShooting()
+    {
+        if (isDie) return;
+        if (isShootingEne && anim != null)
+        {
+            anim.SetBool("Shooting", false);
+        }
     }
 
 }

@@ -4050,6 +4050,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4121974158047646312, guid: 909bddd2f84a20848b3b1652f443456e, type: 3}
+      propertyPath: isBoss
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4549659127224029235, guid: 909bddd2f84a20848b3b1652f443456e, type: 3}
       propertyPath: m_Name
       value: ShootingEnemy
@@ -4057,6 +4061,10 @@ PrefabInstance:
     - target: {fileID: 4619565047919513571, guid: 909bddd2f84a20848b3b1652f443456e, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650222235306693913, guid: 909bddd2f84a20848b3b1652f443456e, type: 3}
+      propertyPath: isShootingEne
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6468958210293465850, guid: 909bddd2f84a20848b3b1652f443456e, type: 3}
       propertyPath: m_Size.y
