@@ -6,15 +6,17 @@ using System.Linq;
 public class AbilitySelectionUI : MonoBehaviour
 {
     public GameObject panel;
-    public AbilityButton[] abilityButtons; // 3つのボタン用
+    public AbilityButton[] abilityButtons; // ボタン用
 
     [SerializeField] AbilityData Ability1;
     [SerializeField] AbilityData Ability2;
-    [SerializeField] AbilityData Ability3;
+    //[SerializeField] AbilityData Ability3;
+
 
     // 固定の能力を表示するメソッド
     public void ShowFixedAbilities()
     {
+        Debug.Log("Showing Fixed Abilities");
         foreach (var button in abilityButtons)
         {
             button.Initialize(this);
@@ -32,13 +34,14 @@ public class AbilitySelectionUI : MonoBehaviour
 
         abilityButtons[0].SetAbility(Ability1);
         abilityButtons[1].SetAbility(Ability2);
-        abilityButtons[2].SetAbility(Ability3);
+        //abilityButtons[2].SetAbility(Ability3);
     }
 
 
     // プレイヤーが能力を選択したときに呼ばれる
     public void OnAbilitySelected(AbilityData chosen)
     {
+        Debug.Log("Ability Selected: " + chosen.abilityName);
         panel.SetActive(false);
         ApplyAbility(chosen);
 

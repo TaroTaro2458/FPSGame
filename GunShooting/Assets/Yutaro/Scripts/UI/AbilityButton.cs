@@ -31,7 +31,7 @@ public class AbilityButton : MonoBehaviour
 
     public void OnClick()
     {
-
+        Debug.Log("Ability Button Clicked: " + ability.abilityName);
         selectionUI.OnAbilitySelected(ability);
     }
 

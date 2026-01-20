@@ -32,8 +32,7 @@ Transform:
   m_LocalPosition: {x: -265.8, y: 1.57, z: 611.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3561272977616514258}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3444981132819974890
@@ -122,56 +121,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d168f0d97d675524b802b5fe3558a9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityUI: {fileID: 7595022155293392614}
---- !u!1 &7922935683838049326
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3561272977616514258}
-  - component: {fileID: 7595022155293392614}
-  m_Layer: 0
-  m_Name: BossDropCnt
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3561272977616514258
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7922935683838049326}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 265.8, y: -1.57, z: -611.8}
-  m_LocalScale: {x: 0, y: 0, z: 0}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7516456783125770356}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7595022155293392614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7922935683838049326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac382d30f30ff494697e55e6a4a4f2ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 6002436932425267415, guid: e15b4ef24f1257243a6d024b69fb32d9, type: 3}
-  abilityButtons:
-  - {fileID: 6248844669406593563, guid: cc5329e9829577c4492e1dfd2f1a4d1e, type: 3}
-  - {fileID: 3267732133725129002, guid: db0738103d72da74298ee8103489a45f, type: 3}
-  - {fileID: 6248844669406593563, guid: cc5329e9829577c4492e1dfd2f1a4d1e, type: 3}
-  Ability1: {fileID: 11400000, guid: 0f949bc44a8be304a9e681bc4d3eaaa1, type: 2}
-  Ability2: {fileID: 11400000, guid: 18d9e775cfa25624086d51bd50e16552, type: 2}
-  Ability3: {fileID: 11400000, guid: 18d9e775cfa25624086d51bd50e16552, type: 2}
+  abilityUIPrefab: {fileID: 5287904188280236205, guid: f70e68d792a895741a84d381c98204da, type: 3}
+  abilityCanvasPos: {fileID: 0}

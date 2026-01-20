@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AbilityUser : MonoBehaviour
 {
-    public AbilityData ability; // Inspectorで設定できるようにpublicにする
+    public AbilityData ability; 
 
     void Start()
     {
@@ -30,9 +30,7 @@ public class AbilityUser : MonoBehaviour
                 Debug.Log("インベントリのスロット数が " + data.value + " 増加しました！");
                 // inventoryのスロット数を増やす処理
                 break;
-            /*case AbilityType.FireResistance:
-                // 火耐性を付与する処理
-                break;*/
+            
         }
     }
 }
