@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BossEnemyController : MonoBehaviour
+public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
 {
     [Header("右手の銃の設定(ロケランとホーミング)")]
     [SerializeField] float stopDistance = 10f;              // 一定距離まで近づく
@@ -41,6 +41,7 @@ public class BossEnemyController : MonoBehaviour
     bool isPinch = false;
     bool isDie;
     bool isFootstepPlaying;
+    Animator anim;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -49,6 +50,7 @@ public class BossEnemyController : MonoBehaviour
         targetPoint = player.Find("AimPoint");
         agent = GetComponent<NavMeshAgent>();
         enemyHealth = GetComponent<EnemyHealth>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -66,6 +68,17 @@ public class BossEnemyController : MonoBehaviour
         {
             agent.isStopped = true;
         }
+
+        if(agent.velocity.magnitude > 0.1f)
+        {
+            anim.SetBool("isWalk", true);
+        }else if (agent.velocity.magnitude <= 0.1f)
+        {
+            anim.SetBool("isWalk", false);
+        }
+
+
+            
 
         enemyDirectionControl = new Vector3(player.position.x, transform.position.y, player.position.z);
         transform.LookAt(enemyDirectionControl);
@@ -89,6 +102,8 @@ public class BossEnemyController : MonoBehaviour
             }
             AudioManager.Instance.PlaySE3D(SEType.Gun, transform.position);
             Destroy(bullet, 5);
+            anim.SetBool("isShootRight", true);
+            Invoke(nameof(StopShootRight), 0.5f);
 
             countTime = 0;
         }
@@ -143,9 +158,38 @@ public class BossEnemyController : MonoBehaviour
         bulletDirection = (targetPoint.position - shootingPoint.position).normalized;
         bulletRb.linearVelocity = bulletDirection * bulletSpeed;
         AudioManager.Instance.PlaySE3D(SEType.Gun, transform.position);
+
+        anim.SetBool("isShootLeft", true);
+        Invoke(nameof(StopShootLeft), 0.5f);
+
         Destroy(bullet, 5);
 
        
     }
 
+    void StopShootRight()
+    {
+        anim.SetBool("isShootRight", false);
+    }
+
+    void StopShootLeft()
+    {
+        anim.SetBool("isShootLeft", false);
+    }
+
+    public void OnDeath()
+    {
+        isDie = true;
+
+        if (agent != null && agent.isActiveAndEnabled && agent.isOnNavMesh)
+        {
+            agent.isStopped = true;
+            agent.ResetPath();
+        }
+
+        anim.SetBool("Die", true);
+        Debug.Log("アニメーション再生");
+        agent.enabled = false;
+        Destroy(gameObject, 0.8f);
+    }
 }
