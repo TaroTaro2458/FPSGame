@@ -123,7 +123,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: single
-  itemImage: {fileID: 21300000, guid: 795e1bdf4497f8142aa9808f2f9f2634, type: 3}
+  itemImage: {fileID: 21300000, guid: 49367b9c4bcad4c4aacdcacce7630ffc, type: 3}
+  itemType: 0
+  coolingAttachment: {fileID: 0}
+  maxHeatAttachment: {fileID: 0}
 --- !u!1001 &621481829644588669
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -195,6 +195,15 @@ public class GetItem : MonoBehaviour
                 break;
             }
         }
+        foreach (Transform child in maxHeatAttachmentTransform)
+        {
+            ItemData data = child.GetComponent<ItemData>();
+            if (data != null && data.itemName == itemName)
+            {
+                Destroy(child.gameObject);
+                break;
+            }
+        }
 
     }
 
@@ -255,7 +264,7 @@ public class GetItem : MonoBehaviour
 
     }
 
-
+    // インベントリ上限を増加させるメソッド
     public void InventoryUp(int amount)
     {
         maxItems += amount;

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class InventoryCount : MonoBehaviour
 {
-    [SerializeField] Text inventoryText; // UIのText（TextMeshProならTMP_Textに変更）
+    [SerializeField] Text inventoryText; // UIのText
     [SerializeField] GetItem getItem;    // GetItemスクリプトの参照
 
     void Start()

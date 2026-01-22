@@ -137,10 +137,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eac3556485299c4db869795fff8e6de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: "\u6C37"
-  itemImage: {fileID: 21300000, guid: 5889f3968634a8542a9d9b69ab53de31, type: 3}
+  itemName: Ice
+  itemImage: {fileID: 21300000, guid: 18e328dc5d6063b47930e36bf898972a, type: 3}
   itemType: 1
   coolingAttachment: {fileID: 2913783199397906018}
+  maxHeatAttachment: {fileID: 0}
 --- !u!114 &-654615420311356782
 MonoBehaviour:
   m_ObjectHideFlags: 0
