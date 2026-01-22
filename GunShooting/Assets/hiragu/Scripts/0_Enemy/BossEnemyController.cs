@@ -56,8 +56,14 @@ public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
     // Update is called once per frame
     void Update()
     {
-        
+
+        if (!agent.enabled || !agent.isOnNavMesh)
+        {
+            return;
+        }
+
         distance = Vector3.Distance(transform.position, player.position);
+        if (isDie) return;
 
         if (distance > stopDistance)
         {
@@ -103,7 +109,7 @@ public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
             AudioManager.Instance.PlaySE3D(SEType.Gun, transform.position);
             Destroy(bullet, 5);
             anim.SetBool("isShootRight", true);
-            Invoke(nameof(StopShootRight), 0.5f);
+            Invoke(nameof(StopShootRight), 0.01f);
 
             countTime = 0;
         }
@@ -160,7 +166,7 @@ public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
         AudioManager.Instance.PlaySE3D(SEType.Gun, transform.position);
 
         anim.SetBool("isShootLeft", true);
-        Invoke(nameof(StopShootLeft), 0.5f);
+        Invoke(nameof(StopShootLeft), 0.01f);
 
         Destroy(bullet, 5);
 
@@ -187,7 +193,7 @@ public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
             agent.ResetPath();
         }
 
-        anim.SetBool("Die", true);
+        anim.SetBool("isDie", true);
         Debug.Log("アニメーション再生");
         agent.enabled = false;
         Destroy(gameObject, 0.8f);
