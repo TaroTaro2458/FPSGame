@@ -969,7 +969,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: b1d8d39892004174eafae187fcc469e0, type: 3}
     volume: 1
   bgmList:
-  - name: Buattle
+  - name: battle
     clip: {fileID: 8300000, guid: f2f592195a019824d9131109e3061a0b, type: 3}
     volume: 0.128
     loop: 1
