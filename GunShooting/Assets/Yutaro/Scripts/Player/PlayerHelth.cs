@@ -29,6 +29,8 @@ public class PlayerHealth : MonoBehaviour
             shake.TriggerShake();
         }
 
+        AudioManager.Instance.PlaySE3D(SEType.PlayerHit, transform.position); // ƒ_ƒ[ƒW‚ğó‚¯‚½‚ÌSE
+
         //HP‚ª0ˆÈ‰º‚É‚È‚Á‚½‚ç€–Sˆ—
 
         if (currentHealth <= 0)

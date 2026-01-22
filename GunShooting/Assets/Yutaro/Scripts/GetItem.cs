@@ -62,18 +62,24 @@ public class GetItem : MonoBehaviour
             Debug.Log("fullauto");
             GetFullauto(fullAutogunPrefab); // 入手と同時に装備
             Destroy(other.gameObject); // アイテムを消す
+
+            AudioManager.Instance.PlaySE3D(SEType.GunPikUp, transform.position);　// 銃をとったらseがなる
         }
         else if (other.CompareTag("shotgun") && AddItem(item))
         {
             Debug.Log("shotgun");
             GetShotgun(shotgunPrefab); // 入手と同時に装備
             Destroy(other.gameObject); // アイテムを消す
+
+            AudioManager.Instance.PlaySE3D(SEType.GunPikUp, transform.position);　// 銃をとったらseがなる
         }
         else if (other.CompareTag("single") && AddItem(item))
         {
             Debug.Log("handgun");
             GetHandgun(handgunPrefab); // 入手と同時に装備
             Destroy(other.gameObject); // アイテムを消す
+
+            AudioManager.Instance.PlaySE3D(SEType.GunPikUp, transform.position);　// 銃をとったらseがなる
         }
         else if (other.CompareTag("CoolingAttachment") && AddItem(item))
         {

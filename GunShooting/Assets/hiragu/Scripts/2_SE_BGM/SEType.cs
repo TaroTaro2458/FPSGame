@@ -10,11 +10,14 @@ public enum SEType
         SelfDestruction,
         Gun,
         Shotgun,
+        PlayerGun,
         GunDrop,
         GunPikUp,
         OverHeat,
         Reload,
         CancelButton,
         NextButton,
-        SettingButton
+        SettingButton,
+        Homing,
+        recovery
 }

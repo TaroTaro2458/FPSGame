@@ -52,15 +52,23 @@ public class EnemyMove : MonoBehaviour, IEnemyDeathListener
     {
         isDie = true;
 
-        agent.isStopped = true;
-        agent.ResetPath();
+        if (agent != null && agent.isActiveAndEnabled && agent.isOnNavMesh)
+        {
+            agent.isStopped = true;
+            agent.ResetPath();
+        }
+
         anim.SetTrigger("Die");
+        Debug.Log("アニメーション再生");
+        agent.enabled = false;
+        Destroy(gameObject, 0.8f);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            AudioManager.Instance.PlaySE3D(SEType.SelfDestruction, transform.position);
             Destroy(gameObject);
         }
     }

@@ -1,8 +1,9 @@
+using System.ComponentModel;
 using Unity.Services.Analytics;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class pursuitShootingEnemyController : MonoBehaviour
+public class pursuitShootingEnemyController : MonoBehaviour, IEnemyDeathListener
 {
     [SerializeField] GameObject bulletPrefab;                 // 弾のプレハブ
     [SerializeField] float range = 15f;                 // 射程・この距離以内にプレイヤーがいなかった移動する
@@ -19,6 +20,13 @@ public class pursuitShootingEnemyController : MonoBehaviour
     Rigidbody bulletRb;
     Vector3 bulletDirection;
     GameObject bullet;
+    //bool isFootstepPlaying;
+    [SerializeField] float footstepInterval = 0.5f;
+    float footstepTimer;
+
+    Animator anim;
+    bool isDie = false;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,86 +34,149 @@ public class pursuitShootingEnemyController : MonoBehaviour
         player = GameObject.FindWithTag("Player").transform;
         targetPoint = player.Find("AimPoint");
         nav = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
+
+
+        nav.stoppingDistance = range;   // ★これが超重要
     }
 
     // Update is called once per frame
     void Update()
     {
-        // プレイヤーとの距離を取得
-        distance = distance = Vector3.Distance(transform.position, targetPoint.position);
-        
+        if (isDie) return;
+        if (player == null) return;
 
-        if (player != null)
+        distance = Vector3.Distance(transform.position, targetPoint.position);
+
+        // 射程外 → 追跡
+        if (distance > range)
         {
-            // プレイヤーが射程外なら追跡、そうでないなら射撃
-            if (distance > range)
+            Move();
+            return;
+        }
+
+        // 射程内だが見えない → 追跡
+        if (!CanSeePlayer())
+        {
+            Move();
+            return;
+        }
+
+        // ===== ここから射撃状態 =====
+        StopAndShoot();
+    }
+
+    void Move()
+    {
+        nav.updateRotation = true;
+        nav.isStopped = false;
+        nav.SetDestination(player.position);
+
+        // ★アニメーション制御
+        anim.SetBool("Walk", true);
+        anim.SetBool("Shooting", false);
+
+        // 足音
+        if (nav.velocity.magnitude > 0.1f)
+        {
+            footstepTimer += Time.deltaTime;
+            if (footstepTimer >= footstepInterval)
             {
-                Move();
+                AudioManager.Instance.PlaySE3D(SEType.EnemyWalk, transform.position);
+                footstepTimer = 0f;
             }
-            else
+        }
+        else
+        {
+            footstepTimer = 0f;
+        }
+
+        intervalCount = 0f;
+    }
+
+
+    // rayを飛ばしてプレイヤーまでの射線上に何もないことを確認する
+    bool CanSeePlayer()
+    {
+        Vector3 dir = (targetPoint.position - shootingPoint.position).normalized;
+
+        // RaycastHitで最初に当たったものをチェック
+        if (Physics.Raycast(shootingPoint.position, dir, out RaycastHit hit, range))
+        {
+
+            // 以下4行はrayを可視化するためのもの
+            Vector3 origin = shootingPoint.position;
+            Vector3 dira = (targetPoint.position - origin).normalized;
+            float distance = range;
+            Debug.DrawRay(origin, dira * distance, Color.green);
+
+            if (hit.transform.CompareTag("Player") || hit.transform.CompareTag("EnemyBullet"))
             {
-                if (CanSeePlayer())
-                {
-                    Vector3 targetPos = targetPoint.position;
-                    targetPos.y = transform.position.y;         // y軸方向まで見る必要はない
-                    transform.LookAt(targetPos);                   // プレイヤーのほうを向く
-                    nav.isStopped = true;                       // 止まるようにする
-                    intervalCount += Time.deltaTime;            // カウントを進める
-                    if (intervalCount >= interval)               // カウントが射撃間隔を越したら撃つ
-                    {
-                        Shooting();                             // 射撃のメソッド
-                        intervalCount = 0f;                     // カウントをリセット
-                    }
-                }
-                else
-                {
-                    Move();
-                }
+                return true; // 射線に遮蔽物なし
             }
-
         }
+        return false; // 何か壁などに当たった
+    }
 
-        void Move()
+    // 弾のスピードを渡してプレイヤーの向けて撃つ
+    void Shooting()
+    {
+        if (player == null) return;                                                                     // エラー対策
+
+        bullet = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);             // 弾を生成
+        bullet.transform.rotation = Quaternion.LookRotation(
+            (targetPoint.position - shootingPoint.position).normalized) * Quaternion.Euler(90, 0, 0);        // 弾がカプセルの場合向きを合わせる
+        bulletRb = bullet.GetComponent<Rigidbody>();                                                    // 弾にスピードを渡すためのrigidbody
+        bulletDirection = (targetPoint.position - shootingPoint.position).normalized;                        // プレイヤーの現在位置
+        bulletRb.linearVelocity = bulletDirection * bulletSpeed;                                        // プレイヤーに向かって移動させる
+        Destroy(bullet, destroyTime);                                                                   // 一定時間経過で壊す
+    }
+
+    void StopAndShoot()
+    {
+        // 完全停止
+        nav.isStopped = true;
+        nav.velocity = Vector3.zero;
+        nav.ResetPath();
+        nav.updateRotation = false;
+
+        // ★移動アニメ完全停止
+        anim.SetBool("Walk", false);
+
+        // プレイヤーの方を向く
+        Vector3 lookPos = targetPoint.position;
+        lookPos.y = transform.position.y;
+        transform.LookAt(lookPos);
+
+        intervalCount += Time.deltaTime;
+        if (intervalCount >= interval)
         {
-            intervalCount = interval - 0.5f;            // 次に止まった場合にすぐに撃てるように調整
-            nav.isStopped = false;                      // 止まらないようにする
-            nav.SetDestination(player.position);        // プレイヤーに追跡
-        }
+            anim.SetBool("Shooting", true);   // ★射撃開始
+            Shooting();
 
-        // rayを飛ばしてプレイヤーまでの射線上に何もないことを確認する
-        bool CanSeePlayer()
+            Invoke(nameof(EndShooting), 2f); // アニメ長に合わせる
+            intervalCount = 0f;
+        }
+    }
+
+    public void OnDeath()
+    {
+        isDie = true;
+
+        if (nav != null && nav.isActiveAndEnabled && nav.isOnNavMesh)
         {
-            Vector3 dir = (targetPoint.position - shootingPoint.position).normalized;
-
-            // RaycastHitで最初に当たったものをチェック
-            if (Physics.Raycast(shootingPoint.position, dir, out RaycastHit hit, range))
-            {
-                // 以下4行はrayを可視化するためのもの
-                Vector3 origin = shootingPoint.position;
-                Vector3 dira = (targetPoint.position - origin).normalized;
-                float distance = range;
-                Debug.DrawRay(origin, dira * distance, Color.green);
-
-                if (hit.transform.CompareTag("Player"))
-                {
-                    return true; // 射線に遮蔽物なし
-                }
-            }
-            return false; // 何か壁などに当たった
+            nav.isStopped = true;
+            nav.ResetPath();
         }
 
-        // 弾のスピードを渡してプレイヤーの向けて撃つ
-        void Shooting()
-        {
-            if (player == null) return;                                                                     // エラー対策
+        anim.SetTrigger("Die");
+        Debug.Log("アニメーション再生");
+        nav.enabled = false;
+        Destroy(gameObject, 0.8f);
+    }
 
-            bullet = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);             // 弾を生成
-            bullet.transform.rotation = Quaternion.LookRotation(
-                (targetPoint.position - shootingPoint.position).normalized) * Quaternion.Euler(90, 0, 0);        // 弾がカプセルの場合向きを合わせる
-            bulletRb = bullet.GetComponent<Rigidbody>();                                                    // 弾にスピードを渡すためのrigidbody
-            bulletDirection = (targetPoint.position - shootingPoint.position).normalized;                        // プレイヤーの現在位置
-            bulletRb.linearVelocity = bulletDirection * bulletSpeed;                                        // プレイヤーに向かって移動させる
-            Destroy(bullet, destroyTime);                                                                   // 一定時間経過で壊す
-        }
+    void EndShooting()
+    {
+        anim.SetBool("Shooting", false);
     }
 }

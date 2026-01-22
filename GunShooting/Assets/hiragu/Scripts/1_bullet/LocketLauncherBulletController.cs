@@ -52,6 +52,7 @@ public class LocketLauncherBulletController : MonoBehaviour
             return;
         }
         Explode();
+        AudioManager.Instance.PlaySE3D(SEType.Explosion, transform.position);
         GameObject effect = Instantiate(explosionParticle, transform.position, Quaternion.identity);
         Destroy(effect, 5.0f);
     }
