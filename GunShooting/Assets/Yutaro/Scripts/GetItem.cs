@@ -21,7 +21,12 @@ public class GetItem : MonoBehaviour
     [SerializeField] Transform cooldownAttachmentTransform;
     [SerializeField] Transform maxHeatAttachmentTransform;
     // 最大装備数
-    [SerializeField] int maxItems = 2;
+    [SerializeField] int maxItems;
+    // 最大装備数プロパティ(InventoryCount用)
+    public int MaxItems => maxItems;
+    //UIの参照
+    [SerializeField]  InventoryCount inventoryCount;
+
     // 所持アイテムリスト
     private List<GameObject> currentItems = new List<GameObject>();
     private List<string> currentItemList = new List<string>();
@@ -244,5 +249,12 @@ public class GetItem : MonoBehaviour
 
     }
 
-   
+
+    public void InventoryUp(int amount)
+    {
+        maxItems += amount;
+        inventoryCount.UpdateInventoryText();
+    }
+
+
 }

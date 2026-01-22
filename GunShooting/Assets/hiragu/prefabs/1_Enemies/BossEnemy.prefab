@@ -132,7 +132,8 @@ MonoBehaviour:
   maxHp: 300
   EnmeyCurrentHp: 0
   overallDropChance: 1
-  dropItems: []
+  dropItems:
+  - gunPrefab: {fileID: 3988755078664155165, guid: 892ee9da90e491347aa838f71383e4b4, type: 3}
   isBoss: 1
   onHealthChanged:
     m_PersistentCalls:
