@@ -17,6 +17,7 @@ public class SettingMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            AudioManager.Instance.PlaySE(SEType.SettingButton);
             ToggleSettings();
         }
     }

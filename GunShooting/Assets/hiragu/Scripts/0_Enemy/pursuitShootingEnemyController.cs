@@ -76,20 +76,8 @@ public class pursuitShootingEnemyController : MonoBehaviour, IEnemyDeathListener
         anim.SetBool("Walk", true);
         anim.SetBool("Shooting", false);
 
-        // ‘«‰¹
-        if (nav.velocity.magnitude > 0.1f)
-        {
-            footstepTimer += Time.deltaTime;
-            if (footstepTimer >= footstepInterval)
-            {
-                AudioManager.Instance.PlaySE3D(SEType.EnemyWalk, transform.position);
-                footstepTimer = 0f;
-            }
-        }
-        else
-        {
-            footstepTimer = 0f;
-        }
+        
+       
 
         intervalCount = 0f;
     }

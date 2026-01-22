@@ -27,19 +27,6 @@ public class EnemyMove : MonoBehaviour, IEnemyDeathListener
         agent.SetDestination(player.position);
 
 
-        if (agent.velocity.magnitude > 0.1f)
-        {
-            if (!isFootstepPlaying)
-            {
-                AudioManager.Instance.PlaySE3D(SEType.EnemyWalk,transform.position);
-                isFootstepPlaying = true;
-                Invoke(nameof(ResetFootstep), 10.0f); // ‰¹‚Ì’·‚³
-            }
-        }
-        else
-        {
-            isFootstepPlaying = false;
-        }
 
     }
 

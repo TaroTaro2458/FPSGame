@@ -306,7 +306,7 @@ MonoBehaviour:
   bgmList:
   - name: battle
     clip: {fileID: 8300000, guid: f2f592195a019824d9131109e3061a0b, type: 3}
-    volume: 0.05
+    volume: 0.345
     loop: 1
   - name: gameOver
     clip: {fileID: 8300000, guid: e6a0154c2e32ad744a2f8a28412708f1, type: 3}
@@ -3358,7 +3358,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2791431649368283016, guid: 31dbb0fc972c34f4788b2ed609572efe, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4565168803041973679, guid: 31dbb0fc972c34f4788b2ed609572efe, type: 3}
       propertyPath: m_Enabled
@@ -3370,11 +3370,11 @@ PrefabInstance:
       objectReference: {fileID: 814861633}
     - target: {fileID: 5743038810520006702, guid: 31dbb0fc972c34f4788b2ed609572efe, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.717
       objectReference: {fileID: 0}
     - target: {fileID: 5743038810520006702, guid: 31dbb0fc972c34f4788b2ed609572efe, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6300216962914583864, guid: 31dbb0fc972c34f4788b2ed609572efe, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4063,6 +4063,7 @@ MonoBehaviour:
   cooldownAttachmentTransform: {fileID: 187594363}
   maxHeatAttachmentTransform: {fileID: 1845982649}
   maxItems: 10
+  inventoryCount: {fileID: 0}
   onItemChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -5343,7 +5344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2106893227
 MonoBehaviour:
   m_ObjectHideFlags: 0
