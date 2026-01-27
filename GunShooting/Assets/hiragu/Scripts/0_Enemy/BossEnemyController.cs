@@ -10,7 +10,6 @@ public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
     [Header("右手の銃の設定(ロケランとホーミング)")]
     [SerializeField] float stopDistance = 10f;              // 一定距離まで近づく
     [SerializeField] Transform shootingPoint;               // 発射位置
-    //[SerializeField] GameObject bulletPrefab;               // 発射する弾
     [SerializeField] float shootingInterval = 3.0f;         // 発射間隔
     [SerializeField] float homingBulletSpeed = 5;
     [SerializeField] float locLanSpeed = 5;
@@ -36,11 +35,13 @@ public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
     Rigidbody bulletRb;
     Vector3 bulletDirection;
     Vector3 enemyDirectionControl;                          // 常にプレイヤーのほうを向くため
-    float countTime = 0;                                    // 発射間隔制御用
+    float countTime = 0;                                    // 発射間隔制御用 右手
+    float countTimeLeft = 0;                                // 発射間隔制御用 左手
 
     bool isPinch = false;
     bool isDie;
     bool isFootstepPlaying;
+    bool isWalkingNow;                                      // アニメーションを制御するために今のフレームの状態を保持するためのもの
     Animator anim;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -75,16 +76,10 @@ public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
             agent.isStopped = true;
         }
 
-        if(agent.velocity.magnitude > 0.1f)
-        {
-            anim.SetBool("isWalk", true);
-        }else if (agent.velocity.magnitude <= 0.1f)
-        {
-            anim.SetBool("isWalk", false);
-        }
+        isWalkingNow = agent.velocity.magnitude > 0.1f;
 
 
-            
+        anim.SetBool("isWalk",isWalkingNow);
 
         enemyDirectionControl = new Vector3(player.position.x, transform.position.y, player.position.z);
         transform.LookAt(enemyDirectionControl);
@@ -92,35 +87,15 @@ public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
         countTime += Time.deltaTime;
         if (countTime > shootingInterval)
         {
-            //bullet = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
-            int rand = Random.Range(0, bulletList.Count);
-            bullet = Instantiate(bulletList[rand],shootingPoint.position, shootingPoint.rotation);
-            LocketLauncherBulletController llbc = bullet.GetComponent<LocketLauncherBulletController>();
-            HomingBullet hb = bullet.GetComponent<HomingBullet>();
-            if(llbc != null)
-            {
-                llbc.setShootingPoint(shootingPoint);
-                llbc.bulletSpeed = locLanSpeed;
-            }
-            if (hb != null)
-            {
-                hb.bulletSpeed = homingBulletSpeed;
-            }
-            AudioManager.Instance.PlaySE3D(SEType.Gun, transform.position);
-            Destroy(bullet, 5);
-            anim.SetBool("isShootRight", true);
-            Invoke(nameof(StopShootRight), 0.01f);
-
-            countTime = 0;
+            ShootingRight();
         }
 
-
-        countTime += Time.deltaTime;
-        if (countTime > shootingInterval)
+        countTimeLeft += Time.deltaTime;
+        if (countTimeLeft > leftShootingInterval)
         {
             Shooting();
 
-            countTime = 0;
+            countTimeLeft = 0;
         }
 
         if (enemyHealth.EnmeyCurrentHp <= pinchHp && !isPinch)
@@ -131,6 +106,7 @@ public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
             Debug.Log("強くなった");
         }
 
+        // 足音のSE
         if (agent.velocity.magnitude > 0.1f)
         {
             if (!isFootstepPlaying)
@@ -151,36 +127,66 @@ public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
         isFootstepPlaying = false;
     }
 
+    void ShootingRight()
+    {
+        // 右手(ロケラン、ホーミングのやつ)の射撃処理
+        int rand = Random.Range(0, bulletList.Count);
+        bullet = Instantiate(bulletList[rand], shootingPoint.position, shootingPoint.rotation);
+        LocketLauncherBulletController llbc = bullet.GetComponent<LocketLauncherBulletController>();
+        HomingBullet hb = bullet.GetComponent<HomingBullet>();
+        if (llbc != null)
+        {
+            llbc.setShootingPoint(shootingPoint);
+            llbc.bulletSpeed = locLanSpeed;
+        }
+        if (hb != null)
+        {
+            hb.bulletSpeed = homingBulletSpeed;
+        }
+
+        // 発射時のSE
+        AudioManager.Instance.PlaySE3D(SEType.Gun, transform.position);
+        Destroy(bullet, 5);
+
+        if (agent.velocity.magnitude > 0.1)
+        {
+            anim.SetTrigger("ShootWalkRight");
+        }
+        else
+        {
+            anim.SetTrigger("ShootIdelRight");
+        }
+
+        countTime = 0;
+    }
+
     void Shooting()
     {
+        // 左手(通常)の射撃処理
         if (player == null) return;
         if (isDie) return;
         
 
-        bullet = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
+        bullet = Instantiate(bulletPrefab, leftShootingPoint.position, leftShootingPoint.rotation);
         bullet.transform.rotation = Quaternion.LookRotation(
-            (targetPoint.position - shootingPoint.position).normalized) * Quaternion.Euler(90, 0, 0);
+            (targetPoint.position - leftShootingPoint.position).normalized) * Quaternion.Euler(90, 0, 0);
         bulletRb = bullet.GetComponent<Rigidbody>();
-        bulletDirection = (targetPoint.position - shootingPoint.position).normalized;
+        bulletDirection = (targetPoint.position - leftShootingPoint.position).normalized;
         bulletRb.linearVelocity = bulletDirection * bulletSpeed;
+        // 発射時のSE
         AudioManager.Instance.PlaySE3D(SEType.Gun, transform.position);
 
-        anim.SetBool("isShootLeft", true);
-        Invoke(nameof(StopShootLeft), 0.01f);
+        if(agent.velocity.magnitude > 0.1)
+        {
+            anim.SetTrigger("ShootWalkLeft");
+        }else
+        {
+            anim.SetTrigger("ShootIdelLeft");
+        }
 
-        Destroy(bullet, 5);
+            Destroy(bullet, 5);
 
        
-    }
-
-    void StopShootRight()
-    {
-        anim.SetBool("isShootRight", false);
-    }
-
-    void StopShootLeft()
-    {
-        anim.SetBool("isShootLeft", false);
     }
 
     public void OnDeath()
