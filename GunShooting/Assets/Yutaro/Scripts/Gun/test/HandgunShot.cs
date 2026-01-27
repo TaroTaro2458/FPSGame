@@ -34,6 +34,10 @@ public class HandgunShot : MonoBehaviour
 
     void Update()
     {
+        // ポージング中は発射不可
+        if (IsPosing()) return;
+        
+
         // 左クリックで発射
         if (Input.GetButton("Fire1") && Time.time >= nextFireTime && overheat.CanFire)
         {
@@ -41,6 +45,13 @@ public class HandgunShot : MonoBehaviour
             nextFireTime = Time.time + fireRate;
             overheat.RegisterShot(heatPerShot);
         }
+    }
+
+    // ポージング中かどうかを判定するメソッド
+    private bool IsPosing()
+    {
+        Animator animator = GetComponent<Animator>();
+        return animator != null && animator.GetBool("IsPosing");
     }
 
     void Shoot()

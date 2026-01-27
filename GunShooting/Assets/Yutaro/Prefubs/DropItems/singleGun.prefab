@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eac3556485299c4db869795fff8e6de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: single
+  itemName: handgun
   itemImage: {fileID: 21300000, guid: 49367b9c4bcad4c4aacdcacce7630ffc, type: 3}
   itemType: 0
   coolingAttachment: {fileID: 0}

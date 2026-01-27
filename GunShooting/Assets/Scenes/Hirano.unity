@@ -7103,6 +7103,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  healTimer: 0
+  healInterval: 5
+  autohealCap: 40
 --- !u!114 &886771692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14786,7 +14789,7 @@ MonoBehaviour:
   firePoint: {fileID: 1737953346}
   bulletSpeed: 100
   fireRate: 0.5
-  bulletDamage: 10
+  bulletDamage: 20
   heatPerShot: 5
   muzzleFlashPrefab: {fileID: 4565600078591484643, guid: a6e6f080fd570c34fab60b5db24c64f3, type: 3}
   muzzlePoint: {fileID: 1737953346}

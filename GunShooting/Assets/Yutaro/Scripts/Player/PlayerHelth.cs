@@ -7,6 +7,13 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] int maxHealth = 100;
     // 現在の体力
     private int currentHealth;
+    // 自動回復待ち時間
+    [SerializeField] float healTimer;
+    // 自動回復量/秒
+    private int healRate = 5;
+    [SerializeField] float healInterval = 5.0f; // 回復間隔
+    // 自動回復上限
+    [SerializeField] int autohealCap = 40;
 
     public int CurrentHealth => currentHealth;
 
@@ -18,8 +25,23 @@ public class PlayerHealth : MonoBehaviour
          currentHealth = maxHealth;
     }
 
-   public void TakeDamage(int damage)
+    void Update()
     {
+        // ダメージ後の待ち時間をカウントダウン
+        if (healTimer > 0f)
+        {
+            healTimer -= Time.deltaTime;
+        }
+        else
+        {
+            AutoHeal();
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        // ダメージを受けたら回復までの待ち時間をリセット
+        healTimer = healInterval;
         // ダメージを受ける
         currentHealth -= damage;
         // カメラシェイクを呼び出す
@@ -35,6 +57,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            currentHealth = 0;
             Die();
         }
         
@@ -47,6 +70,23 @@ public class PlayerHealth : MonoBehaviour
         currentHealth += amount;
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;
+    }
+
+    void AutoHeal()
+    {
+        // autohealCap以上なら何もしない
+        if (currentHealth >= autohealCap) return;
+        //HPが0以下なら何もしない
+        if (currentHealth <= 0) return;
+
+        float healAmount = healRate * Time.deltaTime*5;
+        currentHealth += Mathf.RoundToInt(healAmount);
+
+        if (currentHealth > autohealCap)
+        {
+            currentHealth = autohealCap;
+        }
+
     }
 
     // 最大体力を上げる
