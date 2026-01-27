@@ -8545,8 +8545,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 1880301987}
   abilityButtons:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1639568894}
+  - {fileID: 1022181068}
   Ability1: {fileID: 11400000, guid: 18d9e775cfa25624086d51bd50e16552, type: 2}
   Ability2: {fileID: 11400000, guid: 0f949bc44a8be304a9e681bc4d3eaaa1, type: 2}
 --- !u!1 &758077608
@@ -11326,6 +11326,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1007339479}
   m_Mesh: {fileID: -7759331768739107841, guid: 07a415f09d500474083bd12da01e5c17, type: 3}
+--- !u!114 &1022181068 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5047140656455902893, guid: e15b4ef24f1257243a6d024b69fb32d9, type: 3}
+  m_PrefabInstance: {fileID: 940785861}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 558f1736dcb80684a8ca30fb62b4799e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1038260092
 GameObject:
   m_ObjectHideFlags: 0
@@ -17839,6 +17850,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1639568894 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2409922203392603553, guid: e15b4ef24f1257243a6d024b69fb32d9, type: 3}
+  m_PrefabInstance: {fileID: 940785861}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 558f1736dcb80684a8ca30fb62b4799e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1643425267
 GameObject:
   m_ObjectHideFlags: 0
@@ -20944,7 +20966,6 @@ GameObject:
   - component: {fileID: 1952032625}
   - component: {fileID: 1952032624}
   - component: {fileID: 1952032623}
-  - component: {fileID: 1952032627}
   m_Layer: 5
   m_Name: BossDrop_UI
   m_TagString: Untagged
@@ -21034,22 +21055,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1952032627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1952032622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac382d30f30ff494697e55e6a4a4f2ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 1880301987}
-  abilityButtons: []
-  Ability1: {fileID: 11400000, guid: 18d9e775cfa25624086d51bd50e16552, type: 2}
-  Ability2: {fileID: 11400000, guid: 0f949bc44a8be304a9e681bc4d3eaaa1, type: 2}
 --- !u!1 &1955805805
 GameObject:
   m_ObjectHideFlags: 0
