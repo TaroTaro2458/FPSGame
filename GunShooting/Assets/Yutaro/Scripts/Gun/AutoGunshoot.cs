@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class AutoGunshoot : MonoBehaviour
 {
@@ -23,14 +24,23 @@ public class AutoGunshoot : MonoBehaviour
     // マズルフラッシュの出現位置
     [SerializeField] Transform muzzlePoint;
 
+    bool isPosing = false;
+
     private void Start()
     {
-        // Overheat�N���X�̎Q�Ƃ��擾
+        // Overheat
         overheat = FindObjectOfType<Overheat>();
     }
     void Update()
     {
-        // ���N���b�N�����������Ă���ԁA���Ԋu�Ŕ���
+
+        // UI上ならゲーム側のクリック処理をしない
+        if (EventSystem.current != null &&
+            EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+        //
         if (Input.GetButton("Fire1") && Time.time >= nextFireTime && overheat.CanFire)
         {
             Fire();
@@ -66,7 +76,9 @@ public class AutoGunshoot : MonoBehaviour
         GameObject flash = Instantiate(muzzleFlashPrefab, muzzlePoint.position, muzzlePoint.rotation);
         Destroy(flash, 0.1f); // 0.1秒後に自動で消す
 
-        AudioManager.Instance.PlaySE3D(SEType.PlayerGun, transform.position); // 撃ったら音がなる
+        // 銃声SE再生
+        AudioManager.Instance.PlaySE(SEType.Gun);
+        //AudioManager.Instance.PlaySE3D(SEType.PlayerGun, transform.position); // 撃ったら音がなる
     }
 }
 

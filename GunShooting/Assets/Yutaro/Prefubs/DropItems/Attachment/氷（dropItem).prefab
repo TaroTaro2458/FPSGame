@@ -125,6 +125,7 @@ MonoBehaviour:
   itemName: Ice
   itemImage: {fileID: 21300000, guid: 18e328dc5d6063b47930e36bf898972a, type: 3}
   itemType: 1
+  weight: 5
   coolingAttachment: {fileID: 2913783199397906018, guid: 6868807e7e9fe8b4f88b54e681b63f3f, type: 3}
   maxHeatAttachment: {fileID: 0}
 --- !u!1001 &311081754611247943

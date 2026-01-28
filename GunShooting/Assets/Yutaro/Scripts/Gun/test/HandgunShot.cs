@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class HandgunShot : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class HandgunShot : MonoBehaviour
     // マズルフラッシュの出現位置
     [SerializeField] Transform muzzlePoint;
 
+
     private void Start()
     {
         // Overheatクラスの参照を取得
@@ -34,9 +36,13 @@ public class HandgunShot : MonoBehaviour
 
     void Update()
     {
-        // ポージング中は発射不可
-        if (IsPosing()) return;
-        
+
+        // UI上ならゲーム側のクリック処理をしない(折衷案）
+        if (EventSystem.current != null &&
+            EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
 
         // 左クリックで発射
         if (Input.GetButton("Fire1") && Time.time >= nextFireTime && overheat.CanFire)
@@ -45,13 +51,6 @@ public class HandgunShot : MonoBehaviour
             nextFireTime = Time.time + fireRate;
             overheat.RegisterShot(heatPerShot);
         }
-    }
-
-    // ポージング中かどうかを判定するメソッド
-    private bool IsPosing()
-    {
-        Animator animator = GetComponent<Animator>();
-        return animator != null && animator.GetBool("IsPosing");
     }
 
     void Shoot()
@@ -81,6 +80,9 @@ public class HandgunShot : MonoBehaviour
         // マズルフラッシュを生成
         GameObject flash = Instantiate(muzzleFlashPrefab, muzzlePoint.position, muzzlePoint.rotation);
         Destroy(flash, 0.1f); // 0.1秒後に自動で消す
+
+        // 銃声SE再生
+        AudioManager.Instance.PlaySE(SEType.Gun);
     }
 
 

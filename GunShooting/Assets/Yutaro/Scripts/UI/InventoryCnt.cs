@@ -17,6 +17,7 @@ public class InventoryUI : MonoBehaviour
     // インベントリスロットのインスタンスリスト
     private List<GameObject> slotInstances = new List<GameObject>();
 
+
     void Start()
     {
         //最初はインベントリ非表示
@@ -75,5 +76,11 @@ public class InventoryUI : MonoBehaviour
 
         // ゲームの時間を止める／再開する
         Time.timeScale = isActive ? 0f : 1f;
+
+        
+        if (isActive)
+        {
+            UpdateInventoryDisplay();
+        }
     }
 }

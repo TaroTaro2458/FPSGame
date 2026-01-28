@@ -1,10 +1,15 @@
 using Unity.Services.Analytics;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
     //移動速度
     [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float heavyWeightMoveSpeed = 2.5f;
+
+    [SerializeField] GetItem getItem;
+
     // Rigidbodyコンポーネントの参照
     private Rigidbody rb;
     // 地面チェック用のTransformとLayerMask
@@ -77,11 +82,16 @@ public class PlayerMove : MonoBehaviour
         // アニメーションの速度パラメーターを設定
         float moveAmount = new Vector2(moveX, moveZ).magnitude;
         //animator.SetFloat("Speed", moveAmount);
-
         Vector3 move = transform.right * moveX + transform.forward * moveZ;
 
-        float currentSpeed = (Input.GetKey(KeyCode.LeftShift) && currentStamina > 0f) ? dashSpeed : moveSpeed;
-        
+        // 重量に応じた基本速度を計算（新）
+        float baseSpeed = CalculateBaseSpeed();
+
+        // ダッシュ時は dashSpeed、重さ関係なし
+        float currentSpeed = (Input.GetKey(KeyCode.LeftShift) && currentStamina > 0f) ?
+            dashSpeed : baseSpeed;
+
+
         rb.MovePosition(rb.position + move * currentSpeed * Time.fixedDeltaTime);
 
         // 動いていたら足音がなるようにする
@@ -99,6 +109,25 @@ public class PlayerMove : MonoBehaviour
             isFootstepPlaying = false;
         }
 
+    }
+
+    // 重量に応じた基本速度を計算
+    float CalculateBaseSpeed()
+    {
+        if (getItem == null) return moveSpeed;
+
+        int currentWeight = getItem.CurrentInventoryWeight;
+        int maxWeight = getItem.MaxWeight;
+
+        // 重量超過時は重い速度
+        if (currentWeight > maxWeight)
+        {
+            return heavyWeightMoveSpeed;
+        }
+
+        // 重量に応じて徐々に遅くする（オプション）
+        float weightRatio = (float)currentWeight / maxWeight;
+        return Mathf.Lerp(moveSpeed, heavyWeightMoveSpeed, weightRatio);
     }
 
     // se用

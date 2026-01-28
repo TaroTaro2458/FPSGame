@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Shotgun : MonoBehaviour
 {
@@ -37,6 +38,13 @@ public class Shotgun : MonoBehaviour
     void Update()
     {
 
+        // UI上ならゲーム側のクリック処理をしない
+        if (EventSystem.current != null &&
+            EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
         // 左クリック押し続けて発射
         if (Input.GetButton("Fire1") && Time.time >= nextFireTime&& overheat.CanFire)
         {
@@ -45,6 +53,7 @@ public class Shotgun : MonoBehaviour
             overheat.RegisterShot(heatPerShot);
         }
     }
+
 
     void FireShotgun()
     {
@@ -67,7 +76,9 @@ public class Shotgun : MonoBehaviour
             Destroy(flash, 0.1f); // 0.1秒後に自動で消す
         }
 
-        AudioManager.Instance.PlaySE3D(SEType.Shotgun, transform.position); // 音がなる
+        // 銃声SE再生
+        AudioManager.Instance.PlaySE(SEType.Shotgun);
+        //AudioManager.Instance.PlaySE3D(SEType.Shotgun, transform.position); // 音がなる
     }
 }
 

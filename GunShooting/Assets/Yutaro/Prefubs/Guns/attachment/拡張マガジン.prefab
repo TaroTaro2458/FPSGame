@@ -140,6 +140,7 @@ MonoBehaviour:
   itemName: ExtendedMag
   itemImage: {fileID: 21300000, guid: 68ee8cf517cf5024e9323e6b8f15ea21, type: 3}
   itemType: 1
+  weight: 5
   coolingAttachment: {fileID: 0}
   maxHeatAttachment: {fileID: 4036763649071897888}
 --- !u!114 &-940989825227063687

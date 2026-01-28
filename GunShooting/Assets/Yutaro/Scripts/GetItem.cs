@@ -24,6 +24,13 @@ public class GetItem : MonoBehaviour
     [SerializeField] int maxItems;
     // 最大装備数プロパティ(InventoryCount用)
     public int MaxItems => maxItems;
+
+    // 最大重量
+    [SerializeField] int MaxInventoryWeight = 100;
+    private int currentInventoryWeight = 0;
+    public int CurrentInventoryWeight => currentInventoryWeight;
+    public int MaxWeight => MaxInventoryWeight;
+
     //UIの参照
     [SerializeField]  InventoryCount inventoryCount;
 
@@ -39,7 +46,9 @@ public class GetItem : MonoBehaviour
     // Overheatスクリプトの参照
     [SerializeField] Overheat overheat;
     
-    private int fireGageCount = 0;
+    private int handgunCount = 0;
+    private int shotgunCount = 0;
+    private int fullautogunCount = 0;
 
     void Awake()
     {
@@ -86,12 +95,16 @@ public class GetItem : MonoBehaviour
             Debug.Log("冷却アタッチメント取得");
             ApplyCooldownAttachment(cooldownAttachmentPrefab); 
             Destroy(other.gameObject);
+
+            AudioManager.Instance.PlaySE3D(SEType.GunPikUp, transform.position);　// 銃をとったらseがなる
         }
         else if (other.CompareTag("MaxHeatAttachment") && AddItem(item))
         {
             Debug.Log("拡張アタッチメント取得");
             ApplyMaxHeatAttachment(maxHeatAttachmentPrefab);
             Destroy(other.gameObject);
+
+            AudioManager.Instance.PlaySE3D(SEType.GunPikUp, transform.position);　// 銃をとったらseがなる
         }
     }
 
@@ -99,17 +112,48 @@ public class GetItem : MonoBehaviour
     void GetFullauto(GameObject itemPrefab)
     {
         Transform equipSlot = fullautoHandTransform; // 装備位置
-        GameObject equippedItem = Instantiate(itemPrefab, equipSlot.position, equipSlot.rotation, equipSlot);
+
+        // 現在の装備数を取得
+        fullautogunCount = equipSlot.childCount;
+        // オフセット値（左方向にずらす距離）
+        float offsetZ = 0.2f; // 必要に応じて調整
+
+        // 新しい位置を計算
+        Vector3 offsetPosition = equipSlot.position - new Vector3(0f, 0f, offsetZ * fullautogunCount);
+
+        GameObject equippedItem = Instantiate(itemPrefab, offsetPosition, equipSlot.rotation, equipSlot);
     }
     void GetShotgun(GameObject itemPrefab)
     {
         Transform equipSlot = shotgunHandTransform; // 装備位置
-        GameObject equippedItem = Instantiate(itemPrefab, equipSlot.position, equipSlot.rotation, equipSlot);
+
+        // 現在の装備数を取得
+        shotgunCount = equipSlot.childCount;
+        // オフセット値（左方向にずらす距離）
+        float offsetZ = 0.2f; // 必要に応じて調整
+
+        // 新しい位置を計算
+        Vector3 offsetPosition = equipSlot.position + new Vector3(0f, 0f, offsetZ * shotgunCount);
+
+        GameObject equippedItem = Instantiate(itemPrefab, offsetPosition, equipSlot.rotation, equipSlot);
+
+        //GameObject equippedItem = Instantiate(itemPrefab, equipSlot.position, equipSlot.rotation, equipSlot);
     }
     void GetHandgun(GameObject itemPrefab)
     {
         Transform equipSlot = handgunHandTransform; // 装備位置
-        GameObject equippedItem = Instantiate(itemPrefab, equipSlot.position, equipSlot.rotation, equipSlot);
+
+        // 現在の装備数を取得
+        handgunCount = equipSlot.childCount;
+        // オフセット値（左方向にずらす距離）
+        float offsetY = 0.2f; // 必要に応じて調整
+
+        // 新しい位置を計算
+        Vector3 offsetPosition = equipSlot.position + new Vector3(0f, offsetY * handgunCount, 0f );
+
+        GameObject equippedItem = Instantiate(itemPrefab, offsetPosition, equipSlot.rotation, equipSlot);
+
+        //GameObject equippedItem = Instantiate(itemPrefab, equipSlot.position, equipSlot.rotation, equipSlot);
     }
 
     // アタッチメント適用処理(冷却氷)
@@ -218,6 +262,14 @@ public class GetItem : MonoBehaviour
         ItemData data = item.GetComponent<ItemData>();
         if (data != null)
         {
+            // 追加したときの重量を計算
+            currentInventoryWeight += data.weight;
+            if (currentInventoryWeight > MaxInventoryWeight)
+            {
+                Debug.Log("重量オーバー :"+ currentInventoryWeight);
+                
+            }
+
             currentItemList.Add(data.itemName);
             onItemChanged.Invoke();// UIに通知
             Destroy(item); // 情報を保存したあとに削除
@@ -230,6 +282,13 @@ public class GetItem : MonoBehaviour
     // アイテムをインベントリから削除
     public void RemoveItem(string item)
     {
+        // 重量を減らす
+        if (itemDataDict.TryGetValue(item, out ItemData data))
+        {
+            currentInventoryWeight -= data.weight;
+            if (currentInventoryWeight < 0) currentInventoryWeight = 0;
+        }
+
         // アイテムが存在するか確認
         if (currentItemList.Contains(item))
         {
@@ -267,6 +326,7 @@ public class GetItem : MonoBehaviour
     // インベントリ上限を増加させるメソッド
     public void InventoryUp(int amount)
     {
+        MaxInventoryWeight += 10;
         maxItems += amount;
         inventoryCount.UpdateInventoryText();
     }

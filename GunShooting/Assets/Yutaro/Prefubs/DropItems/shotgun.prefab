@@ -124,6 +124,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: shotgun
   itemImage: {fileID: 21300000, guid: 79f56b5ec9b579a49af027af391ae0b6, type: 3}
+  itemType: 0
+  weight: 25
+  coolingAttachment: {fileID: 0}
+  maxHeatAttachment: {fileID: 0}
 --- !u!1001 &1997794459028867079
 PrefabInstance:
   m_ObjectHideFlags: 0

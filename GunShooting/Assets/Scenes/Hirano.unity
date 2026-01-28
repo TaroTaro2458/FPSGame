@@ -7129,6 +7129,7 @@ MonoBehaviour:
   cooldownAttachmentTransform: {fileID: 447156058}
   maxHeatAttachmentTransform: {fileID: 1236852770}
   maxItems: 10
+  MaxInventoryWeight: 100
   inventoryCount: {fileID: 2116699919}
   onItemChanged:
     m_PersistentCalls:
@@ -7180,6 +7181,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  heavyWeightMoveSpeed: 2.5
+  getItem: {fileID: 886771692}
   groundCheck: {fileID: 314353948}
   groundMask:
     serializedVersion: 2

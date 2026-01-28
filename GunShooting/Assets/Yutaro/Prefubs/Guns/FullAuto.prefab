@@ -134,6 +134,7 @@ MonoBehaviour:
   itemName: FullAuto
   itemImage: {fileID: 21300000, guid: 795e1bdf4497f8142aa9808f2f9f2634, type: 3}
   itemType: 0
+  weight: 20
   coolingAttachment: {fileID: 0}
   maxHeatAttachment: {fileID: 0}
 --- !u!114 &-2828667833398134550

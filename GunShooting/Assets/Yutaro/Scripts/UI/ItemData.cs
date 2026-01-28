@@ -21,6 +21,9 @@ public class ItemData : MonoBehaviour
     // アイテムの種類
     public ItemType itemType;
 
+    // アイテムの重量
+    public int weight;
+
     // アタッチメント用
     public CoolingAttachment coolingAttachment;
     public MaxHeatAttachment maxHeatAttachment;
