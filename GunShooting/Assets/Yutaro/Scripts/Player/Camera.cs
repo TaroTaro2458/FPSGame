@@ -10,6 +10,9 @@ public class camera : MonoBehaviour
 
     void Start()
     {
+        if (AbilitySelectionUI.isUIOpen) return;
+
+
         //カーソルを非表示かつロック
         Cursor.lockState = CursorLockMode.Locked;
     }

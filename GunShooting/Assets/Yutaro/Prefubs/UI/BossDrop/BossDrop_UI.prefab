@@ -570,6 +570,7 @@ GameObject:
   - component: {fileID: 6847621466540186182}
   - component: {fileID: 586148163687927948}
   - component: {fileID: 6387195665368740965}
+  - component: {fileID: 4672832632213642189}
   m_Layer: 5
   m_Name: BossDrop_UI
   m_TagString: Untagged
@@ -660,6 +661,24 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &4672832632213642189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6002436932425267415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac382d30f30ff494697e55e6a4a4f2ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 8240396268465468360}
+  abilityButtons:
+  - {fileID: 2409922203392603553}
+  - {fileID: 5047140656455902893}
+  Ability1: {fileID: 11400000, guid: 18d9e775cfa25624086d51bd50e16552, type: 2}
+  Ability2: {fileID: 11400000, guid: 0f949bc44a8be304a9e681bc4d3eaaa1, type: 2}
 --- !u!1 &7426766064333925467
 GameObject:
   m_ObjectHideFlags: 0
