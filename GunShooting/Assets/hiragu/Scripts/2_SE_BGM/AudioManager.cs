@@ -10,11 +10,11 @@ public class AudioManager : MonoBehaviour
 
     [Header("BGM")]
     [SerializeField] List<BGMData> bgmList;
-
+     
     AudioSource seSource;
     AudioSource bgmSource;
 
-    Dictionary<string, BGMData> bgmDict;
+    Dictionary<BGMType, BGMData> bgmDict;
     Dictionary<SEType, SEData> seDict;
 
     void Awake()
@@ -48,9 +48,9 @@ public class AudioManager : MonoBehaviour
             seDict[se.type] = se;
         }
 
-        bgmDict = new Dictionary<string, BGMData>();
+        bgmDict = new Dictionary<BGMType, BGMData>();
         foreach (var bgm in bgmList)
-            bgmDict[bgm.name] = bgm;
+            bgmDict[bgm.type] = bgm;
 
     }
 
@@ -84,15 +84,16 @@ public class AudioManager : MonoBehaviour
 
         src.Play();
         Destroy(go, se.clip.length);
+        Debug.Log( type + "なってる?");
     }
 
     // これ以下はBGM用のメソッド
-    public void PlayBGM(string name)
+    public void PlayBGM(BGMType type)
     {
         Debug.Log("bgm");
-        if (!bgmDict.TryGetValue(name, out var bgm))
+        if (!bgmDict.TryGetValue(type, out var bgm))
         {
-            Debug.LogWarning($"BGM {name} が見つかりません");
+            Debug.LogWarning($"BGM {type} が見つかりません");
             return;
         }
 

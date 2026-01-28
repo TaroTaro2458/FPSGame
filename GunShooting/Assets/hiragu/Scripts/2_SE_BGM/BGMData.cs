@@ -3,7 +3,7 @@ using UnityEngine;
 [System.Serializable]
 public class BGMData
 {
-    public string name;
+    public BGMType type;
     public AudioClip clip;
 
     [Range(0f, 1f)]
