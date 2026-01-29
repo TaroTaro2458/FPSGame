@@ -14,6 +14,11 @@ public class AbilitySelectionUI : MonoBehaviour
     //[SerializeField] AbilityData Ability3;
 
 
+    void Awake()
+    {
+        panel.SetActive(false);
+    }
+
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("TRIGGER HIT by " + other.name);
@@ -25,20 +30,21 @@ public class AbilitySelectionUI : MonoBehaviour
         isUIOpen = true;
 
         Debug.Log("Showing Fixed Abilities");
+
         foreach (var button in abilityButtons)
         {
             button.Initialize(this);
         }
+        // パネル表示
+        panel.SetActive(true);
+        Debug.Log("Panel active: " + panel.activeSelf);
 
-
-        bool isActive = !panel.activeSelf;
-        panel.SetActive(isActive);
         // マウスカーソルの表示切り替え
-        Cursor.visible = isActive;
-        Cursor.lockState = isActive ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
 
-        // ゲームの時間を止める／再開する
-        Time.timeScale = isActive ? 0f : 1f;
+        // ゲームの時間を止める
+        Time.timeScale = 0f;
 
         abilityButtons[0].SetAbility(Ability1);
         abilityButtons[1].SetAbility(Ability2);
