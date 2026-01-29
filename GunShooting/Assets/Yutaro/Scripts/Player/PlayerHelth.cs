@@ -100,7 +100,6 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         // 死亡処理 シーンをGameOverに切り替える
-        Debug.Log("プレイヤー死亡");
         SceneManager.LoadScene("GameOver");
     }
 }

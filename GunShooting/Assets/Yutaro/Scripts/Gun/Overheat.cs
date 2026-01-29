@@ -64,7 +64,6 @@ public class Overheat : MonoBehaviour
         // アタッチメントがある場合、パラメータを上書き
         if (coolingAttachment != null)
         {
-            Debug.Log("アタッチメント適用: " + coolingAttachment.name);
             currentCooldownRate += coolingAttachment.additionalCooldownRate;
         }
         else if (maxHeatgageAttachment != null)
@@ -90,7 +89,7 @@ public class Overheat : MonoBehaviour
             if (isOverheated && currentHeat <= 0f)
             {
                 isOverheated = false;
-                Debug.Log("冷却完了");
+                //Debug.Log("冷却完了");
 
                 // 点滅停止
                 if (blinkCoroutine != null)
@@ -126,7 +125,7 @@ public class Overheat : MonoBehaviour
         if ((Mathf.Approximately(currentHeat, maxHeat)))
         {
             isOverheated = true;
-            Debug.Log("オーバーヒート！");
+            //Debug.Log("オーバーヒート！");
 
             AudioManager.Instance.PlaySE3D(SEType.OverHeat, transform.position); // オーバーヒートしたらseをならす
 
@@ -214,7 +213,7 @@ public class Overheat : MonoBehaviour
         {
             coolingAttachments.Add(newAttachment); 
             RecalculateCooldownRate();
-            Debug.Log($"アタッチメント追加！冷却速度: {currentCooldownRate}");
+            //Debug.Log($"アタッチメント追加！冷却速度: {currentCooldownRate}");
         } 
     }
 
@@ -224,7 +223,7 @@ public class Overheat : MonoBehaviour
         {
             maxHeatgageAttachments.Add(newAttachment);
             RecalculateMaxHeat();
-            Debug.Log($"アタッチメント追加！, 最大ヒート: {maxHeat}");
+            //Debug.Log($"アタッチメント追加！, 最大ヒート: {maxHeat}");
         }
     }
 }

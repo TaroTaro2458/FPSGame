@@ -19,13 +19,11 @@ public class DropGunCnt : MonoBehaviour
         {
             getItem = playerObj.GetComponent<GetItem>();
         }
-        else
+        /*else
         {
-            Debug.LogError("プレイヤーオブジェクトが見つかりません: " + playerName);
-        }
+            Debug.LogWarning("Playerオブジェクトが見つかりません。");
+        }*/
     }
-
-    // Update is called once per frame
     /* void Update()
      {
          if (getItem == null)

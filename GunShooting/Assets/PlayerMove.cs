@@ -26,14 +26,9 @@ public class PlayerMove : MonoBehaviour
     // 地面に接地しているかどうか
     [SerializeField] bool isGrounded;
     // ダッシュの速度と持続時間
-    [SerializeField] float dashSpeed = 10f;
+    [SerializeField] float dashMultiplier = 2f;
     [SerializeField] float dashDuration = 5f;
-    // ダッシュのクールダウン時間
-    private float dashTimer ;
-    // ダッシュ中かどうかのフラグ
-    private bool isDashing = false;
-    // ダッシュ終了時間
-    private float dashEndTime = 0f;
+    private bool canDash = true;
     // アニメーター参照(保留中）
     //Animator animator;
 
@@ -43,7 +38,7 @@ public class PlayerMove : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true; // 倒れ防止
-
+        currentStamina = maxStamina;
         //animator = GetComponent<Animator>();
     }
 
@@ -60,18 +55,21 @@ public class PlayerMove : MonoBehaviour
         }
 
         bool isTryingToDash = Input.GetKey(KeyCode.LeftShift);
-        bool canDash = currentStamina > 0f;
 
-        if (isTryingToDash && canDash)
+        // スタミナ処理）
+        if (isTryingToDash && currentStamina > 0f)
         {
             currentStamina -= staminaDrainRate * Time.deltaTime;
-            currentStamina = Mathf.Max(currentStamina, 0f);
+            Debug.Log("ダッシュ中 " + currentStamina);
         }
-        else
+        else if (currentStamina < maxStamina)
         {
             currentStamina += staminaRecoveryRate * Time.deltaTime;
-            currentStamina = Mathf.Min(currentStamina, maxStamina);
         }
+        // Clampを最後に実行し、canDashも確定
+        currentStamina = Mathf.Clamp(currentStamina, 0f, maxStamina);
+        canDash = currentStamina > 0f;  // ← ここで確定
+
     }
 
     void FixedUpdate()
@@ -84,12 +82,14 @@ public class PlayerMove : MonoBehaviour
         //animator.SetFloat("Speed", moveAmount);
         Vector3 move = transform.right * moveX + transform.forward * moveZ;
 
-        // 重量に応じた基本速度を計算（新）
+        // 重量に応じた基本速度を計算
         float baseSpeed = CalculateBaseSpeed();
 
-        // ダッシュ時は dashSpeed、重さ関係なし
-        float currentSpeed = (Input.GetKey(KeyCode.LeftShift) && currentStamina > 0f) ?
-            dashSpeed : baseSpeed;
+
+        // ダッシュ中なら基礎速度に倍率をかける
+        float currentSpeed = (Input.GetKey(KeyCode.LeftShift) && canDash)
+            ? baseSpeed * dashMultiplier
+            : baseSpeed;
 
 
         rb.MovePosition(rb.position + move * currentSpeed * Time.fixedDeltaTime);
@@ -125,7 +125,7 @@ public class PlayerMove : MonoBehaviour
             return heavyWeightMoveSpeed;
         }
 
-        // 重量に応じて徐々に遅くする（オプション）
+        // 重量に応じて徐々に遅くする
         float weightRatio = (float)currentWeight / maxWeight;
         return Mathf.Lerp(moveSpeed, heavyWeightMoveSpeed, weightRatio);
         //return moveSpeed;

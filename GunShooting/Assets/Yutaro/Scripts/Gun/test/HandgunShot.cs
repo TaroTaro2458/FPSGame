@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 public class HandgunShot : MonoBehaviour
 {
-
+    // 弾のプレハブ
     [SerializeField] GameObject bulletPrefab;
     //射撃位置
     [SerializeField] Transform firePoint;
@@ -37,7 +37,7 @@ public class HandgunShot : MonoBehaviour
     void Update()
     {
 
-        // UI上ならゲーム側のクリック処理をしない(折衷案）
+        // UI上ならゲーム側のクリック処理をしない
         if (EventSystem.current != null &&
             EventSystem.current.IsPointerOverGameObject())
         {
@@ -55,7 +55,7 @@ public class HandgunShot : MonoBehaviour
 
     void Shoot()
     {
-        // 
+        // 画面中央からレイを飛ばす
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         Vector3 targetPoint;
 
@@ -67,13 +67,13 @@ public class HandgunShot : MonoBehaviour
         {
             targetPoint = ray.GetPoint(100f);
         }
-
+        // 射撃方向を計算
         Vector3 shootDirection = (targetPoint - firePoint.position).normalized;
 
+        // 弾の発射処理
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.LookRotation(shootDirection));
         bulletCnt = bullet.GetComponent<BulletCnt>();
         bulletCnt.playerBulletDamage = bulletDamage;
-
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.linearVelocity = shootDirection * bulletSpeed;
 

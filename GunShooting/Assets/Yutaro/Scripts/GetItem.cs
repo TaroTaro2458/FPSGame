@@ -25,7 +25,7 @@ public class GetItem : MonoBehaviour
     // 最大装備数プロパティ(InventoryCount用)
     public int MaxItems => maxItems;
 
-    // 最大重量
+    // 重量
     [SerializeField] int MaxInventoryWeight = 100;
     private int currentInventoryWeight = 0;
     public int CurrentInventoryWeight => currentInventoryWeight;
@@ -45,7 +45,8 @@ public class GetItem : MonoBehaviour
     private Dictionary<string, ItemData> itemDataDict = new Dictionary<string, ItemData>();
     // Overheatスクリプトの参照
     [SerializeField] Overheat overheat;
-    
+
+    // 装備中の銃の数カウント用
     private int handgunCount = 0;
     private int shotgunCount = 0;
     private int fullautogunCount = 0;
@@ -68,7 +69,7 @@ public class GetItem : MonoBehaviour
         // アイテム取得判定 tagで識別
         if (other.CompareTag("fullauto") && AddItem(item))
         {
-            Debug.Log("fullauto");
+            //Debug.Log("fullauto");
             GetFullauto(fullAutogunPrefab); // 入手と同時に装備
             Destroy(other.gameObject); // アイテムを消す
 
@@ -76,7 +77,7 @@ public class GetItem : MonoBehaviour
         }
         else if (other.CompareTag("shotgun") && AddItem(item))
         {
-            Debug.Log("shotgun");
+            //Debug.Log("shotgun");
             GetShotgun(shotgunPrefab); // 入手と同時に装備
             Destroy(other.gameObject); // アイテムを消す
 
@@ -84,7 +85,7 @@ public class GetItem : MonoBehaviour
         }
         else if (other.CompareTag("single") && AddItem(item))
         {
-            Debug.Log("handgun");
+            //Debug.Log("handgun");
             GetHandgun(handgunPrefab); // 入手と同時に装備
             Destroy(other.gameObject); // アイテムを消す
 
@@ -92,7 +93,7 @@ public class GetItem : MonoBehaviour
         }
         else if (other.CompareTag("CoolingAttachment") && AddItem(item))
         {
-            Debug.Log("冷却アタッチメント取得");
+           // Debug.Log("冷却アタッチメント取得");
             ApplyCooldownAttachment(cooldownAttachmentPrefab); 
             Destroy(other.gameObject);
 
@@ -100,7 +101,7 @@ public class GetItem : MonoBehaviour
         }
         else if (other.CompareTag("MaxHeatAttachment") && AddItem(item))
         {
-            Debug.Log("拡張アタッチメント取得");
+           // Debug.Log("拡張アタッチメント取得");
             ApplyMaxHeatAttachment(maxHeatAttachmentPrefab);
             Destroy(other.gameObject);
 
@@ -120,7 +121,7 @@ public class GetItem : MonoBehaviour
 
         // 新しい位置を計算
         Vector3 offsetPosition = equipSlot.position - new Vector3(0f, 0f, offsetZ * fullautogunCount);
-
+        // インスタンス生成(装備）
         GameObject equippedItem = Instantiate(itemPrefab, offsetPosition, equipSlot.rotation, equipSlot);
     }
     void GetShotgun(GameObject itemPrefab)
@@ -130,13 +131,14 @@ public class GetItem : MonoBehaviour
         // 現在の装備数を取得
         shotgunCount = equipSlot.childCount;
         // オフセット値（左方向にずらす距離）
-        float offsetZ = 0.2f; // 必要に応じて調整
+        float offsetZ = 0.2f; 
 
         // 新しい位置を計算
         Vector3 offsetPosition = equipSlot.position + new Vector3(0f, 0f, offsetZ * shotgunCount);
-
+        // インスタンス生成(装備）
         GameObject equippedItem = Instantiate(itemPrefab, offsetPosition, equipSlot.rotation, equipSlot);
 
+        //修正前　状況次第で戻すかも
         //GameObject equippedItem = Instantiate(itemPrefab, equipSlot.position, equipSlot.rotation, equipSlot);
     }
     void GetHandgun(GameObject itemPrefab)
@@ -146,13 +148,14 @@ public class GetItem : MonoBehaviour
         // 現在の装備数を取得
         handgunCount = equipSlot.childCount;
         // オフセット値（左方向にずらす距離）
-        float offsetY = 0.2f; // 必要に応じて調整
+        float offsetY = 0.2f;
 
         // 新しい位置を計算
         Vector3 offsetPosition = equipSlot.position + new Vector3(0f, offsetY * handgunCount, 0f );
-
+        // インスタンス生成(装備）
         GameObject equippedItem = Instantiate(itemPrefab, offsetPosition, equipSlot.rotation, equipSlot);
 
+        //修正前　状況次第で戻すかも
         //GameObject equippedItem = Instantiate(itemPrefab, equipSlot.position, equipSlot.rotation, equipSlot);
     }
 
@@ -264,18 +267,18 @@ public class GetItem : MonoBehaviour
         {
             // 追加したときの重量を計算
             currentInventoryWeight += data.weight;
-            if (currentInventoryWeight > MaxInventoryWeight)
-            {
-                Debug.Log("重量オーバー :"+ currentInventoryWeight);
-                
-            }
+            /* if (currentInventoryWeight > MaxInventoryWeight)
+             {
+                 // 重量オーバーの場合、追加を拒否
+                 currentInventoryWeight -= data.weight; // 元に戻す
+                 return false;
+             }*/
 
             currentItemList.Add(data.itemName);
             onItemChanged.Invoke();// UIに通知
             Destroy(item); // 情報を保存したあとに削除
             return true;
         }
-        Debug.LogWarning("ItemData が見つかりませんでした");
         return false;
     }
 
@@ -316,7 +319,6 @@ public class GetItem : MonoBehaviour
         {
             return data;
         }
-        Debug.LogWarning($"ItemData not found for itemName: {itemName}");
         return null;
 
 
