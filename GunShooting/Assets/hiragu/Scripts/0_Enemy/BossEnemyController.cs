@@ -48,6 +48,8 @@ public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
     bool isShotRight = false;
     bool isShotLeft = false;
 
+    bool hasShotThisFrame = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -80,6 +82,8 @@ public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
             agent.isStopped = true;
         }
 
+        hasShotThisFrame = false;
+
         isWalkingNow = agent.velocity.magnitude > 0.1f;
 
         // 歩くアニメーションと停止時のアニメーションの切り替え
@@ -91,7 +95,7 @@ public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
 
         // 右手の射撃の処理
         countTime += Time.deltaTime;
-        if (countTime > shootingInterval)
+        if (!isShotRight && countTime > shootingInterval)
         {
             isShotRight = true;
             //ShootingRight();
@@ -99,21 +103,22 @@ public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
 
         // 左手の射撃の処理
         countTimeLeft += Time.deltaTime;
-        if (countTimeLeft > leftShootingInterval)
+        if (!isShotLeft && countTimeLeft > leftShootingInterval)
         {
             isShotLeft = true;
             //Shooting();
         }
 
-        if (isShotRight && isShotLeft)
+        if (!hasShotThisFrame && isShotRight && isShotLeft)
         {
             ShootingBoth();
         }
-        else if (isShotRight)
+        else if (!hasShotThisFrame && isShotRight)
         {
             ShootingRight();
         }
-        else if (isShotLeft){
+        else if (!hasShotThisFrame && isShotLeft)
+        {
             Shooting();
         }
 
