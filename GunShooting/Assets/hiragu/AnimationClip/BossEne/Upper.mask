@@ -6,7 +6,7 @@ AvatarMask:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Base
+  m_Name: Upper
   m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
   m_Elements:
   - m_Path: 
@@ -46,7 +46,7 @@ AvatarMask:
   - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand
     m_Weight: 1
   - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/Ggroup
     m_Weight: 0
   - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/Ggroup1
@@ -170,7 +170,7 @@ AvatarMask:
   - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand
     m_Weight: 1
   - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/group
     m_Weight: 0
   - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/group1

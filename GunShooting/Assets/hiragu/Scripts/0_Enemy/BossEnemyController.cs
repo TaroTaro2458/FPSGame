@@ -32,6 +32,7 @@ public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
     Transform targetPoint;                                  // これに向けて弾を撃つ
     EnemyHealth enemyHealth;                                // ピンチかどうかを判断するために必要
     GameObject bullet;                                      // これに弾をセット
+    GameObject bulletRight;
     Rigidbody bulletRb;                                     // 弾を動かすためのリジットボディ
     Vector3 bulletDirection;                                // 最終的に弾を飛ばす位置
     Vector3 enemyDirectionControl;                          // 常にプレイヤーのほうを向くため
@@ -43,7 +44,9 @@ public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
     bool isDie;                                             // 死んでいるか判断
     bool isFootstepPlaying;                                 // 足音がなっているか判断
     bool isWalkingNow;                                      // アニメーションを制御するために今のフレームの状態を保持するためのもの
-                                
+
+    bool isShotRight = false;
+    bool isShotLeft = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -90,13 +93,27 @@ public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
         countTime += Time.deltaTime;
         if (countTime > shootingInterval)
         {
-            ShootingRight();
+            isShotRight = true;
+            //ShootingRight();
         }
 
         // 左手の射撃の処理
         countTimeLeft += Time.deltaTime;
         if (countTimeLeft > leftShootingInterval)
         {
+            isShotLeft = true;
+            //Shooting();
+        }
+
+        if (isShotRight && isShotLeft)
+        {
+            ShootingBoth();
+        }
+        else if (isShotRight)
+        {
+            ShootingRight();
+        }
+        else if (isShotLeft){
             Shooting();
         }
 
@@ -165,14 +182,15 @@ public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
         // 停止時か歩いているときのアニメーションを再生
         if (agent.velocity.magnitude > 0.1)
         {
-            anim.SetTrigger("ShootWalkRight");
+            anim.SetTrigger("ShotWalkRight");
         }
         else
         {
-            anim.SetTrigger("ShootIdelRight");
+            anim.SetTrigger("ShotIdleRight");
         }
         // 次に撃つまでの時間をリセット
         countTime = 0;
+        isShotRight = false;
     }
 
     // 左手(通常)の射撃処理
@@ -196,15 +214,76 @@ public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
         // 停止時か歩いているときのアニメーションを再生
         if (agent.velocity.magnitude > 0.1)
         {
-            anim.SetTrigger("ShootWalkLeft");
+            anim.SetTrigger("ShotWalkLeft");
         }else
         {
-            anim.SetTrigger("ShootIdelLeft");
+            anim.SetTrigger("ShotIdleLeft");
         }
         // 次に撃つまでの時間をリセット
         countTimeLeft = 0;
         // 一定時間たったら弾を消す
         Destroy(bullet, 5);
+        isShotLeft = false;
+    }
+
+    // 両手での射撃
+    void ShootingBoth()
+    {
+        // プレイヤーがいなかったり、自分が死んでいたりしたときに動かさないため
+        if (player == null) return;
+        if (isDie) return;
+
+        // 弾を生成してプレイヤーの胸あたりに飛ばす処理 通常弾
+        bulletRight = Instantiate(bulletPrefab, leftShootingPoint.position, leftShootingPoint.rotation);
+        bulletRight.transform.rotation = Quaternion.LookRotation(
+            (targetPoint.position - leftShootingPoint.position).normalized) * Quaternion.Euler(90, 0, 0);
+        bulletRb = bulletRight.GetComponent<Rigidbody>();
+        bulletDirection = (targetPoint.position - leftShootingPoint.position).normalized;
+        bulletRb.linearVelocity = bulletDirection * bulletSpeed;
+
+        // 右手の弾の処理
+        // 弾のリストからランダムに選ぶ
+        int rand = Random.Range(0, bulletList.Count);
+        bullet = Instantiate(bulletList[rand], shootingPoint.position, shootingPoint.rotation);
+
+        // 選ばれた弾のコンポーネントを取得
+        LocketLauncherBulletController llbc = bullet.GetComponent<LocketLauncherBulletController>();
+        HomingBullet hb = bullet.GetComponent<HomingBullet>();
+
+        // ロケランを発射する
+        if (llbc != null)
+        {
+            llbc.setShootingPoint(shootingPoint);
+            llbc.bulletSpeed = locLanSpeed;
+        }
+        // ホーミング弾を発射する
+        if (hb != null)
+        {
+            hb.bulletSpeed = homingBulletSpeed;
+        }
+
+        
+        Destroy(bullet, 5);
+
+        // 発射時のSE
+        AudioManager.Instance.PlaySE3D(SEType.Gun, transform.position);
+
+        // 停止時か歩いているときのアニメーションを再生
+        if (agent.velocity.magnitude > 0.1)
+        {
+            anim.SetTrigger("ShotWalkBoth");
+        }
+        else
+        {
+            anim.SetTrigger("ShotIdleBoth");
+        }
+        // 次に撃つまでの時間をリセット
+        countTime = 0;
+        countTimeLeft = 0;
+        // 一定時間たったら弾を消す
+        Destroy(bulletRight, 5);
+        isShotRight = false;
+        isShotLeft = false;
     }
 
     public void OnDeath()

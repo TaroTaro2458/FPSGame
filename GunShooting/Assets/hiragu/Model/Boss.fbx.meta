@@ -42,7 +42,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -60,7 +60,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Idel
+      name: Idle
       takeName: Take 001
       internalID: -998496362607748373
       firstFrame: 25
@@ -71,7 +71,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -118,7 +118,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Idel_Shoot_Right
+      name: ShotIdleRight
       takeName: Take 001
       internalID: 6641085478485924818
       firstFrame: 60
@@ -147,7 +147,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Idell_Shoot_Left
+      name: ShotIdleLeft
       takeName: Take 001
       internalID: -5059006814000262888
       firstFrame: 75
@@ -176,7 +176,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Walk_Shoot_Right
+      name: ShotWalkRight
       takeName: Take 001
       internalID: 6234510843852800090
       firstFrame: 90
@@ -205,7 +205,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Walk_Shoot_Left
+      name: ShotWalkLeft
       takeName: Take 001
       internalID: -6788666626592393668
       firstFrame: 105
@@ -234,11 +234,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: WalkEmpty
+      name: ShotWalkBoth
       takeName: Take 001
       internalID: 1702301948168947093
-      firstFrame: 102
-      lastFrame: 103
+      firstFrame: 120
+      lastFrame: 132
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -263,11 +263,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: IdelEmpty
+      name: ShotIdleBoth
       takeName: Take 001
       internalID: 9093586079265926502
-      firstFrame: 72
-      lastFrame: 73
+      firstFrame: 135
+      lastFrame: 147
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
