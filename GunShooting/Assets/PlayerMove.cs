@@ -128,6 +128,7 @@ public class PlayerMove : MonoBehaviour
         // 重量に応じて徐々に遅くする（オプション）
         float weightRatio = (float)currentWeight / maxWeight;
         return Mathf.Lerp(moveSpeed, heavyWeightMoveSpeed, weightRatio);
+        //return moveSpeed;
     }
 
     // se用

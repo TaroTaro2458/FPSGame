@@ -7129,7 +7129,7 @@ MonoBehaviour:
   cooldownAttachmentTransform: {fileID: 447156058}
   maxHeatAttachmentTransform: {fileID: 1236852770}
   maxItems: 10
-  MaxInventoryWeight: 100
+  MaxInventoryWeight: 200
   inventoryCount: {fileID: 2116699919}
   onItemChanged:
     m_PersistentCalls:
