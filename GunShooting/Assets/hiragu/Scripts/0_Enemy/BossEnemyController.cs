@@ -9,39 +9,46 @@ public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
 {
     [Header("右手の銃の設定(ロケランとホーミング)")]
     [SerializeField] float stopDistance = 10f;              // 一定距離まで近づく
-    [SerializeField] Transform shootingPoint;               // 発射位置
-    //[SerializeField] GameObject bulletPrefab;               // 発射する弾
+    [SerializeField] Transform shootingPoint;               // 発射位置(右手)
     [SerializeField] float shootingInterval = 3.0f;         // 発射間隔
-    [SerializeField] float homingBulletSpeed = 5;
-    [SerializeField] float locLanSpeed = 5;
-    [SerializeField] List<GameObject> bulletList;
+    [SerializeField] float homingBulletSpeed = 5;           // ホーミングのスピード
+    [SerializeField] float locLanSpeed = 5;                 // ロケランのスピード
+    [SerializeField] List<GameObject> bulletList;           // 弾のリスト
 
     [Header("左手の銃の設定(通常の弾)")]
-    [SerializeField] GameObject bulletPrefab;
-    [SerializeField] Transform leftShootingPoint;
-    [SerializeField] float leftShootingInterval = 5.0f;
-    [SerializeField] float bulletSpeed = 10.0f;
+    [SerializeField] GameObject bulletPrefab;               // 弾のプレハブ
+    [SerializeField] Transform leftShootingPoint;           // 発射位置(左手)
+    [SerializeField] float leftShootingInterval = 5.0f;     // 発射間隔
+    [SerializeField] float bulletSpeed = 10.0f;             // 弾のスピード
 
     [Header("ボスのHPが減った時に強化する")]
-    [SerializeField] float pinchShootingInterval = 0.7f;
-    [SerializeField] float pinchBulletSpeed = 13f;
-    [SerializeField] int pinchHp = 100;
+    [SerializeField] float pinchShootingInterval = 0.7f;    // ピンチになった時の右手の射撃の発射間隔
+    [SerializeField] float pinchBulletSpeed = 13f;          // 弾のスピード
+    [SerializeField] int pinchHp = 100;                     // このHP以下になったら強化する
 
     Transform player;                                       // プレイヤーを追いかけるための位置
     NavMeshAgent agent;                                     // 追いかけるためのもの
     float distance;                                         // 一定距離で追いかけることをやめるためのもの
-    Transform targetPoint;
-    EnemyHealth enemyHealth;
+    Transform targetPoint;                                  // これに向けて弾を撃つ
+    EnemyHealth enemyHealth;                                // ピンチかどうかを判断するために必要
     GameObject bullet;                                      // これに弾をセット
-    Rigidbody bulletRb;
-    Vector3 bulletDirection;
+    GameObject bulletRight;
+    Rigidbody bulletRb;                                     // 弾を動かすためのリジットボディ
+    Vector3 bulletDirection;                                // 最終的に弾を飛ばす位置
     Vector3 enemyDirectionControl;                          // 常にプレイヤーのほうを向くため
-    float countTime = 0;                                    // 発射間隔制御用
+    float countTime = 0;                                    // 発射間隔制御用 右手
+    float countTimeLeft = 0;                                // 発射間隔制御用 左手
+    Animator anim;                                          // アニメーション
 
-    bool isPinch = false;
-    bool isDie;
-    bool isFootstepPlaying;
-    Animator anim;
+    bool isPinch = false;                                   // ピンチの時を判断
+    bool isDie;                                             // 死んでいるか判断
+    bool isFootstepPlaying;                                 // 足音がなっているか判断
+    bool isWalkingNow;                                      // アニメーションを制御するために今のフレームの状態を保持するためのもの
+
+    bool isShotRight = false;
+    bool isShotLeft = false;
+
+    bool hasShotThisFrame = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -56,9 +63,15 @@ public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
     // Update is called once per frame
     void Update()
     {
-        
-        distance = Vector3.Distance(transform.position, player.position);
+        if (isDie) return;
+        if (!agent.enabled || !agent.isOnNavMesh)
+        {
+            return;
+        }
 
+        distance = Vector3.Distance(transform.position, player.position);
+        
+        // プレイヤーとの距離が一定以内になるまで追いかける
         if (distance > stopDistance)
         {
             agent.isStopped = false;
@@ -69,54 +82,47 @@ public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
             agent.isStopped = true;
         }
 
-        if(agent.velocity.magnitude > 0.1f)
-        {
-            anim.SetBool("isWalk", true);
-        }else if (agent.velocity.magnitude <= 0.1f)
-        {
-            anim.SetBool("isWalk", false);
-        }
+        hasShotThisFrame = false;
 
+        isWalkingNow = agent.velocity.magnitude > 0.1f;
 
-            
+        // 歩くアニメーションと停止時のアニメーションの切り替え
+        anim.SetBool("isWalk",isWalkingNow);
 
+        // Y軸以外はプレイヤーのほうを向く
         enemyDirectionControl = new Vector3(player.position.x, transform.position.y, player.position.z);
         transform.LookAt(enemyDirectionControl);
 
+        // 右手の射撃の処理
         countTime += Time.deltaTime;
-        if (countTime > shootingInterval)
+        if (!isShotRight && countTime > shootingInterval)
         {
-            //bullet = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
-            int rand = Random.Range(0, bulletList.Count);
-            bullet = Instantiate(bulletList[rand],shootingPoint.position, shootingPoint.rotation);
-            LocketLauncherBulletController llbc = bullet.GetComponent<LocketLauncherBulletController>();
-            HomingBullet hb = bullet.GetComponent<HomingBullet>();
-            if(llbc != null)
-            {
-                llbc.setShootingPoint(shootingPoint);
-                llbc.bulletSpeed = locLanSpeed;
-            }
-            if (hb != null)
-            {
-                hb.bulletSpeed = homingBulletSpeed;
-            }
-            AudioManager.Instance.PlaySE3D(SEType.Gun, transform.position);
-            Destroy(bullet, 5);
-            anim.SetBool("isShootRight", true);
-            Invoke(nameof(StopShootRight), 0.5f);
-
-            countTime = 0;
+            isShotRight = true;
+            //ShootingRight();
         }
 
+        // 左手の射撃の処理
+        countTimeLeft += Time.deltaTime;
+        if (!isShotLeft && countTimeLeft > leftShootingInterval)
+        {
+            isShotLeft = true;
+            //Shooting();
+        }
 
-        countTime += Time.deltaTime;
-        if (countTime > shootingInterval)
+        if (!hasShotThisFrame && isShotRight && isShotLeft)
+        {
+            ShootingBoth();
+        }
+        else if (!hasShotThisFrame && isShotRight)
+        {
+            ShootingRight();
+        }
+        else if (!hasShotThisFrame && isShotLeft)
         {
             Shooting();
-
-            countTime = 0;
         }
 
+        // HPが一定以下になったら強くする
         if (enemyHealth.EnmeyCurrentHp <= pinchHp && !isPinch)
         {
             shootingInterval = pinchShootingInterval;
@@ -125,6 +131,7 @@ public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
             Debug.Log("強くなった");
         }
 
+        // 足音のSE
         if (agent.velocity.magnitude > 0.1f)
         {
             if (!isFootstepPlaying)
@@ -140,41 +147,148 @@ public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
         }
     }
 
+    // 足音を鳴らすときの制御に使う
     void ResetFootstep()
     {
         isFootstepPlaying = false;
     }
 
+    // 右手(ロケラン、ホーミングのやつ)の射撃処理
+    void ShootingRight()
+    {
+        // プレイヤーがいなかったり、自分が死んでいたりしたときに動かさないため
+        if (player == null) return;
+        if (isDie) return;
+
+        // 弾のリストからランダムに選ぶ
+        int rand = Random.Range(0, bulletList.Count);
+        bullet = Instantiate(bulletList[rand], shootingPoint.position, shootingPoint.rotation);
+
+        // 選ばれた弾のコンポーネントを取得
+        LocketLauncherBulletController llbc = bullet.GetComponent<LocketLauncherBulletController>();
+        HomingBullet hb = bullet.GetComponent<HomingBullet>();
+
+        // ロケランを発射する
+        if (llbc != null)
+        {
+            llbc.setShootingPoint(shootingPoint);
+            llbc.bulletSpeed = locLanSpeed;
+        }
+        // ホーミング弾を発射する
+        if (hb != null)
+        {
+            hb.bulletSpeed = homingBulletSpeed;
+        }
+
+        // 発射時のSE
+        AudioManager.Instance.PlaySE3D(SEType.Gun, transform.position);
+        Destroy(bullet, 5);
+
+        // 停止時か歩いているときのアニメーションを再生
+        if (agent.velocity.magnitude > 0.1)
+        {
+            anim.SetTrigger("ShotWalkRight");
+        }
+        else
+        {
+            anim.SetTrigger("ShotIdleRight");
+        }
+        // 次に撃つまでの時間をリセット
+        countTime = 0;
+        isShotRight = false;
+    }
+
+    // 左手(通常)の射撃処理
     void Shooting()
     {
+        // プレイヤーがいなかったり、自分が死んでいたりしたときに動かさないため
         if (player == null) return;
         if (isDie) return;
         
-
-        bullet = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
+        // 弾を生成してプレイヤーの胸あたりに飛ばす処理
+        bullet = Instantiate(bulletPrefab, leftShootingPoint.position, leftShootingPoint.rotation);
         bullet.transform.rotation = Quaternion.LookRotation(
-            (targetPoint.position - shootingPoint.position).normalized) * Quaternion.Euler(90, 0, 0);
+            (targetPoint.position - leftShootingPoint.position).normalized) * Quaternion.Euler(90, 0, 0);
         bulletRb = bullet.GetComponent<Rigidbody>();
-        bulletDirection = (targetPoint.position - shootingPoint.position).normalized;
+        bulletDirection = (targetPoint.position - leftShootingPoint.position).normalized;
         bulletRb.linearVelocity = bulletDirection * bulletSpeed;
+
+        // 発射時のSE
         AudioManager.Instance.PlaySE3D(SEType.Gun, transform.position);
 
-        anim.SetBool("isShootLeft", true);
-        Invoke(nameof(StopShootLeft), 0.5f);
+        // 停止時か歩いているときのアニメーションを再生
+        if (agent.velocity.magnitude > 0.1)
+        {
+            anim.SetTrigger("ShotWalkLeft");
+        }else
+        {
+            anim.SetTrigger("ShotIdleLeft");
+        }
+        // 次に撃つまでの時間をリセット
+        countTimeLeft = 0;
+        // 一定時間たったら弾を消す
+        Destroy(bullet, 5);
+        isShotLeft = false;
+    }
 
+    // 両手での射撃
+    void ShootingBoth()
+    {
+        // プレイヤーがいなかったり、自分が死んでいたりしたときに動かさないため
+        if (player == null) return;
+        if (isDie) return;
+
+        // 弾を生成してプレイヤーの胸あたりに飛ばす処理 通常弾
+        bulletRight = Instantiate(bulletPrefab, leftShootingPoint.position, leftShootingPoint.rotation);
+        bulletRight.transform.rotation = Quaternion.LookRotation(
+            (targetPoint.position - leftShootingPoint.position).normalized) * Quaternion.Euler(90, 0, 0);
+        bulletRb = bulletRight.GetComponent<Rigidbody>();
+        bulletDirection = (targetPoint.position - leftShootingPoint.position).normalized;
+        bulletRb.linearVelocity = bulletDirection * bulletSpeed;
+
+        // 右手の弾の処理
+        // 弾のリストからランダムに選ぶ
+        int rand = Random.Range(0, bulletList.Count);
+        bullet = Instantiate(bulletList[rand], shootingPoint.position, shootingPoint.rotation);
+
+        // 選ばれた弾のコンポーネントを取得
+        LocketLauncherBulletController llbc = bullet.GetComponent<LocketLauncherBulletController>();
+        HomingBullet hb = bullet.GetComponent<HomingBullet>();
+
+        // ロケランを発射する
+        if (llbc != null)
+        {
+            llbc.setShootingPoint(shootingPoint);
+            llbc.bulletSpeed = locLanSpeed;
+        }
+        // ホーミング弾を発射する
+        if (hb != null)
+        {
+            hb.bulletSpeed = homingBulletSpeed;
+        }
+
+        
         Destroy(bullet, 5);
 
-       
-    }
+        // 発射時のSE
+        AudioManager.Instance.PlaySE3D(SEType.Gun, transform.position);
 
-    void StopShootRight()
-    {
-        anim.SetBool("isShootRight", false);
-    }
-
-    void StopShootLeft()
-    {
-        anim.SetBool("isShootLeft", false);
+        // 停止時か歩いているときのアニメーションを再生
+        if (agent.velocity.magnitude > 0.1)
+        {
+            anim.SetTrigger("ShotWalkBoth");
+        }
+        else
+        {
+            anim.SetTrigger("ShotIdleBoth");
+        }
+        // 次に撃つまでの時間をリセット
+        countTime = 0;
+        countTimeLeft = 0;
+        // 一定時間たったら弾を消す
+        Destroy(bulletRight, 5);
+        isShotRight = false;
+        isShotLeft = false;
     }
 
     public void OnDeath()
@@ -187,7 +301,7 @@ public class BossEnemyController : MonoBehaviour, IEnemyDeathListener
             agent.ResetPath();
         }
 
-        anim.SetBool("Die", true);
+        anim.SetBool("isDie", true);
         Debug.Log("アニメーション再生");
         agent.enabled = false;
         Destroy(gameObject, 0.8f);

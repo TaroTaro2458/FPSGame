@@ -6,7 +6,7 @@ AvatarMask:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: base
+  m_Name: Upper
   m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
   m_Elements:
   - m_Path: 
@@ -14,7 +14,7 @@ AvatarMask:
   - m_Path: Mox_mesh
     m_Weight: 0
   - m_Path: Mox_Skeleton
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Mox_Skeleton/Mox_Hips
     m_Weight: 0
   - m_Path: Mox_Skeleton/Mox_Hips/Mox_LeftUpLeg
@@ -45,6 +45,78 @@ AvatarMask:
     m_Weight: 1
   - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand
     m_Weight: 1
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/Ggroup
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/Ggroup1
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/Ggroup1/Gpasted__pCube5
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/Ggroup2
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/Ggroup2/Gpasted__group1
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/Ggroup2/Gpasted__group1/Gpasted__pasted__pCube5
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/Ggroup3
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/Ggroup3/Gpasted__pCube3
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/Ggroup4
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/Ggroup5
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/Ggroup5/Gpasted__pCube9
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/Ggroup6
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/Ggroup6/Gpasted__pCube9
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/GnurbsSquare1
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/GnurbsSquare1/GbottomnurbsSquare1
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/GnurbsSquare1/GleftnurbsSquare1
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/GnurbsSquare1/GrightnurbsSquare1
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/GnurbsSquare2
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/GnurbsSquare2/GbottomnurbsSquare2
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/GnurbsSquare2/GleftnurbsSquare2
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/GnurbsSquare2/GrightnurbsSquare2
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/GnurbsSquare2/GtopnurbsSquare2
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/GnurbsSquare3
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/GnurbsSquare3/GbottomnurbsSquare3
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/GnurbsSquare3/GleftnurbsSquare3
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/GnurbsSquare3/GrightnurbsSquare3
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/GnurbsSquare3/GtopnurbsSquare3
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/GpCube1
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/GpCube3
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/GpCube5
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/GpCube6
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/GpCube7
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/GpCube8
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/GpCube9
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Gun/GpCylinder1
+    m_Weight: 0
   - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Mox_LeftHandIndex1
     m_Weight: 1
   - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_LeftShoulder/Mox_LeftArm/Mox_LeftForeArm/Mox_LeftHand/Mox_LeftHandIndex1/Mox_LeftHandIndex2
@@ -97,6 +169,66 @@ AvatarMask:
     m_Weight: 1
   - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand
     m_Weight: 1
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/group
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/group1
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/group1/pasted__pCube5
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/group2
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/group2/pasted__group1
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/group2/pasted__group1/pasted__pasted__pCube5
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/nurbsSquare1
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/nurbsSquare1/bottomnurbsSquare1
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/nurbsSquare1/leftnurbsSquare1
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/nurbsSquare1/rightnurbsSquare1
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/nurbsSquare1/topnurbsSquare1
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/nurbsSquare2
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/nurbsSquare2/bottomnurbsSquare2
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/nurbsSquare2/leftnurbsSquare2
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/nurbsSquare2/rightnurbsSquare2
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/nurbsSquare2/topnurbsSquare2
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/nurbsSquare3
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/nurbsSquare3/bottomnurbsSquare3
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/nurbsSquare3/leftnurbsSquare3
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/nurbsSquare3/rightnurbsSquare3
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/nurbsSquare3/topnurbsSquare3
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/pCube1
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/pCube2
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/pCube3
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/pCube4
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/pCube5
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/pCube6
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/pCube7
+    m_Weight: 0
+  - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/assaultRifle/pCube8
+    m_Weight: 0
   - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/Mox_RightHandIndex1
     m_Weight: 1
   - m_Path: Mox_Skeleton/Mox_Hips/Mox_Spine/Mox_Spine1/Mox_RightShoulder/Mox_RightArm/Mox_RightForeArm/Mox_RightHand/Mox_RightHandIndex1/Mox_RightHandIndex2
@@ -231,78 +363,6 @@ AvatarMask:
     m_Weight: 0
   - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand
     m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/Ggroup
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/Ggroup1
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/Ggroup1/Gpasted__pCube5
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/Ggroup2
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/Ggroup2/Gpasted__group1
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/Ggroup2/Gpasted__group1/Gpasted__pasted__pCube5
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/Ggroup3
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/Ggroup3/Gpasted__pCube3
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/Ggroup4
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/Ggroup5
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/Ggroup5/Gpasted__pCube9
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/Ggroup6
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/Ggroup6/Gpasted__pCube9
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/GnurbsSquare1
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/GnurbsSquare1/GbottomnurbsSquare1
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/GnurbsSquare1/GleftnurbsSquare1
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/GnurbsSquare1/GrightnurbsSquare1
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/GnurbsSquare2
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/GnurbsSquare2/GbottomnurbsSquare2
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/GnurbsSquare2/GleftnurbsSquare2
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/GnurbsSquare2/GrightnurbsSquare2
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/GnurbsSquare2/GtopnurbsSquare2
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/GnurbsSquare3
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/GnurbsSquare3/GbottomnurbsSquare3
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/GnurbsSquare3/GleftnurbsSquare3
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/GnurbsSquare3/GrightnurbsSquare3
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/GnurbsSquare3/GtopnurbsSquare3
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/GpCube1
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/GpCube3
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/GpCube5
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/GpCube6
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/GpCube7
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/GpCube8
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/GpCube9
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/Gun/GpCylinder1
-    m_Weight: 0
   - m_Path: rig_All/rig_COG/gr_LeftArm/rig_LeftHand/ik_LeftHand
     m_Weight: 0
   - m_Path: rig_All/rig_COG/gr_RightArm
@@ -310,66 +370,6 @@ AvatarMask:
   - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightArmUpv
     m_Weight: 0
   - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/group
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/group1
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/group1/pasted__pCube5
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/group2
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/group2/pasted__group1
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/group2/pasted__group1/pasted__pasted__pCube5
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/nurbsSquare1
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/nurbsSquare1/bottomnurbsSquare1
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/nurbsSquare1/leftnurbsSquare1
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/nurbsSquare1/rightnurbsSquare1
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/nurbsSquare1/topnurbsSquare1
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/nurbsSquare2
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/nurbsSquare2/bottomnurbsSquare2
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/nurbsSquare2/leftnurbsSquare2
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/nurbsSquare2/rightnurbsSquare2
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/nurbsSquare2/topnurbsSquare2
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/nurbsSquare3
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/nurbsSquare3/bottomnurbsSquare3
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/nurbsSquare3/leftnurbsSquare3
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/nurbsSquare3/rightnurbsSquare3
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/nurbsSquare3/topnurbsSquare3
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/pCube1
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/pCube2
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/pCube3
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/pCube4
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/pCube5
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/pCube6
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/pCube7
-    m_Weight: 0
-  - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/assaultRifle/pCube8
     m_Weight: 0
   - m_Path: rig_All/rig_COG/gr_RightArm/rig_RightHand/ik_RightHand
     m_Weight: 0
