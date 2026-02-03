@@ -90,9 +90,10 @@ public class PlayerHealthUI : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
-
+        // リセット
         if (damageOverlay != null)
             damageOverlay.color = new Color(1, 0, 0, 0);
         hpBarTransform.localScale = Vector3.one;
+        timer = 0f;
     }
 }

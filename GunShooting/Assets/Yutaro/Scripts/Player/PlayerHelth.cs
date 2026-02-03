@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour
     // 現在の体力
     private int currentHealth;
     // 自動回復待ち時間
-    [SerializeField] float healTimer;
+    [SerializeField] float healTimer = 0f;
     // 自動回復量/秒
     private int healRate = 5;
     [SerializeField] float healInterval = 5.0f; // 回復間隔
@@ -30,7 +30,8 @@ public class PlayerHealth : MonoBehaviour
         // ダメージ後の待ち時間をカウントダウン
         if (healTimer > 0f)
         {
-            healTimer -= Time.deltaTime;
+            Debug.Log("healTimer = " + healTimer);
+            healTimer -= Time.unscaledDeltaTime;
         }
         else
         {
@@ -40,6 +41,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+
         // ダメージを受けたら回復までの待ち時間をリセット
         healTimer = healInterval;
         // ダメージを受ける
@@ -74,12 +76,14 @@ public class PlayerHealth : MonoBehaviour
 
     void AutoHeal()
     {
+        Debug.Log("AutoHeal called. HP=" + currentHealth + " healTimer=" + healTimer);
+
         // autohealCap以上なら何もしない
         if (currentHealth >= autohealCap) return;
         //HPが0以下なら何もしない
         if (currentHealth <= 0) return;
 
-        float healAmount = healRate * Time.deltaTime*5;
+        float healAmount = healRate * Time.unscaledDeltaTime * 5;
         currentHealth += Mathf.RoundToInt(healAmount);
 
         if (currentHealth > autohealCap)

@@ -3398,7 +3398,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -856, y: -371}
+  m_AnchoredPosition: {x: -823, y: -371}
   m_SizeDelta: {x: 200, y: 43.9905}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &314353947
@@ -10392,6 +10392,8 @@ MonoBehaviour:
   sensXInput: {fileID: 1579863731}
   sensYSlider: {fileID: 1255862428}
   sensYInput: {fileID: 182208708}
+  bgmSlider: {fileID: 0}
+  bgmInput: {fileID: 0}
 --- !u!114 &1357132372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13962,7 +13964,7 @@ Transform:
   m_GameObject: {fileID: 1737953345}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7238547, z: -0, w: 0.68995243}
-  m_LocalPosition: {x: 0.354, y: 1.055, z: 0.18}
+  m_LocalPosition: {x: 0.531, y: 1.103, z: 0.126}
   m_LocalScale: {x: 1, y: 1, z: 0.5240193}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14944,7 +14946,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -121, y: 152}
+  m_AnchoredPosition: {x: -99, y: 152}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1966127815

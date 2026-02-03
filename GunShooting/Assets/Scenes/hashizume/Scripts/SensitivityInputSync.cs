@@ -14,6 +14,13 @@ public class SensitivityInputSync : MonoBehaviour
     float min = 0.1f;
     float max = 10f;
 
+    // BGM ‰¹—Ê
+    public Slider bgmSlider;
+    public TMP_InputField bgmInput;
+    // BGM ‰¹—Êi0?1)
+    float bgmMin = 0.0001f;
+    float bgmMax = 1f;
+
     void Start()
     {
         // ‰Šú“¯Šú
@@ -28,6 +35,7 @@ public class SensitivityInputSync : MonoBehaviour
 
         sensXInput.onEndEdit.AddListener(OnXInputEnd);
         sensYInput.onEndEdit.AddListener(OnYInputEnd);
+
     }
 
     void SyncFromSettings()
