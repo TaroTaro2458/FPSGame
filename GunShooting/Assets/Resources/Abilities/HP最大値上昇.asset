@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: HP UP
   description: HP+
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 3966996c7b54e5e42a827770cf148285, type: 3}
   type: 0
   value: 10
