@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4325463695113408111}
   - component: {fileID: 7224120444768433444}
   - component: {fileID: -3772658185574537392}
+  - component: {fileID: -5334467236790153164}
   m_Layer: 0
   m_Name: shotgun
   m_TagString: shotgun
@@ -128,6 +129,19 @@ MonoBehaviour:
   weight: 25
   coolingAttachment: {fileID: 0}
   maxHeatAttachment: {fileID: 0}
+--- !u!114 &-5334467236790153164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7000038458876174501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c1e9b6bfa8b44145b30b407e2996eb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 50
 --- !u!1001 &1997794459028867079
 PrefabInstance:
   m_ObjectHideFlags: 0

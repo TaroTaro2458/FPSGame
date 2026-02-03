@@ -1291,7 +1291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f80c8b2822d28948ac83d0eb20867aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playScene: Hirano
+  playScene: Main
 --- !u!114 &1894502798
 MonoBehaviour:
   m_ObjectHideFlags: 0

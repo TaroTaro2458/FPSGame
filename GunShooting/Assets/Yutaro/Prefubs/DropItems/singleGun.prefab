@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6410653166049893863}
   - component: {fileID: 8932383334370148406}
   - component: {fileID: 4957246204128702511}
+  - component: {fileID: -5301125580221301970}
   m_Layer: 0
   m_Name: singleGun
   m_TagString: single
@@ -128,6 +129,19 @@ MonoBehaviour:
   weight: 10
   coolingAttachment: {fileID: 0}
   maxHeatAttachment: {fileID: 0}
+--- !u!114 &-5301125580221301970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259343658904190189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c1e9b6bfa8b44145b30b407e2996eb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 50
 --- !u!1001 &621481829644588669
 PrefabInstance:
   m_ObjectHideFlags: 0

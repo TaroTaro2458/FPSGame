@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7633095251150494380}
   - component: {fileID: 4073144757148804293}
   - component: {fileID: 1797698030939882461}
+  - component: {fileID: -206702089233996168}
   m_Layer: 0
   m_Name: "\u62E1\u5F35\u30DE\u30AC\u30B8\u30F3\uFF08dropItem)"
   m_TagString: MaxHeatAttachment
@@ -128,6 +129,19 @@ MonoBehaviour:
   weight: 5
   coolingAttachment: {fileID: 0}
   maxHeatAttachment: {fileID: 4036763649071897888, guid: 400168367eec63e4b9ce20ca276b90df, type: 3}
+--- !u!114 &-206702089233996168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605339371805934323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c1e9b6bfa8b44145b30b407e2996eb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 50
 --- !u!1001 &3606010149936979779
 PrefabInstance:
   m_ObjectHideFlags: 0

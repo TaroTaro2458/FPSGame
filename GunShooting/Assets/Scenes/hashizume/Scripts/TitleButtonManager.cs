@@ -14,7 +14,7 @@ public class TitleButtonManager : MonoBehaviour
     public void OnStartButton()
     {
         Debug.Log("ゲームスタートボタンが押されました！");
-        SceneManager.LoadScene("Hirano"); // ← 遷移先のシーン名
+        SceneManager.LoadScene("Main"); // ← 遷移先のシーン名
     }
 
     public void OnQuitButton()

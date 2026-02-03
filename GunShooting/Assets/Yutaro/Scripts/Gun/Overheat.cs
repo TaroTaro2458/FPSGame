@@ -35,7 +35,7 @@ public class Overheat : MonoBehaviour
     private Coroutine blinkCoroutine;
 
     // 冷却アタッチメントによる冷却速度追加分
-    [SerializeField] float baseCooldownRate = 20f;
+    [SerializeField] float baseCooldownRate;
     private float currentCooldownRate;
     // 冷却アタッチメント参照
     [SerializeField] CoolingAttachment coolingAttachment;

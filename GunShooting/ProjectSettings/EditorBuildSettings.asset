@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/hashizume/Scenes/TitleScene.unity
     guid: 48c2ec3362bdc4c4cb0bae107d9df632
   - enabled: 1
-    path: Assets/Scenes/Hirano.unity
+    path: Assets/Scenes/Main.unity
     guid: 6b5805c0c3325334cb23b0900834d8d3
   - enabled: 0
     path: Assets/Scenes/MainScene.unity

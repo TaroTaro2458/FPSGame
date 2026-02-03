@@ -14,6 +14,9 @@ public class PlayerHealthUI : MonoBehaviour
     private float previousFillAmount;
     private bool isLowHealthEffect = false;
 
+    // HP低下演出用タイマー
+    private float timer;
+
     private void Start()
     {
         if (playerHealth == null)
@@ -71,7 +74,7 @@ public class PlayerHealthUI : MonoBehaviour
         float pulse = 0f;
         float overlayAlpha = 0f;
 
-        while (isLowHealthEffect && playerHealth.CurrentHealth > 0)
+        while (isLowHealthEffect && playerHealth.CurrentHealth > 0 && timer < 5f)
         {
             // HPバーのズーム（ドクンドクン）
             float scale = 1f + Mathf.PingPong(pulse * 4f, 0.2f);
@@ -83,6 +86,8 @@ public class PlayerHealthUI : MonoBehaviour
                 damageOverlay.color = new Color(1, 0, 0, overlayAlpha);
 
             pulse += Time.deltaTime;
+            //HP低下演出のタイマーカウント（５秒で終了）
+            timer += Time.deltaTime;
             yield return null;
         }
 
