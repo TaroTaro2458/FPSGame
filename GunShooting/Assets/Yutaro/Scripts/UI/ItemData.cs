@@ -21,6 +21,9 @@ public class ItemData : MonoBehaviour
     // アイテムの種類
     public ItemType itemType;
 
+    // アイテム識別番号
+    public int itemID;
+
     // アイテムの重量
     public int weight;
 

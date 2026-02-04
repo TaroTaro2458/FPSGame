@@ -30,7 +30,6 @@ public class PlayerHealth : MonoBehaviour
         // ダメージ後の待ち時間をカウントダウン
         if (healTimer > 0f)
         {
-            Debug.Log("healTimer = " + healTimer);
             healTimer -= Time.unscaledDeltaTime;
         }
         else
@@ -76,7 +75,6 @@ public class PlayerHealth : MonoBehaviour
 
     void AutoHeal()
     {
-        Debug.Log("AutoHeal called. HP=" + currentHealth + " healTimer=" + healTimer);
 
         // autohealCap以上なら何もしない
         if (currentHealth >= autohealCap) return;

@@ -70,6 +70,7 @@ public class GetItem : MonoBehaviour
         if (other.CompareTag("fullauto") && AddItem(item))
         {
             //Debug.Log("fullauto");
+            fullautogunCount++;
             GetFullauto(fullAutogunPrefab); // 入手と同時に装備
             Destroy(other.gameObject); // アイテムを消す
 
@@ -78,6 +79,7 @@ public class GetItem : MonoBehaviour
         else if (other.CompareTag("shotgun") && AddItem(item))
         {
             //Debug.Log("shotgun");
+            shotgunCount++;
             GetShotgun(shotgunPrefab); // 入手と同時に装備
             Destroy(other.gameObject); // アイテムを消す
 
@@ -86,6 +88,7 @@ public class GetItem : MonoBehaviour
         else if (other.CompareTag("single") && AddItem(item))
         {
             //Debug.Log("handgun");
+            handgunCount++;
             GetHandgun(handgunPrefab); // 入手と同時に装備
             Destroy(other.gameObject); // アイテムを消す
 
@@ -114,8 +117,12 @@ public class GetItem : MonoBehaviour
     {
         Transform equipSlot = fullautoHandTransform; // 装備位置
 
+        ItemData data = itemPrefab.GetComponent<ItemData>();
+
         // 現在の装備数を取得
         fullautogunCount = equipSlot.childCount;
+        data.itemID = fullautogunCount;
+        
         // オフセット値（左方向にずらす距離）
         float offsetZ = 0.2f; // 必要に応じて調整
 
@@ -128,8 +135,12 @@ public class GetItem : MonoBehaviour
     {
         Transform equipSlot = shotgunHandTransform; // 装備位置
 
+        ItemData data = itemPrefab.GetComponent<ItemData>();
+
         // 現在の装備数を取得
         shotgunCount = equipSlot.childCount;
+        data.itemID = shotgunCount;
+
         // オフセット値（左方向にずらす距離）
         float offsetZ = 0.2f; 
 
@@ -145,8 +156,11 @@ public class GetItem : MonoBehaviour
     {
         Transform equipSlot = handgunHandTransform; // 装備位置
 
+        ItemData data = itemPrefab.GetComponent<ItemData>();
+
         // 現在の装備数を取得
         handgunCount = equipSlot.childCount;
+        data.itemID = handgunCount;
         // オフセット値（左方向にずらす距離）
         float offsetY = 0.2f;
 
@@ -209,8 +223,9 @@ public class GetItem : MonoBehaviour
         foreach (Transform child in fullautoHandTransform)
         {
             ItemData data = child.GetComponent<ItemData>();
-            if (data != null && data.itemName == itemName)
+            if (data != null && data.itemName == itemName && data.itemID == fullautogunCount)
             {
+                fullautogunCount--;
                 Destroy(child.gameObject);
                 break;
             }
@@ -218,8 +233,9 @@ public class GetItem : MonoBehaviour
         foreach (Transform child in shotgunHandTransform)
         {
             ItemData data = child.GetComponent<ItemData>();
-            if (data != null && data.itemName == itemName)
+            if (data != null && data.itemName == itemName && data.itemID == shotgunCount)
             {
+                shotgunCount--;
                 Destroy(child.gameObject);
                 break;
             }
@@ -227,8 +243,9 @@ public class GetItem : MonoBehaviour
         foreach (Transform child in handgunHandTransform)
         {
             ItemData data = child.GetComponent<ItemData>();
-            if (data != null && data.itemName == itemName)
+            if (data != null && data.itemName == itemName && data.itemID == handgunCount)
             {
+                handgunCount--;
                 Destroy(child.gameObject);
                 break;
             }
