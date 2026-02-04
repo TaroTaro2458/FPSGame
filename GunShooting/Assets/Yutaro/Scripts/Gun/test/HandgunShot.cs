@@ -82,7 +82,7 @@ public class HandgunShot : MonoBehaviour
         Destroy(flash, 0.1f); // 0.1ïbå„Ç…é©ìÆÇ≈è¡Ç∑
 
         // èeê∫SEçƒê∂
-        AudioManager.Instance.PlaySE(SEType.Gun);
+        AudioManager.Instance.PlaySE(SEType.PlayerGun);
     }
 
 
