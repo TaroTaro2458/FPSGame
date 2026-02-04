@@ -8,6 +8,7 @@ public class TitleButtonManager : MonoBehaviour
         // マウスカーソルを表示
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        
     }
 
     // ボタンから呼び出す関数

@@ -20,6 +20,7 @@ public class GameStateManager : MonoBehaviour
         switch (newState)
         {
             case GameState.Title:
+                Debug.Log("State changed to Title");
                 AudioManager.Instance.StopBGM();
                 AudioManager.Instance.PlayBGM(BGMType.Title);
                 break;
