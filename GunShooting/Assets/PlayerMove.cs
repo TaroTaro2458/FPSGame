@@ -56,7 +56,7 @@ public class PlayerMove : MonoBehaviour
         bool isTryingToDash = Input.GetKey(KeyCode.LeftShift);
 
         // スタミナ処理）
-        if (isTryingToDash && currentStamina > 0f)
+        if (isTryingToDash && currentStamina > 0f && isGrounded)
         {
             currentStamina -= staminaDrainRate * Time.deltaTime;
             Debug.Log("ダッシュ中 " + currentStamina);
@@ -86,7 +86,7 @@ public class PlayerMove : MonoBehaviour
 
 
         // ダッシュ中なら基礎速度に倍率をかける
-        float currentSpeed = (Input.GetKey(KeyCode.LeftShift) && canDash)
+        float currentSpeed = (Input.GetKey(KeyCode.LeftShift) && canDash && isGrounded)
             ? baseSpeed * dashMultiplier
             : baseSpeed;
 
