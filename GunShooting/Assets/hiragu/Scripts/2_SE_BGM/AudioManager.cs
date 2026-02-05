@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
@@ -10,7 +11,10 @@ public class AudioManager : MonoBehaviour
 
     [Header("BGM")]
     [SerializeField] List<BGMData> bgmList;
-     
+
+    [Header("âπó í≤êÆ")]
+    [SerializeField] AudioMixer audioMixer;
+
     AudioSource seSource;
     AudioSource bgmSource;
 
@@ -52,6 +56,16 @@ public class AudioManager : MonoBehaviour
         foreach (var bgm in bgmList)
             bgmDict[bgm.type] = bgm;
 
+        // BGM
+        bgmSource.outputAudioMixerGroup =
+            audioMixer.FindMatchingGroups("BGM")[0];
+
+        // SE
+        seSource.outputAudioMixerGroup =
+            audioMixer.FindMatchingGroups("SE")[0];
+
+
+
     }
 
     // ===== 2D SEÅiUIÇ»Ç«Åj=====
@@ -81,6 +95,8 @@ public class AudioManager : MonoBehaviour
         src.spatialBlend = 1f;   // 3D
         src.minDistance = 2f;
         src.maxDistance = 25f;
+        src.outputAudioMixerGroup =
+            audioMixer.FindMatchingGroups("SE")[0];
 
         src.Play();
         Destroy(go, se.clip.length);
@@ -129,4 +145,17 @@ public class AudioManager : MonoBehaviour
         bgmSource.Stop();
         bgmSource.volume = startVolume;
     }
+
+    public void SetBGMVolume(float value)
+    {
+        value = Mathf.Max(value, 0.0001f);
+        audioMixer.SetFloat("BGMVolume", Mathf.Log10(value) * 20);
+    }
+
+    public void SetSEVolume(float value)
+    {
+        value = Mathf.Max(value, 0.0001f);
+        audioMixer.SetFloat("SEVolume", Mathf.Log10(value) * 20);
+    }
+
 }

@@ -17,9 +17,18 @@ public class SensitivityInputSync : MonoBehaviour
     // BGM 音量
     public Slider bgmSlider;
     public TMP_InputField bgmInput;
+
+    [SerializeField] Slider seSlider;
+    [SerializeField] TMP_InputField seInput;
+
+
+
     // BGM 音量（0?1)
     float bgmMin = 0.0001f;
     float bgmMax = 1f;
+
+    float seMin = 0.0001f;
+    float seMax = 1f;
 
     void Start()
     {
@@ -36,6 +45,24 @@ public class SensitivityInputSync : MonoBehaviour
         sensXInput.onEndEdit.AddListener(OnXInputEnd);
         sensYInput.onEndEdit.AddListener(OnYInputEnd);
 
+        // 音量調整
+        // ===== BGM =====
+        float bgm = PlayerPrefs.GetFloat("BGMVolume", 1f);
+        bgmSlider.SetValueWithoutNotify(bgm);
+        bgmInput.text = bgm.ToString("0.00");
+        AudioManager.Instance.SetBGMVolume(bgm);
+
+        bgmSlider.onValueChanged.AddListener(OnBGMSliderChanged);
+        bgmInput.onEndEdit.AddListener(OnBGMInputEnd);
+
+        // ===== SE =====
+        float se = PlayerPrefs.GetFloat("SEVolume", 1f);
+        seSlider.SetValueWithoutNotify(se);
+        seInput.text = se.ToString("0.00");
+        AudioManager.Instance.SetSEVolume(se);
+
+        seSlider.onValueChanged.AddListener(OnSESliderChanged);
+        seInput.onEndEdit.AddListener(OnSEInputEnd);
     }
 
     void SyncFromSettings()
@@ -103,5 +130,42 @@ public class SensitivityInputSync : MonoBehaviour
     {
         float value = Mathf.Clamp(slider.value, min, max);
         input.text = value.ToString("0.00");
+    }
+
+    void OnBGMSliderChanged(float value)
+    {
+        value = Mathf.Clamp(value, bgmMin, bgmMax);
+        AudioManager.Instance.SetBGMVolume(value);
+        bgmInput.text = value.ToString("0.00");
+    }
+
+    void OnBGMInputEnd(string text)
+    {
+        if (float.TryParse(text, out float value))
+        {
+            value = Mathf.Clamp(value, bgmMin, bgmMax);
+            bgmSlider.SetValueWithoutNotify(value); // ★重要
+            AudioManager.Instance.SetBGMVolume(value);
+        }
+    }
+
+    // ===== SE Slider =====
+    void OnSESliderChanged(float value)
+    {
+        value = Mathf.Clamp(value, seMin, seMax);
+        AudioManager.Instance.SetSEVolume(value);
+        seInput.text = value.ToString("0.00");
+    }
+
+    // ===== SE Input =====
+    void OnSEInputEnd(string text)
+    {
+        if (float.TryParse(text, out float value))
+        {
+            value = Mathf.Clamp(value, seMin, seMax);
+            seSlider.SetValueWithoutNotify(value); // ★重要
+            AudioManager.Instance.SetSEVolume(value);
+        }
+
     }
 }
